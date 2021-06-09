@@ -62,7 +62,7 @@ export default class Colle extends React.Component {
             </div>
 
             {/* 文件列表 */}
-            <div className="file-list-wrapper">
+            <div className="file-list-wrapper scrollbar">
               {new Array(10).fill(1).map((e, i) => (
                 <div className="file-item-wrapper" key={i}>
                   <div className="file-info">
