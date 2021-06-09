@@ -1,0 +1,85 @@
+/* 头部 */
+.hold-header-wrapper {
+  height: 48px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+}
+
+.hold-header-wrapper .hold-item-left {
+  height: 28px;
+  width: 70px;
+}
+
+.hold-header-wrapper .hold-item-right {
+  display: flex;
+  align-items: center;
+}
+
+.hold-header-wrapper .hold-item-right div + div {
+  margin-left: 12px;
+}
+
+.hold-header-wrapper .hold-item-right .header-avator-wrapper {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+  overflow: hidden;
+}
+
+/* 输入提取码 */
+.hold-container-wrapper {
+  width: 358px;
+  height: 196px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.hold-head-wrapper {
+  height: 64px;
+  background-image: url("../../images/hold-header.png"),
+    linear-gradient(270deg, #468cfe 0%, #75bafe 100%);
+  background-size: contain;
+
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.hold-avator-wrapper {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.hold-user {
+  color: #fff;
+}
+
+.hold-main-wrapper {
+  padding: 0 24px;
+}
+
+.hold-main-wrapper p {
+  height: 20px;
+  line-height: 20px;
+  padding: 32px 0 8px 0;
+}
+
+.hold-password-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.hold-password-wrapper input {
+  height: 34px;
+  margin-right: 12px;
+  flex: 1;
+}

@@ -1,0 +1,62 @@
+:root {
+  --primary: #4084fb;
+  --primary-weak: #669dfc;
+  --primary-seri: #3a77e2;
+  --info: #262626;
+  --info-weak: #8c8c8c;
+  --danger: #f56c6c;
+  --danger-weak: #fde2e2;
+}
+
+/* @media (max-width: 768px) {
+  body {
+  }
+} */
+
+body {
+  background-color: #f7f7f7;
+  color: #262626;
+  font-size: 14px;
+}
+
+input {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 0 8px;
+  transition: 0.1s;
+}
+
+input[type="text"]:hover,
+input[type="password"]:hover {
+  border-color: #bfbfbf;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--primary);
+}
+
+button {
+  padding: 0 8px;
+  height: 36px;
+  background-color: var(--primary);
+  cursor: pointer;
+  border-radius: 4px;
+  color: #fff;
+  transition: 0.1s;
+}
+
+button:hover {
+  background-color: var(--primary-weak);
+}
+
+button:active {
+  background-color: var(--primary-seri);
+}
+
+.ps-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
