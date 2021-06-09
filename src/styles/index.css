@@ -1,3 +1,5 @@
+@import url("//at.alicdn.com/t/font_2603470_gqco2ioqvd6.css");
+
 :root {
   --primary: #4084fb;
   --primary-weak: #669dfc;
@@ -24,6 +26,7 @@ input {
   border-radius: 4px;
   padding: 0 8px;
   transition: 0.1s;
+  outline: none;
 }
 
 input[type="text"]:hover,
@@ -71,10 +74,9 @@ input[type="checkbox"] {
   -webkit-appearance: none;
   -ms-appearance: none;
   background-image: url("../images/checkbox-off.png");
-  background-size: 20px 20px;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: cover;
-  background-color: #fff;
+  background-position: center;
   cursor: pointer;
 }
 
@@ -87,4 +89,11 @@ input[type="checkbox"]:checked {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
 }

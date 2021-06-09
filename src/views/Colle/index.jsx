@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "../../components/header";
+import * as utils from "../../utils";
+
+// console.log(utils.mimeType('txt'));
 import "./index.css";
 
 // 文件列表
@@ -21,13 +24,13 @@ export default class Colle extends React.Component {
 
         <div className="colle-control-wrapper">
           <div className="colle-control-left">
-            <span>总共11个文件</span>
+            <span className="share-failure-sum">总共11个文件</span>
             <span className="share-failure-title">失效时间：</span>
             <span className="share-failure-state">已失效</span>
           </div>
 
           <div className="colle-control-right">
-            <button>下载</button>
+            <button className="button">下载</button>
           </div>
         </div>
 
@@ -60,12 +63,19 @@ export default class Colle extends React.Component {
 
             {/* 文件列表 */}
             <div className="file-list-wrapper">
-              {[1, 2, 3].map((e) => (
-                <div className="file-item-wrapper" key={e}>
+              {new Array(10).fill(1).map((e, i) => (
+                <div className="file-item-wrapper" key={i}>
                   <div className="file-info">
-                    <input type="checkbox" />
-                    <div className="file-icon"></div>
-                    <div className="file-name">文件夹</div>
+                    <input type="checkbox" name="file" />
+                    <div className="file-icon">
+                      <img src={utils.mimeType("pdf")} alt="" />
+                    </div>
+                    <div
+                      className="file-name ellipsis"
+                      title="文件名称文件名名称文件名称文件名.jpeg"
+                    >
+                      文件名称文件名称...
+                    </div>
                   </div>
 
                   <div className="file-size">

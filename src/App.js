@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Colle from './views/Colle';
 // import Hold from './views/Hold';
-import * as utils from './utils';
-
-console.log(utils.mimeType('txt'));
 
 
 // console.log(Hold);
@@ -21,7 +18,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app-wrapper">
         <Colle></Colle>
       </div>
     );
