@@ -1,35 +1,3 @@
-/* 头部 */
-.hold-header-wrapper {
-  height: 48px;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 48px;
-}
-
-.hold-header-wrapper .hold-item-left {
-  height: 28px;
-  width: 70px;
-}
-
-.hold-header-wrapper .hold-item-right {
-  display: flex;
-  align-items: center;
-}
-
-.hold-header-wrapper .hold-item-right div + div {
-  margin-left: 12px;
-}
-
-.hold-header-wrapper .hold-item-right .header-avator-wrapper {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  border: 1px solid var(--primary);
-  overflow: hidden;
-}
-
 /* 输入提取码 */
 .hold-container-wrapper {
   width: 358px;

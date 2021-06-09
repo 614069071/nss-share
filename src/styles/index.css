@@ -36,7 +36,7 @@ input[type="password"]:focus {
   border-color: var(--primary);
 }
 
-button {
+.button {
   padding: 0 8px;
   height: 36px;
   background-color: var(--primary);
@@ -46,12 +46,40 @@ button {
   transition: 0.1s;
 }
 
-button:hover {
+.button:hover {
   background-color: var(--primary-weak);
 }
 
-button:active {
+.button:active {
   background-color: var(--primary-seri);
+}
+
+.button.plain {
+  background-color: transparent;
+  border: 1px solid var(--primary-weak);
+  color: var(--primary);
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: none;
+  outline: none;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  background-image: url("../images/checkbox-off.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-image: url("../images/checkbox-on.png");
 }
 
 .ps-center {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import Colle from './components/Colle';
-import Hold from './components/Hold';
+import Colle from './views/Colle';
+// import Hold from './views/Hold';
 import * as utils from './utils';
 
 console.log(utils.mimeType('txt'));
@@ -22,7 +22,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Hold></Hold>
+        <Colle></Colle>
       </div>
     );
   }

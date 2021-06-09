@@ -1,0 +1,158 @@
+.colle-list-wrapper .file-info {
+  flex: 4;
+  display: flex;
+  align-items: center;
+}
+
+.colle-list-wrapper .file-size {
+  flex: 2;
+}
+
+.colle-list-wrapper .file-share-time {
+  flex: 1;
+}
+
+.colle-list-wrapper input[type="checkbox"] {
+  margin: 0 6px 0 24px;
+}
+
+.colle-view-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.colle-control-wrapper {
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+}
+
+.colle-control-wrapper .colle-control-left span + span {
+  margin-left: 14px;
+}
+
+.colle-control-left .share-failure-title {
+  color: var(--info-weak);
+}
+
+.colle-control-left .share-failure-state {
+  color: var(--danger);
+}
+
+/* 文件面包屑导航 */
+.colle-list-wrapper {
+  flex: 1;
+  padding: 16px 48px 48px 48px;
+}
+
+.colle-list-inner {
+  height: 100%;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 24px 24px 24px;
+}
+
+.colle-bread-wrapper {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  padding-left: 24px;
+}
+
+.colle-bread-wrapper > * {
+  cursor: pointer;
+}
+
+.colle-bread-wrapper .colle-back-btn,
+.colle-bread-wrapper .colle-all-btn {
+  color: var(--info-weak);
+  display: flex;
+  align-items: center;
+}
+
+.colle-bread-wrapper .colle-back-btn::after {
+  content: "";
+  margin: 0 18px;
+  height: 14px;
+  width: 1px;
+  background-color: var(--info-weak);
+  display: inline-block;
+}
+
+.colle-bread-list-wrapper {
+  margin-left: 8px;
+}
+
+.colle-bread-list-wrapper span i {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 4px;
+}
+
+/* 选中文件 */
+.colle-check-wrapper {
+  height: 48px;
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.colle-check-wrapper .check-sum {
+  margin-right: 8px;
+}
+
+.colle-check-wrapper .check-sum span {
+  color: var(--primary);
+  padding: 0 3px;
+}
+
+.all-download-btn {
+  height: 32px !important;
+  width: 52px;
+}
+
+.file-item-wrapper {
+  display: flex;
+  height: 56px;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.file-item-wrapper > div {
+  display: flex;
+}
+
+.file-item-wrapper .file-info .file-icon {
+  width: 32px;
+  height: 32px;
+  background-color: pink;
+  margin-right: 8px;
+}
+
+.file-item-wrapper:hover {
+  background-color: #f7faff;
+}
+
+.file-item-wrapper .file-size .file-download-btn {
+  display: none;
+  cursor: pointer;
+}
+
+.file-item-wrapper:hover .file-download-btn {
+  display: block;
+}
+
+.file-item-wrapper .file-size span:first-child {
+  width: 56%;
+}
