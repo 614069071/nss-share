@@ -91,6 +91,13 @@
 
 .colle-bread-list-wrapper {
   margin-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.colle-bread-list-wrapper span {
+  display: flex;
+  align-items: center;
 }
 
 .colle-bread-list-wrapper span i {
@@ -100,6 +107,8 @@
   text-align: center;
   line-height: 20px;
   margin-right: 4px;
+  font-size: 12px;
+  color: var(--info-weak);
 }
 
 /* 选中文件 */

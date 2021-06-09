@@ -42,7 +42,7 @@ export default class Colle extends React.Component {
               <div className="colle-bread-list-wrapper">
                 {["文件夹1", "文件夹2"].map((e, i) => (
                   <span key={i}>
-                    <i>&gt;</i>
+                    <i className="iconfont icon-arrow-right"></i>
                     {e}
                   </span>
                 ))}
