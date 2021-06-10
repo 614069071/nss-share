@@ -79,6 +79,7 @@ export default class Colle extends Component {
   render() {
     const { fileColles, breadColleArg } = this.state;
     const checkedCollenArg = fileColles.filter((e) => e.checked);
+    const isCheckAll = checkedCollenArg.length === fileColles.length;
 
     return (
       <div className="colle-view-wrapper">
@@ -121,7 +122,11 @@ export default class Colle extends Component {
 
             <div className="colle-check-wrapper">
               <div className="colle-check-control-wrapper file-info">
-                <input type="checkbox" onChange={this.selectAll} />
+                <input
+                  type="checkbox"
+                  checked={isCheckAll}
+                  onChange={this.selectAll}
+                />
                 {checkedCollenArg.length ? (
                   <Fragment>
                     <div className="check-sum">
@@ -145,7 +150,7 @@ export default class Colle extends Component {
             {/* 文件列表 */}
             <div className="file-list-wrapper scrollbar">
               {fileColles.map((v, i) => (
-                <div className="file-item-wrapper" key={i}>
+                <div className="file-item-wrapper" key={v.key}>
                   <div className="file-info">
                     <input
                       type="checkbox"
