@@ -6,14 +6,25 @@ import "./index.css";
 export default class Hold extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      code: "",
+    };
   }
 
   componentDidMount() {
     console.log("componentDidMount");
   }
 
+  validCode = () => {
+    const { code } = this.state;
+    const { change } = this.props;
+    change();
+    console.log("code", code);
+  };
+
   render() {
+    const { code } = this.state;
+
     return (
       <div className="hold-view-wrapper">
         {/* 输入提取码 */}
@@ -31,8 +42,15 @@ export default class Hold extends React.Component {
           <div className="hold-main-wrapper">
             <p>请输入文件提取码</p>
             <div className="hold-password-wrapper">
-              <input type="password" maxLength="4" />
-              <button className="button">提取文件</button>
+              <input
+                type="password"
+                maxLength="4"
+                value={code}
+                onChange={(e) => this.setState({ code: e.target.value })}
+              />
+              <button className="button" onClick={this.validCode}>
+                提取文件
+              </button>
             </div>
           </div>
         </div>
@@ -41,8 +59,10 @@ export default class Hold extends React.Component {
   }
 }
 
-Hold.defaultProps = {};
+Hold.defaultProps = {
+  change: () => {},
+};
 
 Hold.propTypes = {
-  data: PropTypes.string,
+  change: PropTypes.func,
 };

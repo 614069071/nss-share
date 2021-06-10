@@ -126,6 +126,7 @@ body,
 #root,
 .app-wrapper {
   height: 100%;
+  min-height: 400px;
 }
 
 .app-wrapper {
