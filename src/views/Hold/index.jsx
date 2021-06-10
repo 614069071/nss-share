@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./index.css";
 
 // 有效期、提取密码配置页
-export default class Hold extends React.Component {
+export default class Hold extends Component {
   constructor(props) {
     super(props);
     this.state = {

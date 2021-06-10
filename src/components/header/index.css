@@ -1,5 +1,5 @@
 /* 头部 */
-.hold-header-wrapper {
+.header-wrapper {
   height: 48px;
   background-color: #fff;
   display: flex;
@@ -8,21 +8,21 @@
   padding: 0 48px;
 }
 
-.hold-header-wrapper .hold-item-left {
+.header-wrapper .header-item-left {
   height: 28px;
   width: 70px;
 }
 
-.hold-header-wrapper .hold-item-right {
+.header-wrapper .header-item-right {
   display: flex;
   align-items: center;
 }
 
-.hold-header-wrapper .hold-item-right div + div {
+.header-wrapper .header-item-right div + div {
   margin-left: 12px;
 }
 
-.hold-header-wrapper .hold-item-right .header-avator-wrapper {
+.header-wrapper .header-item-right .header-avator-wrapper {
   height: 24px;
   width: 24px;
   border-radius: 50%;

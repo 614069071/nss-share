@@ -16,7 +16,8 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    const hasHold = utils.storages.get('hasHold');
+    const hasHold = utils.storages.get('hasHold') || false;
+
     this.setState({ hasHold });
   }
 
@@ -31,7 +32,7 @@ export default class App extends Component {
 
     return (
       <div className="app-wrapper">
-        <Header></Header>
+        <Header isHold={hasHold}></Header>
 
         <div className="app-inner-wrapper">
           {
