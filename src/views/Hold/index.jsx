@@ -11,9 +11,7 @@ export default class Hold extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log("componentDidMount");
-  }
+  componentDidMount() {}
 
   validCode = () => {
     const { code } = this.state;
