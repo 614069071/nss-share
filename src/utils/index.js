@@ -58,3 +58,30 @@ export function mimeType(mime) {
 
   return require('../images/icons/other.png').default;
 }
+
+export const storages = {
+  set(key, value) {
+    if (typeof value === 'object' && value !== null) {
+      sessionStorage.setItem(key, JSON.stringify(value));
+      return;
+    }
+    sessionStorage.setItem(key, value);
+  },
+  get(key) {
+    const value = sessionStorage.getItem(key) || '';
+    let val = null;
+    try {
+      val = JSON.parse(value);
+    } catch (e) {
+      return value;
+    }
+
+    if (typeof val === 'number') {
+      return value;
+    }
+    return val;
+  },
+  del(key) {
+    sessionStorage.removeItem(key);
+  }
+}

@@ -12,7 +12,7 @@ export default class Colle extends Component {
     this.state = {
       isCheckedHidden: true,
       fileColles: [
-        { key: 1, checked: false },
+        { key: 1, checked: false, isFloder: 1 },
         { key: 2, checked: false },
         { key: 3, checked: false },
       ],
@@ -157,7 +157,10 @@ export default class Colle extends Component {
                       onChange={(e) => this.checkFile(e, v, i)}
                     />
                     <div className="file-icon">
-                      <img src={utils.mimeType("pdf")} alt="" />
+                      <img
+                        src={utils.mimeType(v.isFloder ? "floder" : "doc")}
+                        alt=""
+                      />
                     </div>
                     <div
                       className="file-name ellipsis"
@@ -168,7 +171,7 @@ export default class Colle extends Component {
                   </div>
 
                   <div className="file-size">
-                    <span>1.25M</span>
+                    <span>{v.isFloder ? null : "1.25M"}</span>
                     <a
                       href="javascript"
                       download="download"
