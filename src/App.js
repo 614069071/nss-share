@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Header from './components/header'
+import Footer from './components/footer'
 import Colle from './views/Colle';
 // import Hold from './views/Hold';
 
@@ -17,7 +19,13 @@ export default class App extends Component {
   render() {
     return (
       <div className="app-wrapper">
-        <Colle></Colle>
+        <Header></Header>
+
+        <div className="app-inner-wrapper">
+          <Colle></Colle>
+        </div>
+
+        <Footer></Footer>
       </div>
     );
   }

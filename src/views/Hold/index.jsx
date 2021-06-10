@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "../../components/header";
 import "./index.css";
 
 // 有效期、提取密码配置页
@@ -17,7 +16,6 @@ export default class Hold extends React.Component {
   render() {
     return (
       <div className="hold-view-wrapper">
-        <Header></Header>
         {/* 输入提取码 */}
         <div className="hold-container-wrapper ps-center">
           <div className="hold-head-wrapper">

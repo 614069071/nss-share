@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import Header from "../../components/header";
 import * as utils from "../../utils";
 
 // console.log(utils.mimeType('txt'));
@@ -83,8 +82,6 @@ export default class Colle extends Component {
 
     return (
       <div className="colle-view-wrapper">
-        <Header></Header>
-
         <div className="colle-control-wrapper">
           <div className="colle-control-left">
             <span className="share-failure-sum">总共11个文件</span>

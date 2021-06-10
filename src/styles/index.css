@@ -120,3 +120,24 @@ input[type="checkbox"]:checked {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
   background-color: #d9d9d9;
 }
+
+html,
+body,
+#root,
+.app-wrapper {
+  height: 100%;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-inner-wrapper {
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-inner-wrapper > div {
+  height: 100%;
+}

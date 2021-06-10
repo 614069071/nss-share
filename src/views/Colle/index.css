@@ -18,7 +18,6 @@
 
 .colle-view-wrapper {
   width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -49,7 +48,7 @@
 .colle-list-wrapper {
   flex: 1;
   overflow: hidden;
-  padding: 16px 48px 48px 48px;
+  padding: 16px 48px 0 48px;
 }
 
 .colle-list-inner {
