@@ -10,9 +10,7 @@ export default class Colle extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log("componentDidMount");
-  }
+  componentDidMount() {}
 
   render() {
     return (

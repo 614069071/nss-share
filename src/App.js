@@ -12,9 +12,7 @@ export default class App extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log('componentDidMount');
-  }
+  componentDidMount() { }
 
   render() {
     return (
