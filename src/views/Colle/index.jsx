@@ -214,6 +214,7 @@ export default class Colle extends Component {
                       href="javascript"
                       download="download"
                       className="file-download-btn"
+                      title="下载"
                     >
                       <i className="icon-down-blue"></i>
                     </a>
