@@ -32,12 +32,23 @@
   border-top: 1px solid #e5e5e5;
 }
 
+.colle-control-wrapper .colle-control-left {
+  display: flex;
+  align-items: center;
+}
+
 .colle-control-wrapper .colle-control-left .share-failure-sum {
   margin-right: 14px;
 }
 
 .colle-control-left .share-failure-title {
   color: var(--info-weak);
+  display: inline-flex;
+  align-items: center;
+}
+
+.colle-control-left .share-failure-title i {
+  margin-right: 4px;
 }
 
 .colle-control-left .share-failure-state {
@@ -87,6 +98,10 @@
   width: 1px;
   background-color: var(--info-weak);
   display: inline-block;
+}
+
+.colle-bread-wrapper .colle-back-btn i {
+  margin-right: 4px;
 }
 
 .colle-bread-list-wrapper {
@@ -165,6 +180,7 @@
 .file-item-wrapper .file-info .file-name {
   flex: 1;
   padding-right: 20px;
+  cursor: pointer;
 }
 
 .file-item-wrapper:hover {
@@ -182,4 +198,36 @@
 
 .file-item-wrapper .file-size span:first-child {
   width: 56%;
+}
+
+/* 定义视频弹窗内容 */
+.player-video-wrapper {
+  width: 500px;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+}
+
+.player-video-wrapper .player-video-close {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  position: absolute;
+  color: #fff;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  cursor: pointer;
+  user-select: none;
+}
+
+.video-js .vjs-big-play-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

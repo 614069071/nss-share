@@ -1,15 +1,21 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import shortid from "shortid";
+import videojs from "video.js";
+// import "videojs-contrib-hls";//支持m3u8
+import "video.js/dist/video-js.min.css";
 import * as utils from "../../utils";
 import "./index.css";
 
+window.videojs = videojs;
+
+import("video.js/dist/lang/zh-CN.js");
 // 文件列表
 export default class Colle extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isCheckedHidden: true,
+      videoPupur: false,
       fileColles: [
         { name: "我是文件夹", checked: false, isFloder: 1 },
         { name: "文件.txt", checked: false },
@@ -27,7 +33,9 @@ export default class Colle extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // this.playerVideo();
+  }
 
   // 请求列表
   fetchFileColles = (data) => {
@@ -82,8 +90,29 @@ export default class Colle extends Component {
     console.log(this.state.fileColles.filter((e) => e.checked));
   };
 
+  // 播放视频
+  playerVideo = (src = "//vjs.zencdn.net/v/oceans.webm") => {
+    this.setState({ videoPupur: true });
+
+    new videojs(
+      "share_video_wrapper",
+      {
+        controls: true,
+        preload: "auto",
+        fluid: true,
+      },
+      function () {
+        this.src(src);
+      }
+    );
+  };
+
+  closePlayer = () => {
+    this.setState({ videoPupur: false });
+  };
+
   render() {
-    const { fileColles, breadColleArg } = this.state;
+    const { fileColles, breadColleArg, videoPupur } = this.state;
     const checkedCollenArg = fileColles.filter((e) => e.checked);
     const isCheckAll = checkedCollenArg.length === fileColles.length;
 
@@ -92,12 +121,15 @@ export default class Colle extends Component {
         <div className="colle-control-wrapper">
           <div className="colle-control-left">
             <span className="share-failure-sum">总共11个文件</span>
-            <span className="share-failure-title">失效时间：</span>
+            <span className="share-failure-title">
+              <i className="icon-clock"></i>失效时间：
+            </span>
             <span className="share-failure-state">已失效</span>
           </div>
 
           <div className="colle-control-right">
             <button className="button" onClick={this.batchDownloads}>
+              <i className="icon-download"></i>
               下载
             </button>
           </div>
@@ -108,7 +140,7 @@ export default class Colle extends Component {
             <div className="colle-bread-wrapper">
               {breadColleArg.length ? (
                 <div className="colle-back-btn" onClick={this.backChangeBread}>
-                  返回
+                  <i className="icon-back"></i>返回
                 </div>
               ) : null}
               <div className="colle-all-btn" onClick={this.changeAllBread}>
@@ -116,10 +148,7 @@ export default class Colle extends Component {
               </div>
               <div className="colle-bread-list-wrapper">
                 {breadColleArg.map((e, i) => (
-                  <span
-                    key={shortid()}
-                    onClick={() => this.checkChangeBread(e, i)}
-                  >
+                  <span key={i} onClick={() => this.checkChangeBread(e, i)}>
                     <i className="iconfont icon-arrow-right"></i>
                     {e}
                   </span>
@@ -157,7 +186,7 @@ export default class Colle extends Component {
             {/* 文件列表 */}
             <div className="file-list-wrapper scrollbar">
               {fileColles.map((v, i) => (
-                <div className="file-item-wrapper" key={shortid()}>
+                <div className="file-item-wrapper" key={i}>
                   <div className="file-info">
                     <input
                       type="checkbox"
@@ -172,8 +201,10 @@ export default class Colle extends Component {
                         alt=""
                       />
                     </div>
-                    <div className="file-name ellipsis" title={v.name}>
-                      {v.name}
+                    <div className="file-name ellipsis">
+                      <span title={v.name} onClick={() => this.playerVideo()}>
+                        {v.name}
+                      </span>
                     </div>
                   </div>
 
@@ -192,6 +223,16 @@ export default class Colle extends Component {
               ))}
             </div>
           </div>
+        </div>
+
+        <div
+          className="player-video-wrapper"
+          style={{ display: videoPupur ? "block" : "none" }}
+        >
+          <span className="player-video-close" onClick={this.closePlayer}>
+            x
+          </span>
+          <video id="share_video_wrapper" className="video-js"></video>
         </div>
       </div>
     );
