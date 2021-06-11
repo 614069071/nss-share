@@ -47,6 +47,8 @@ input[type="password"]:focus {
   border-radius: 4px;
   color: #fff;
   transition: 0.1s;
+  display: inline-flex;
+  align-items: center;
 }
 
 .button:hover {
@@ -141,4 +143,23 @@ body,
 
 .app-inner-wrapper > div {
   height: 100%;
+}
+
+[class^="icon-"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+}
+
+.icon-download {
+  background-image: url("../images/icons/download.png");
+}
+
+.icon-clock {
+  background-image: url("../images/icons/clock.png");
+}
+
+.icon-back {
+  background-image: url("../images/icons/back.png");
 }
