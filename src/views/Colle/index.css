@@ -6,6 +6,8 @@
 
 .colle-list-wrapper .file-size {
   width: 28%;
+  display: flex;
+  align-items: center;
 }
 
 .colle-list-wrapper .file-share-time {

@@ -156,6 +156,10 @@ body,
   background-image: url("../images/icons/download.png");
 }
 
+.icon-down-blue {
+  background-image: url("../images/icons/download-blue.png");
+}
+
 .icon-clock {
   background-image: url("../images/icons/clock.png");
 }

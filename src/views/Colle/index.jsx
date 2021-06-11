@@ -215,7 +215,7 @@ export default class Colle extends Component {
                       download="download"
                       className="file-download-btn"
                     >
-                      下载
+                      <i className="icon-down-blue"></i>
                     </a>
                   </div>
                   <div className="file-share-time">2021-01-12 11:07</div>
