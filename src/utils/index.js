@@ -1,7 +1,9 @@
 // 根据后缀获取对应icon
 export function mimeType(mime) {
 
-  if (mime === 'floder') return require('../images/icons/floder.png').default;
+  const ext = mime.split('.').pop();
+
+  if (ext === 'floder') return require('../images/icons/floder.png').default;
 
   const pdfTypes = ['pdf'];
   const txtTypes = ['txt'];
@@ -53,7 +55,7 @@ export function mimeType(mime) {
   ];
 
   for (let i = 0; i < mimeTypes.length; i++) {
-    if (mimeTypes[i].key.includes(mime)) return mimeTypes[i].value;
+    if (mimeTypes[i].key.includes(ext)) return mimeTypes[i].value;
   }
 
   return require('../images/icons/other.png').default;

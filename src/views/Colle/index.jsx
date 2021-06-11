@@ -11,13 +11,17 @@ export default class Colle extends Component {
     this.state = {
       isCheckedHidden: true,
       fileColles: [
-        { name: 1, checked: false, isFloder: 1 },
-        { name: 2, checked: false },
-        { name: 3, checked: false },
-        { name: 2, checked: false },
-        { name: 3, checked: false },
-        { name: 2, checked: false },
-        { name: 3, checked: false },
+        { name: "我是文件夹", checked: false, isFloder: 1 },
+        { name: "文件.txt", checked: false },
+        { name: "文件.pdf", checked: false },
+        { name: "文件.doc", checked: false },
+        { name: "文件.ppt", checked: false },
+        { name: "文件.xls", checked: false },
+        { name: "文件.zip", checked: false },
+        { name: "文件.mp3", checked: false },
+        { name: "文件.mp4", checked: false },
+        { name: "文件.png", checked: false },
+        { name: "文件.xsa", checked: false },
       ],
       breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
     };
@@ -164,15 +168,12 @@ export default class Colle extends Component {
                     />
                     <div className="file-icon">
                       <img
-                        src={utils.mimeType(v.isFloder ? "floder" : "doc")}
+                        src={utils.mimeType(v.isFloder ? "floder" : v.name)}
                         alt=""
                       />
                     </div>
-                    <div
-                      className="file-name ellipsis"
-                      title="文件名称文件名名称文件名称文件名.jpeg"
-                    >
-                      文件名称文件名称...
+                    <div className="file-name ellipsis" title={v.name}>
+                      {v.name}
                     </div>
                   </div>
 
