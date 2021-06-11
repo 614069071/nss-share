@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import shortid from "shortid";
 import * as utils from "../../utils";
-
-// console.log(utils.mimeType('txt'));
 import "./index.css";
 
 // 文件列表
@@ -12,9 +11,13 @@ export default class Colle extends Component {
     this.state = {
       isCheckedHidden: true,
       fileColles: [
-        { key: 1, checked: false, isFloder: 1 },
-        { key: 2, checked: false },
-        { key: 3, checked: false },
+        { name: 1, checked: false, isFloder: 1 },
+        { name: 2, checked: false },
+        { name: 3, checked: false },
+        { name: 2, checked: false },
+        { name: 3, checked: false },
+        { name: 2, checked: false },
+        { name: 3, checked: false },
       ],
       breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
     };
@@ -109,7 +112,10 @@ export default class Colle extends Component {
               </div>
               <div className="colle-bread-list-wrapper">
                 {breadColleArg.map((e, i) => (
-                  <span key={i} onClick={() => this.checkChangeBread(e, i)}>
+                  <span
+                    key={shortid()}
+                    onClick={() => this.checkChangeBread(e, i)}
+                  >
                     <i className="iconfont icon-arrow-right"></i>
                     {e}
                   </span>
@@ -147,7 +153,7 @@ export default class Colle extends Component {
             {/* 文件列表 */}
             <div className="file-list-wrapper scrollbar">
               {fileColles.map((v, i) => (
-                <div className="file-item-wrapper" key={v.key}>
+                <div className="file-item-wrapper" key={shortid()}>
                   <div className="file-info">
                     <input
                       type="checkbox"
