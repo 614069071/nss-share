@@ -1,4 +1,4 @@
-@import url("//at.alicdn.com/t/font_2603470_e2dkg381gt8.css");
+@import url("//at.alicdn.com/t/font_2603470_bz8p00zl61.css");
 
 :root {
   --primary: #4084fb;
@@ -147,8 +147,8 @@ body,
 
 [class^="icon-"] {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  /* width: 20px;
+  height: 20px; */
   background-size: contain;
 }
 

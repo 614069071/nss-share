@@ -16,6 +16,9 @@ export default class Colle extends Component {
     this.state = {
       isCheckedHidden: true,
       videoPupur: false,
+      imagePupur: false,
+      imageSrc: "",
+      musicPupur: false,
       fileColles: [
         { name: "我是文件夹", checked: false, isFloder: 1 },
         { name: "文件.txt", checked: false },
@@ -111,8 +114,47 @@ export default class Colle extends Component {
     this.setState({ videoPupur: false });
   };
 
+  // 图片预览
+  playerImage = (
+    src = "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg"
+  ) => {
+    this.setState({
+      imageSrc: src,
+      imagePupur: true,
+    });
+  };
+
+  closeImage = () => {
+    this.setState({ imageSrc: "", imagePupur: false });
+  };
+
+  // 音乐播放
+  playerMusic = (src = "") => {
+    this.setState({
+      musicPupur: true,
+    });
+  };
+
+  closeMusic = () => {
+    this.setState({ musicPupur: false });
+  };
+
+  playerFile = () => {
+    // this.playerImage();
+    // this.playerVideo();
+    this.playerMusic();
+  };
+
   render() {
-    const { fileColles, breadColleArg, videoPupur } = this.state;
+    const {
+      fileColles,
+      breadColleArg,
+      videoPupur,
+      imagePupur,
+      imageSrc,
+      musicPupur,
+    } = this.state;
+
     const checkedCollenArg = fileColles.filter((e) => e.checked);
     const isCheckAll = checkedCollenArg.length === fileColles.length;
 
@@ -202,7 +244,7 @@ export default class Colle extends Component {
                       />
                     </div>
                     <div className="file-name ellipsis">
-                      <span title={v.name} onClick={() => this.playerVideo()}>
+                      <span title={v.name} onClick={() => this.playerFile()}>
                         {v.name}
                       </span>
                     </div>
@@ -226,14 +268,40 @@ export default class Colle extends Component {
           </div>
         </div>
 
+        {/* 视频播放 */}
         <div
           className="player-video-wrapper"
           style={{ display: videoPupur ? "block" : "none" }}
         >
           <span className="player-video-close" onClick={this.closePlayer}>
-            x
+            <i className="iconfont icon-cross"></i>
           </span>
           <video id="share_video_wrapper" className="video-js"></video>
+        </div>
+
+        {/* 图片预览 */}
+        <div
+          className="player-image-wrapper"
+          style={{ display: imagePupur ? "block" : "none" }}
+        >
+          <span className="player-image-close" onClick={this.closeImage}>
+            <i className="iconfont icon-cross"></i>
+          </span>
+
+          <div className="player-preview-wrapper">
+            <img src={imageSrc} alt="" />
+          </div>
+        </div>
+
+        {/* 音乐播放 */}
+        <div
+          className="player-music-wrapper"
+          style={{ display: musicPupur ? "block" : "none" }}
+        >
+          <span className="player-music-close" onClick={this.closeMusic}>
+            <i className="iconfont icon-cross"></i>
+          </span>
+          音乐播放
         </div>
       </div>
     );
