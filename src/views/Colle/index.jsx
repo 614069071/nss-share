@@ -1,14 +1,10 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import videojs from "video.js";
-// import "videojs-contrib-hls";//支持m3u8
-import "video.js/dist/video-js.min.css";
+import Plyr from "plyr";
 import * as utils from "../../utils";
 import "./index.css";
+import "plyr/dist/plyr.css";
 
-window.videojs = videojs;
-
-import("video.js/dist/lang/zh-CN.js");
 // 文件列表
 export default class Colle extends Component {
   constructor(props) {
@@ -19,6 +15,7 @@ export default class Colle extends Component {
       imagePupur: false,
       imageSrc: "",
       musicPupur: false,
+      musicSrc: require("./music.mp3").default,
       fileColles: [
         { name: "我是文件夹", checked: false, isFloder: 1 },
         { name: "文件.txt", checked: false },
@@ -36,9 +33,7 @@ export default class Colle extends Component {
     };
   }
 
-  componentDidMount() {
-    // this.playerVideo();
-  }
+  componentDidMount() {}
 
   // 请求列表
   fetchFileColles = (data) => {
@@ -97,17 +92,7 @@ export default class Colle extends Component {
   playerVideo = (src = "//vjs.zencdn.net/v/oceans.webm") => {
     this.setState({ videoPupur: true });
 
-    new videojs(
-      "share_video_wrapper",
-      {
-        controls: true,
-        preload: "auto",
-        fluid: true,
-      },
-      function () {
-        this.src(src);
-      }
-    );
+    new Plyr("#share_video_wrapper");
   };
 
   closePlayer = () => {
@@ -133,6 +118,8 @@ export default class Colle extends Component {
     this.setState({
       musicPupur: true,
     });
+
+    new Plyr("#share_audio_wrapper");
   };
 
   closeMusic = () => {
@@ -153,6 +140,7 @@ export default class Colle extends Component {
       imagePupur,
       imageSrc,
       musicPupur,
+      musicSrc,
     } = this.state;
 
     const checkedCollenArg = fileColles.filter((e) => e.checked);
@@ -276,7 +264,10 @@ export default class Colle extends Component {
           <span className="player-video-close" onClick={this.closePlayer}>
             <i className="iconfont icon-cross"></i>
           </span>
-          <video id="share_video_wrapper" className="video-js"></video>
+
+          <video id="share_video_wrapper" className="video-js">
+            <source src="//vjs.zencdn.net/v/oceans.webm" />
+          </video>
         </div>
 
         {/* 图片预览 */}
@@ -301,7 +292,8 @@ export default class Colle extends Component {
           <span className="player-music-close" onClick={this.closeMusic}>
             <i className="iconfont icon-cross"></i>
           </span>
-          音乐播放
+
+          <audio id="share_audio_wrapper" src={musicSrc} preload="auto" />
         </div>
       </div>
     );
