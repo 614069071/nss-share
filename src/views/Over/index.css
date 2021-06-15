@@ -1,0 +1,26 @@
+.file-over-wrapper {
+  background-color: #fff;
+  margin-top: 16px;
+  position: relative;
+}
+
+.file-over-inner-wrapper {
+  position: absolute;
+  height: auto !important;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.file-over-image-wrapper {
+  width: 227px;
+  height: 122px;
+}
+
+.file-over-inner-wrapper p {
+  color: #595959;
+  margin-top: 16px;
+  height: 20px;
+  line-height: 20px;
+}

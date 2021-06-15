@@ -219,11 +219,6 @@
   user-select: none;
 }
 
-.player-video-wrapper .player-video-close i {
-  color: #fff;
-  font-size: 14px;
-}
-
 .video-js .vjs-big-play-button {
   width: 50px;
   height: 50px;
@@ -251,15 +246,11 @@
 }
 
 .player-image-wrapper .player-image-close {
-  color: #fff;
   position: absolute;
   right: 20px;
   top: 20px;
   user-select: none;
   cursor: pointer;
-}
-.player-image-wrapper .player-image-close i {
-  font-size: 20px;
 }
 
 .player-preview-wrapper img {
@@ -284,8 +275,12 @@
   top: 6px;
   right: 6px;
   cursor: pointer;
+  z-index: 100;
 }
 
+.player-video-wrapper .player-video-close i,
+.player-image-wrapper .player-image-close i,
 .player-music-wrapper .player-music-close i {
-  font-size: 14px;
+  color: #a6a6a6;
+  font-size: 18px;
 }

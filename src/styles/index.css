@@ -145,14 +145,15 @@ body,
   height: 100%;
 }
 
+/*
 [class^="icon-"] {
   display: inline-block;
-  /* width: 20px;
-  height: 20px; */
+  width: 20px;
+  height: 20px;
   background-size: contain;
 }
 
-.icon-download {
+ .icon-download {
   background-image: url("../images/icons/download.png");
 }
 
@@ -166,4 +167,4 @@ body,
 
 .icon-back {
   background-image: url("../images/icons/back.png");
-}
+} */
