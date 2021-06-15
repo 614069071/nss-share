@@ -20,6 +20,7 @@ export default class Colle extends Component {
         { name: "文件.png", checked: false },
         { name: "文件.xsa", checked: false },
       ],
+      isCheck: false,
     };
   }
 
@@ -28,21 +29,23 @@ export default class Colle extends Component {
   }
 
   render() {
-    const { fileColles } = this.state;
+    const { fileColles, isCheck } = this.state;
     return (
       <div className="m-colle-wrapper">
         <div className="m-control-wrapper">
-          {/* <div className="no-check-state-wrapper">
-            总共5个文件 <span>5月31日前有效</span>
-          </div> */}
-
-          <div className="check-state-wrapper">
-            <span className="check-state-cancel">取消</span>
-            <span className="check-state-info">
-              已选中 <i>1</i> 个文件/文件夹
-            </span>
-            <span className="check-state-all">全选</span>
-          </div>
+          {isCheck ? (
+            <div className="check-state-wrapper">
+              <span className="check-state-cancel">取消</span>
+              <span className="check-state-info">
+                已选中 <i>1</i> 个文件/文件夹
+              </span>
+              <span className="check-state-all">全选</span>
+            </div>
+          ) : (
+            <div className="no-check-state-wrapper">
+              总共5个文件 <span>5月31日前有效</span>
+            </div>
+          )}
         </div>
 
         <div className="m-colle-list-wrapper">
@@ -68,9 +71,7 @@ export default class Colle extends Component {
           ))}
         </div>
 
-        <div className="download-files-wrapper">
-          <button className="m-button m-download-button">下载</button>
-        </div>
+        <div className="blank-wrapper"></div>
       </div>
     );
   }

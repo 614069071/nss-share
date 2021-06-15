@@ -16,8 +16,8 @@ export default class App extends Component {
     const isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) || ('ontouchend' in document.body) || (scrren < 768);
 
     this.state = {
-      hasHold: true,//设置了提取码，待验证
-      isNoHold: true, //没有设置提取码
+      hasHold: false,//设置了提取码，待验证
+      isNoHold: false, //没有设置提取码
       isMobile,
       isOver: false //过期
     };

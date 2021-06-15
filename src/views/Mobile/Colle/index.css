@@ -1,5 +1,4 @@
 .m-colle-wrapper {
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -9,11 +8,15 @@
   height: 1.24rem;
   align-items: center;
   padding: 0 0.24rem;
+  background-color: #fff;
+  /* position: sticky;
+  left: 0;
+  top: 0; */
 }
 
 .no-check-state-wrapper span {
   color: #969799;
-  font-size: 0.24em;
+  font-size: 0.24rem;
   margin-left: 0.36rem;
 }
 
@@ -39,16 +42,8 @@
   color: var(--primary);
 }
 
-.download-files-wrapper {
-  padding: 0.06rem 0.32rem;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #fff;
-  box-shadow: 0px 6px 20px 0px rgba(125, 126, 128, 0.12);
-}
-
 .m-colle-list-wrapper {
-  padding: 0 0.24rem 1.77rem 0.24rem;
+  padding: 0 0.24rem 0 0.24rem;
   flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
@@ -92,4 +87,9 @@
 
 .m-file-main p span + span {
   margin-left: 0.24rem;
+}
+
+.blank-wrapper {
+  height: 0.8rem;
+  background-color: #f0f2f5;
 }

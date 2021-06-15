@@ -26,6 +26,12 @@
   flex-direction: column;
 }
 
+.m-inner-wrapper {
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .m-main-wrapper {
   flex: 1;
   overflow: hidden;
@@ -104,4 +110,11 @@
   text-align: center;
   color: #969799;
   margin-top: 0.48rem;
+}
+
+.download-files-wrapper {
+  padding: 0.06rem 0.32rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
 }

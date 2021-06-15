@@ -14,26 +14,26 @@ export default class Mobile extends Component {
     const { isOver, hasHold, isNoHold } = this.props;
     return (
       <div className="mobile-wrapper">
-        <header className="m-app-header-wrapper">
-          <div
-            className="m-header-avator-wrapper"
-            style={{ backgroundImage: `url(${logo})` }}
-          ></div>
-        </header>
+        <div className="m-inner-wrapper">
+          <header className="m-app-header-wrapper">
+            <div
+              className="m-header-avator-wrapper"
+              style={{ backgroundImage: `url(${logo})` }}
+            ></div>
+          </header>
 
-        <div className="m-share-user-wrapper">
-          <div className="m-share-user-inner-wrapper">
-            <div className="m-user-image-wrapper">
-              <img
-                src="https://dss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/netdisk.1.18ad9bc4.-suxkK7XcG8XVe7JNQGaMg.jpg"
-                alt=""
-              />
+          <div className="m-share-user-wrapper">
+            <div className="m-share-user-inner-wrapper">
+              <div className="m-user-image-wrapper">
+                <img
+                  src="https://dss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/netdisk.1.18ad9bc4.-suxkK7XcG8XVe7JNQGaMg.jpg"
+                  alt=""
+                />
+              </div>
+              <div>离子007的分享</div>
             </div>
-            <div>离子007的分享</div>
           </div>
-        </div>
 
-        <div className="m-main-wrapper">
           {isOver ? (
             <div className="m-over-wrapper">
               <div className="m-over-img-wrapper">
@@ -49,13 +49,23 @@ export default class Mobile extends Component {
           ) : (
             <div className="m-hold-wrapper">
               <div>
-                <input type="text" maxLength="4" />
+                <input
+                  type="text"
+                  placeholder="请输入文件提取码"
+                  maxLength="4"
+                />
               </div>
-              <p>分享已过期</p>
+              <p>密码错误，请重新输入</p>
               <button className="m-button">提取文件</button>
             </div>
           )}
         </div>
+
+        {hasHold && (
+          <div className="download-files-wrapper">
+            <button className="m-button m-download-button">下载</button>
+          </div>
+        )}
       </div>
     );
   }
