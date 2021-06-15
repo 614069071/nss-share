@@ -127,8 +127,8 @@ export default class Colle extends Component {
   };
 
   playerFile = () => {
-    // this.playerImage();
-    this.playerVideo();
+    this.playerImage();
+    // this.playerVideo();
     // this.playerMusic();
   };
 
@@ -273,15 +273,14 @@ export default class Colle extends Component {
         {/* 图片预览 */}
         <div
           className="player-image-wrapper"
-          style={{ display: imagePupur ? "block" : "none" }}
+          style={{
+            display: imagePupur ? "block" : "none",
+            backgroundImage: `url(${imageSrc})`,
+          }}
         >
           <span className="player-image-close" onClick={this.closeImage}>
             <i className="iconfont icon-cross"></i>
           </span>
-
-          <div className="player-preview-wrapper">
-            <img src={imageSrc} alt="" />
-          </div>
         </div>
 
         {/* 音乐播放 */}
