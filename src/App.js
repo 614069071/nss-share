@@ -41,15 +41,12 @@ export default class App extends Component {
 
   render() {
     const { isMobile, isNoHold, hasHold, isOver } = this.state;
-    const props = { isNoHold, hasHold, isOver };
+    const props = { isNoHold, hasHold, isOver, change: this.changeHold };
 
     return (
       (<div className="app-wrapper">
         {
-          isMobile ?
-            (<Mobile  {...props} />)
-            :
-            <PC {...props} change={this.changeHold} />
+          isMobile ? <Mobile  {...props} /> : <PC {...props} />
         }
       </div>)
     );
