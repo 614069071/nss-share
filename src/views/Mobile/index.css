@@ -10,6 +10,8 @@
 }
 
 .m-file-check input[type="checkbox"] {
+  width: 0.32rem;
+  height: 0.32rem;
   background-image: url("../../images/m-check-off.png");
 }
 

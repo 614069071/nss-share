@@ -71,6 +71,8 @@
 
 .m-file-item-wrapper .m-file-check {
   width: 0.66rem;
+  height: 0.32rem;
+  text-align: right;
 }
 
 .m-file-item-wrapper .m-file-main {
