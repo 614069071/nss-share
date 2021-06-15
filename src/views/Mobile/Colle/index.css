@@ -1,3 +1,9 @@
+.m-colle-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .m-control-wrapper {
   display: flex;
   height: 1.24rem;
@@ -37,14 +43,14 @@
   padding: 0.06rem 0.32rem;
   width: 100%;
   box-sizing: border-box;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   background-color: #fff;
 }
 
 .m-colle-list-wrapper {
   padding: 0 0.24rem 1.77rem 0.24rem;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .m-file-item-wrapper {

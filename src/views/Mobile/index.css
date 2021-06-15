@@ -18,6 +18,16 @@
 }
 
 /* 头部 */
+.mobile-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.m-main-wrapper {
+  flex: 1;
+  overflow: hidden;
+}
 .m-app-header-wrapper {
   height: 0.88rem;
   padding-left: 0.32rem;

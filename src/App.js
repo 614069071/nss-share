@@ -48,12 +48,12 @@ export default class App extends Component {
     const props = { isNoHold, hasHold, isOver };
 
     return (
-      <Fragment>
+      (<div className="app-wrapper">
         {
           isMobile ?
             (<Mobile  {...props} />)
             :
-            (<div className="app-wrapper">
+            <Fragment>
               <Header isHold={hasHold}></Header>
 
               <div className="app-inner-wrapper">
@@ -63,9 +63,9 @@ export default class App extends Component {
               </div>
 
               <Footer></Footer>
-            </div>)
+            </Fragment>
         }
-      </Fragment>
+      </div>)
     );
   }
 }

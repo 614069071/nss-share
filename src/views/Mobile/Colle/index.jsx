@@ -30,7 +30,7 @@ export default class Colle extends Component {
   render() {
     const { fileColles } = this.state;
     return (
-      <div>
+      <div className="m-colle-wrapper">
         <div className="m-control-wrapper">
           {/* <div className="no-check-state-wrapper">
             总共5个文件 <span>5月31日前有效</span>

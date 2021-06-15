@@ -33,27 +33,29 @@ export default class Mobile extends Component {
           </div>
         </div>
 
-        {isOver ? (
-          <div className="m-over-wrapper">
-            <div className="m-over-img-wrapper">
-              <img src={over} alt="" />
-            </div>
+        <div className="m-main-wrapper">
+          {isOver ? (
+            <div className="m-over-wrapper">
+              <div className="m-over-img-wrapper">
+                <img src={over} alt="" />
+              </div>
 
-            <p>你访问的链接已过期</p>
-          </div>
-        ) : isNoHold ? (
-          <Colle></Colle>
-        ) : hasHold ? (
-          <Colle></Colle>
-        ) : (
-          <div className="m-hold-wrapper">
-            <div>
-              <input type="text" maxLength="4" />
+              <p>你访问的链接已过期</p>
             </div>
-            <p>分享已过期</p>
-            <button className="m-button">提取文件</button>
-          </div>
-        )}
+          ) : isNoHold ? (
+            <Colle></Colle>
+          ) : hasHold ? (
+            <Colle></Colle>
+          ) : (
+            <div className="m-hold-wrapper">
+              <div>
+                <input type="text" maxLength="4" />
+              </div>
+              <p>分享已过期</p>
+              <button className="m-button">提取文件</button>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
