@@ -41,8 +41,16 @@ export default class Example extends Component {
   }
 }
 
-Example.defaultProps = {};
+Example.defaultProps = {
+  hasHold: true,
+  isOver: true,
+  isNoHold: true,
+  change: () => {},
+};
 
 Example.propTypes = {
-  data: PropTypes.string,
+  hasHold: PropTypes.bool,
+  isOver: PropTypes.bool,
+  isNoHold: PropTypes.bool,
+  change: PropTypes.func,
 };
