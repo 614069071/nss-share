@@ -1,11 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import Header from './components/header'
-import Footer from './components/footer'
-import Colle from './views/Colle';
-import Hold from './views/Hold';
-import Over from './components/over';
+import React, { Component } from 'react';
 import * as utils from './utils';
 import Mobile from './views/Mobile';
+import PC from './views/PC';
 
 export default class App extends Component {
   constructor(props) {
@@ -53,17 +49,7 @@ export default class App extends Component {
           isMobile ?
             (<Mobile  {...props} />)
             :
-            <Fragment>
-              <Header isHold={hasHold}></Header>
-
-              <div className="app-inner-wrapper">
-                {
-                  isOver ? <Over /> : (isNoHold ? <Colle /> : (hasHold ? <Colle /> : <Hold change={this.changeHold} />))
-                }
-              </div>
-
-              <Footer></Footer>
-            </Fragment>
+            <PC {...props} change={this.changeHold} />
         }
       </div>)
     );

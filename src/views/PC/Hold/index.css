@@ -9,7 +9,7 @@
 
 .hold-head-wrapper {
   height: 64px;
-  background-image: url("../../images/hold-header.png"),
+  background-image: url("../../../images/hold-header.png"),
     linear-gradient(270deg, #468cfe 0%, #75bafe 100%);
   background-size: contain;
 
