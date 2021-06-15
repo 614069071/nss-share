@@ -10,15 +10,23 @@
   --danger-weak: #fde2e2;
 }
 
-/* @media (max-width: 768px) {
-  body {
-  }
-} */
-
 body {
   background-color: #f7f7f7;
   color: #262626;
   font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 13.3333333vw;
+    height: auto;
+  }
+
+  body {
+    font-size: 0.28rem;
+    height: auto;
+    background-color: #fff;
+  }
 }
 
 input {
@@ -144,27 +152,3 @@ body,
 .app-inner-wrapper > div {
   height: 100%;
 }
-
-/*
-[class^="icon-"] {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-}
-
- .icon-download {
-  background-image: url("../images/icons/download.png");
-}
-
-.icon-down-blue {
-  background-image: url("../images/icons/download-blue.png");
-}
-
-.icon-clock {
-  background-image: url("../images/icons/clock.png");
-}
-
-.icon-back {
-  background-image: url("../images/icons/back.png");
-} */

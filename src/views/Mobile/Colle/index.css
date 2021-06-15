@@ -1,0 +1,82 @@
+.m-control-wrapper {
+  display: flex;
+  height: 1.24rem;
+  align-items: center;
+  padding: 0 0.24rem;
+}
+
+.no-check-state-wrapper span {
+  color: #969799;
+  font-size: 0.24em;
+  margin-left: 0.36rem;
+}
+
+.check-state-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.check-state-wrapper .check-state-info {
+  font-size: 0.32rem;
+}
+
+.check-state-wrapper .check-state-cancel {
+  color: #969799;
+}
+
+.check-state-wrapper .check-state-all {
+  color: #576b95;
+}
+
+.check-state-info i {
+  color: var(--primary);
+}
+
+.download-files-wrapper {
+  padding: 0.06rem 0.32rem;
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.m-colle-list-wrapper {
+  padding: 0 0.24rem 1.77rem 0.24rem;
+}
+
+.m-file-item-wrapper {
+  display: flex;
+  align-items: center;
+  height: 1.28rem;
+}
+
+.m-file-item-wrapper + .m-file-item-wrapper {
+  border-top: 1px solid #ebedf0;
+}
+
+.m-file-item-wrapper .m-file-image {
+  width: 0.72rem;
+  height: 0.72rem;
+  margin-right: 0.16rem;
+}
+
+.m-file-item-wrapper .m-file-check {
+  width: 0.66rem;
+}
+
+.m-file-item-wrapper .m-file-main {
+  height: 0.72rem;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.m-file-main p {
+  font-size: 0.24rem;
+  color: #969799;
+}

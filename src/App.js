@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Header from './components/header'
 import Footer from './components/footer'
 import Colle from './views/Colle';
 import Hold from './views/Hold';
-import Over from './views/Over';
+import Over from './components/over';
 import * as utils from './utils';
+import Mobile from './views/Mobile';
 
 export default class App extends Component {
   constructor(props) {
@@ -15,10 +16,10 @@ export default class App extends Component {
     const isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) || ('ontouchend' in document.body) || (scrren < 768);
 
     this.state = {
-      hasHold: false,//设置了提取码，待验证
-      isNoHold: false, //没有设置提取码
+      hasHold: true,//设置了提取码，待验证
+      isNoHold: true, //没有设置提取码
       isMobile,
-      isOver: false
+      isOver: false //过期
     };
   }
 
@@ -43,20 +44,28 @@ export default class App extends Component {
   }
 
   render() {
-    const { isNoHold, hasHold, isOver } = this.state;
+    const { isMobile, isNoHold, hasHold, isOver } = this.state;
+    const props = { isNoHold, hasHold, isOver };
 
     return (
-      <div className="app-wrapper">
-        <Header isHold={hasHold}></Header>
+      <Fragment>
+        {
+          isMobile ?
+            (<Mobile  {...props} />)
+            :
+            (<div className="app-wrapper">
+              <Header isHold={hasHold}></Header>
 
-        <div className="app-inner-wrapper">
-          {
-            isOver ? <Over /> : (isNoHold ? <Colle /> : (hasHold ? <Colle /> : <Hold change={this.changeHold} />))
-          }
-        </div>
+              <div className="app-inner-wrapper">
+                {
+                  isOver ? <Over /> : (isNoHold ? <Colle /> : (hasHold ? <Colle /> : <Hold change={this.changeHold} />))
+                }
+              </div>
 
-        <Footer></Footer>
-      </div>
+              <Footer></Footer>
+            </div>)
+        }
+      </Fragment>
     );
   }
 }
