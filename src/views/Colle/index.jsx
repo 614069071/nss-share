@@ -107,6 +107,11 @@ export default class Colle extends Component {
       imageSrc: src,
       imagePupur: true,
     });
+
+    /* 
+    https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg
+    https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1070003001,653753576&fm=26&gp=0.jpg
+    */
   };
 
   closeImage = () => {
