@@ -86,3 +86,7 @@
   font-size: 0.24rem;
   color: #969799;
 }
+
+.m-file-main p span + span {
+  margin-left: 0.24rem;
+}
