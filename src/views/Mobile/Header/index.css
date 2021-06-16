@@ -1,0 +1,38 @@
+/* 头部 */
+.m-app-header-inner {
+  height: 0.88rem;
+  padding-left: 0.32rem;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ebedf0;
+}
+
+.m-header-avator-wrapper {
+  height: 0.52rem;
+  width: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.m-share-user-wrapper {
+  padding: 0.24rem 0.24rem 0.16rem 0.24rem;
+}
+
+.m-share-user-wrapper .m-share-user-inner-wrapper {
+  background-color: #fff;
+  height: 1.5rem;
+  padding-left: 0.32rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.12rem;
+  box-shadow: 0px 4px 24px 0px rgba(125, 126, 128, 0.12);
+}
+
+.m-user-image-wrapper {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 0.24rem;
+}

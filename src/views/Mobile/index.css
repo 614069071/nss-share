@@ -26,76 +26,6 @@
   flex-direction: column;
 }
 
-.m-inner-wrapper {
-  flex: 1;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.m-main-wrapper {
-  flex: 1;
-  overflow: hidden;
-}
-.m-app-header-wrapper {
-  height: 0.88rem;
-  padding-left: 0.32rem;
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border-bottom: 1px solid #ebedf0;
-}
-
-.m-header-avator-wrapper {
-  height: 0.52rem;
-  width: 100px;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.m-share-user-wrapper {
-  padding: 0.24rem 0.24rem 0.16rem 0.24rem;
-}
-
-.m-share-user-wrapper .m-share-user-inner-wrapper {
-  background-color: #fff;
-  height: 1.5rem;
-  padding-left: 0.32rem;
-  display: flex;
-  align-items: center;
-  border-radius: 0.12rem;
-  box-shadow: 0px 4px 24px 0px rgba(125, 126, 128, 0.12);
-}
-
-.m-user-image-wrapper {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 0.24rem;
-}
-
-.m-hold-wrapper {
-  padding: 0 0.75rem;
-  margin-top: 1.62rem;
-}
-
-.m-hold-wrapper input {
-  height: 0.88rem;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  border-radius: 0.44rem;
-  border: none;
-  background-color: #f7f8fa;
-}
-
-.m-hold-wrapper p {
-  color: var(--danger);
-  height: 0.48rem;
-  line-height: 0.48rem;
-  text-align: center;
-}
-
 /* 过期 */
 .m-over-wrapper {
   margin-top: 2.33rem;
@@ -110,12 +40,4 @@
   text-align: center;
   color: #969799;
   margin-top: 0.48rem;
-}
-
-.download-files-wrapper {
-  padding: 0.06rem 0.32rem;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #fff;
-  box-shadow: 0px 6px 20px 0px rgba(125, 126, 128, 0.12);
 }

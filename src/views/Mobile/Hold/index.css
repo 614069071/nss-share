@@ -1,0 +1,22 @@
+/* 提取密码 */
+.m-hold-wrapper {
+  padding: 0 0.75rem;
+  margin-top: 1.62rem;
+}
+
+.m-hold-wrapper input {
+  height: 0.88rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 0.44rem;
+  border: none;
+  background-color: #f7f8fa;
+}
+
+.m-hold-wrapper p {
+  color: var(--danger);
+  height: 0.48rem;
+  line-height: 0.48rem;
+  text-align: center;
+}
