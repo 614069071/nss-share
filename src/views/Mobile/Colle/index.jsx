@@ -140,8 +140,8 @@ export default class Colle extends Component {
   };
 
   playerFile = () => {
-    // this.playerImage();
-    this.playerVideo();
+    this.playerImage();
+    // this.playerVideo();
     // this.playerMusic();
   };
 
