@@ -1,38 +1,22 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Header from "../Header";
 import over from "../../../images/over.png";
 import "./index.css";
 
-export default class Over extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function Over(props) {
+  const { isOver } = props;
+  return (
+    <div className="m-over-wrapper">
+      <Header></Header>
 
-  componentDidMount() {
-    console.log("componentDidMount");
-  }
-
-  render() {
-    return (
-      <div className="m-over-wrapper">
-        <Header></Header>
-
-        <div className="m-over-container">
-          <div className="m-over-img-wrapper">
-            <img src={over} alt="" />
-          </div>
-
-          <p>你访问的链接已过期</p>
+      <div className="m-over-container">
+        <div className="m-over-img-wrapper">
+          <img src={over} alt="" />
         </div>
+
+        <p>{isOver ? "您访问的链接已过期" : "文件已被删除"}</p>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-Over.defaultProps = {};
-
-Over.propTypes = {
-  data: PropTypes.string,
-};
+export default Over;
