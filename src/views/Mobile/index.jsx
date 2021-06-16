@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import Vconsole from "vconsole";
 import Colle from "./Colle";
 import Hold from "./Hold";
-
-import over from "../../images/over.png";
+import Over from "./Over";
 import "./index.css";
 
 export default class Mobile extends Component {
@@ -20,13 +19,7 @@ export default class Mobile extends Component {
     return (
       <div className="mobile-wrapper">
         {isOver ? (
-          <div className="m-over-wrapper">
-            <div className="m-over-img-wrapper">
-              <img src={over} alt="" />
-            </div>
-
-            <p>你访问的链接已过期</p>
-          </div>
+          <Over></Over>
         ) : isNoHold ? (
           <Colle></Colle>
         ) : hasHold ? (

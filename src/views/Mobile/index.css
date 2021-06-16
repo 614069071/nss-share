@@ -25,19 +25,3 @@
   display: flex;
   flex-direction: column;
 }
-
-/* 过期 */
-.m-over-wrapper {
-  margin-top: 2.33rem;
-}
-.m-over-wrapper .m-over-img-wrapper {
-  width: 3.71rem;
-  height: 2rem;
-  margin: 0 auto;
-}
-
-.m-over-wrapper p {
-  text-align: center;
-  color: #969799;
-  margin-top: 0.48rem;
-}

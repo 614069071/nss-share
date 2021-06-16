@@ -15,7 +15,7 @@ export default class App extends Component {
       hasHold: false,//设置了提取码，是否校验通过
       isNoHold: false, //没有设置提取码
       isMobile,
-      isOver: false //过期
+      isOver: true //过期
     };
   }
 
