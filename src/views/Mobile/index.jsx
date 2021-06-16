@@ -15,7 +15,7 @@ export default class Mobile extends Component {
   }
 
   render() {
-    const { isOver, hasHold, isNoHold } = this.props;
+    const { isOver, hasHold, isNoHold, change } = this.props;
 
     return (
       <div className="mobile-wrapper">
@@ -32,7 +32,7 @@ export default class Mobile extends Component {
         ) : hasHold ? (
           <Colle></Colle>
         ) : (
-          <Hold></Hold>
+          <Hold change={change}></Hold>
         )}
       </div>
     );

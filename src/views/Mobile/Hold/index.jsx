@@ -14,6 +14,8 @@ export default class Hold extends Component {
   }
 
   render() {
+    const { change } = this.props;
+
     return (
       <div className="m-hold-view-wrapper">
         <Header></Header>
@@ -23,7 +25,9 @@ export default class Hold extends Component {
             <input type="text" placeholder="请输入文件提取码" maxLength="4" />
           </div>
           <p>密码错误，请重新输入</p>
-          <button className="m-button">提取文件</button>
+          <button className="m-button" onClick={change}>
+            提取文件
+          </button>
         </div>
       </div>
     );
