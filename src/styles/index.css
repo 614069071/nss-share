@@ -61,7 +61,8 @@ input[type="password"]:focus {
   background-color: var(--primary-weak);
 }
 
-.button:active {
+.button:active,
+.m-button:active {
   background-color: var(--primary-seri);
 }
 
