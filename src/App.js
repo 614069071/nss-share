@@ -13,7 +13,7 @@ export default class App extends Component {
 
     this.state = {
       hasHold: false,//设置了提取码，待验证
-      isNoHold: false, //没有设置提取码
+      isNoHold: true, //没有设置提取码
       isMobile,
       isOver: false //过期
     };

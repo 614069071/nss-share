@@ -3,7 +3,7 @@ export function mimeType(mime) {
 
   const ext = mime.split('.').pop();
 
-  if (ext === 'floder') return require('../images/icons/floder.png').default;
+  if (ext === 'floder') return require('../images/icons/floder.svg').default;
 
   const pdfTypes = ['pdf'];
   const txtTypes = ['txt'];
@@ -18,39 +18,39 @@ export function mimeType(mime) {
   const mimeTypes = [
     {
       key: pdfTypes,
-      value: require('../images/icons/pdf.png').default
+      value: require('../images/icons/pdf.svg').default
     },
     {
       key: txtTypes,
-      value: require('../images/icons/txt.png').default
+      value: require('../images/icons/txt.svg').default
     },
     {
       key: docTypes,
-      value: require('../images/icons/doc.png').default
+      value: require('../images/icons/doc.svg').default
     },
     {
       key: pptTypes,
-      value: require('../images/icons/ppt.png').default
+      value: require('../images/icons/ppt.svg').default
     },
     {
       key: xlsTypes,
-      value: require('../images/icons/xls.png').default
+      value: require('../images/icons/xls.svg').default
     },
     {
       key: zipTypes,
-      value: require('../images/icons/zip.png').default
+      value: require('../images/icons/zip.svg').default
     },
     {
       key: imgTypes,
-      value: require('../images/icons/img.png').default
+      value: require('../images/icons/img.svg').default
     },
     {
       key: mscTypes,
-      value: require('../images/icons/msc.png').default
+      value: require('../images/icons/msc.svg').default
     },
     {
       key: vdoTypes,
-      value: require('../images/icons/vdo.png').default
+      value: require('../images/icons/vdo.svg').default
     }
   ];
 
@@ -58,7 +58,7 @@ export function mimeType(mime) {
     if (mimeTypes[i].key.includes(ext)) return mimeTypes[i].value;
   }
 
-  return require('../images/icons/other.png').default;
+  return require('../images/icons/other.svg').default;
 }
 
 export const storages = {
