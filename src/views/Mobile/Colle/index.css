@@ -111,6 +111,11 @@
   text-align: center;
 }
 
+.m-colle-bread-wrapper .m-colle-back-btn {
+  display: flex;
+  align-items: center;
+}
+
 .m-colle-bread-wrapper .m-colle-back-btn::after {
   content: "";
   margin: 0 0.16rem;
@@ -119,13 +124,11 @@
   background-color: var(--info-weak);
   display: inline-block;
   position: relative;
-  top: 0.04rem;
+  top: -1px;
 }
 
 .m-colle-bread-wrapper .m-colle-back-btn i {
   font-size: 0.28rem;
-  position: relative;
-  top: 1px;
 }
 
 .m-colle-bread-list-wrapper span:last-child {
