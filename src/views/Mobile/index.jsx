@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Vconsole from "vconsole";
 import Colle from "./Colle";
 import logo from "../../images/logo.png";
 import over from "../../images/over.png";
@@ -8,10 +9,14 @@ import "./index.css";
 export default class Mobile extends Component {
   componentDidMount() {
     console.log("componentDidMount");
+
+    new Vconsole();
   }
 
   render() {
     const { isOver, hasHold, isNoHold } = this.props;
+    console.log("hasHold", hasHold);
+
     return (
       <div className="mobile-wrapper">
         <div className="m-inner-wrapper">
@@ -61,18 +66,18 @@ export default class Mobile extends Component {
           )}
         </div>
 
-        {hasHold && (
+        {isNoHold || hasHold ? (
           <div className="download-files-wrapper">
             <button className="m-button m-download-button">下载</button>
           </div>
-        )}
+        ) : null}
       </div>
     );
   }
 }
 
 Mobile.defaultProps = {
-  hasHold: true, //设置了提取码，待验证
+  hasHold: false, //设置了提取码，待验证
   isNoHold: false, //没有设置提取码
   isOver: false, //过期
 };

@@ -12,19 +12,11 @@ export default class App extends Component {
     const isMobile = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) || ('ontouchend' in document.body) || (scrren < 768);
 
     this.state = {
-      hasHold: false,//设置了提取码，待验证
+      hasHold: false,//设置了提取码，是否校验通过
       isNoHold: true, //没有设置提取码
       isMobile,
       isOver: false //过期
     };
-  }
-
-  judgeClient = () => {
-    const scrren = window.innerWidth || document.documentElement.offsetWidth;
-
-    this.setState({ isMobile: scrren < 768 }, () => {
-      console.log(this.state.isMobile)
-    });
   }
 
   componentDidMount() {
