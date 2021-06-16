@@ -182,6 +182,9 @@
 .file-item-wrapper .file-info .file-name {
   flex: 1;
   padding-right: 20px;
+}
+
+.file-item-wrapper .file-info .file-name span {
   cursor: pointer;
 }
 
@@ -196,6 +199,10 @@
 
 .file-item-wrapper:hover .file-download-btn {
   display: block;
+}
+
+.file-download-btn i {
+  color: var(--primary);
 }
 
 .file-item-wrapper .file-size span:first-child {

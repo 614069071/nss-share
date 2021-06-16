@@ -39,6 +39,7 @@ export default class Colle extends Component {
   fetchFileColles = (data) => {
     console.log("请求列表", data);
   };
+
   // 全选
   selectAll = (e) => {
     const { checked } = e.target;
@@ -49,6 +50,14 @@ export default class Colle extends Component {
     this.setState({ fileColles: arr }, () => {
       console.log(this.state.fileColles);
     });
+  };
+
+  // 处理文件选择
+  checkFile = (e, v, i) => {
+    let arr = this.state.fileColles;
+    arr[i].checked = e.target.checked;
+
+    this.setState({ fileColles: arr });
   };
 
   //返回
@@ -73,14 +82,6 @@ export default class Colle extends Component {
 
     this.setState({ breadColleArg: arr });
     this.fetchFileColles("切换路径");
-  };
-
-  // 处理文件选择
-  checkFile = (e, v, i) => {
-    let arr = this.state.fileColles;
-    arr[i].checked = e.target.checked;
-
-    this.setState({ fileColles: arr });
   };
 
   // 批量下载
@@ -157,14 +158,14 @@ export default class Colle extends Component {
           <div className="colle-control-left">
             <span className="share-failure-sum">总共11个文件</span>
             <span className="share-failure-title">
-              <i className="icon-clock"></i>失效时间：
+              <i className="iconfont icon-reloadtime"></i>失效时间：
             </span>
             <span className="share-failure-state">已失效</span>
           </div>
 
           <div className="colle-control-right">
             <button className="button" onClick={this.batchDownloads}>
-              <i className="icon-download"></i>
+              <i className="iconfont icon-xiazai"></i>
               下载
             </button>
           </div>
@@ -175,7 +176,7 @@ export default class Colle extends Component {
             <div className="colle-bread-wrapper">
               {breadColleArg.length ? (
                 <div className="colle-back-btn" onClick={this.backChangeBread}>
-                  <i className="icon-back"></i>返回
+                  <i className="iconfont icon-back"></i>返回
                 </div>
               ) : null}
               <div className="colle-all-btn" onClick={this.changeAllBread}>
@@ -251,7 +252,7 @@ export default class Colle extends Component {
                       className="file-download-btn"
                       title="下载"
                     >
-                      <i className="icon-down-blue"></i>
+                      <i className="iconfont icon-xiazai"></i>
                     </a>
                   </div>
                   <div className="file-share-time">2021-01-12 11:07</div>
