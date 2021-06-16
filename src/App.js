@@ -3,6 +3,8 @@ import * as utils from './utils';
 import Mobile from './views/Mobile';
 import PC from './views/PC';
 
+// 测试一下git tag
+
 export default class App extends Component {
   constructor(props) {
     super(props);
