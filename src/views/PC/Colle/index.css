@@ -12,6 +12,7 @@
 
 .colle-list-wrapper .file-share-time {
   width: 15%;
+  white-space: nowrap;
 }
 
 .colle-list-wrapper input[type="checkbox"] {
@@ -115,6 +116,7 @@
 .colle-bread-list-wrapper span {
   display: flex;
   align-items: center;
+  color: var(--info-weak);
 }
 
 .colle-bread-list-wrapper span i {
@@ -126,6 +128,10 @@
   margin-right: 4px;
   font-size: 12px;
   color: var(--info-weak);
+}
+
+.colle-bread-list-wrapper span:last-child {
+  color: #323232;
 }
 
 /* 选中文件 */

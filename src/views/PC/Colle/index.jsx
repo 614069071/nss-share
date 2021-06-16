@@ -255,7 +255,9 @@ export default class Colle extends Component {
                       <i className="iconfont icon-xiazai"></i>
                     </a>
                   </div>
-                  <div className="file-share-time">2021-01-12 11:07</div>
+                  <div className="file-share-time ellipsis">
+                    2021-01-12 11:07
+                  </div>
                 </div>
               ))}
             </div>

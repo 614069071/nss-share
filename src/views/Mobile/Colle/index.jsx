@@ -86,7 +86,7 @@ export default class Colle extends Component {
   };
 
   render() {
-    const { fileColles, isCheck, breadColleArg } = this.state;
+    const { fileColles, breadColleArg } = this.state;
     return (
       <div className="m-colle-wrapper">
         <div className="m-control-wrapper">
