@@ -6,7 +6,7 @@ import Footer from "../../components/footer";
 import Colle from "./Colle";
 import Hold from "./Hold";
 
-export default class Example extends Component {
+export default class PC extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -41,14 +41,14 @@ export default class Example extends Component {
   }
 }
 
-Example.defaultProps = {
-  hasHold: true,
-  isOver: true,
-  isNoHold: true,
+PC.defaultProps = {
+  hasHold: false,
+  isOver: false,
+  isNoHold: false,
   change: () => {},
 };
 
-Example.propTypes = {
+PC.propTypes = {
   hasHold: PropTypes.bool,
   isOver: PropTypes.bool,
   isNoHold: PropTypes.bool,
