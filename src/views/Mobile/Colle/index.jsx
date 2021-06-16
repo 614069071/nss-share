@@ -21,14 +21,7 @@ export default class Colle extends Component {
         { name: "文件.xsa", checked: false },
       ],
       isCheck: false,
-      breadColleArg: [
-        "文件夹1",
-        "文件夹2",
-        "文件夹1",
-        "文件夹2",
-        "文件夹1",
-        "文件夹2",
-      ], //文件路劲集合
+      breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
     };
   }
 
@@ -42,11 +35,23 @@ export default class Colle extends Component {
   };
 
   // 全选
-  selectAll = (e) => {
-    const { checked } = e.target;
+  selectAll = () => {
     const arr = this.state.fileColles;
+    const checkArg = arr.filter((e) => e.checked);
 
-    arr.forEach((e) => (e.checked = checked));
+    arr.forEach((e) => {
+      e.checked = checkArg.length < arr.length;
+    });
+
+    this.setState({ fileColles: arr }, () => {
+      console.log(this.state.fileColles);
+    });
+  };
+
+  // 取消全选
+  toCancelAll = () => {
+    const arr = this.state.fileColles;
+    arr.forEach((e) => (e.checked = false));
 
     this.setState({ fileColles: arr }, () => {
       console.log(this.state.fileColles);
@@ -87,12 +92,16 @@ export default class Colle extends Component {
 
   render() {
     const { fileColles, breadColleArg } = this.state;
+    const checkArg = fileColles.filter((e) => e.checked);
+
     return (
       <div className="m-colle-wrapper">
         <div className="m-control-wrapper">
-          {/* {isCheck ? (
+          {checkArg.length ? (
             <div className="check-state-wrapper">
-              <span className="check-state-cancel">取消</span>
+              <span className="check-state-cancel" onClick={this.toCancelAll}>
+                取消
+              </span>
 
               <span className="check-state-info">
                 已选中 <i>1</i> 个文件/文件夹
@@ -102,30 +111,33 @@ export default class Colle extends Component {
                 全选
               </span>
             </div>
+          ) : breadColleArg.length ? (
+            <div className="m-colle-bread-wrapper">
+              {breadColleArg.length ? (
+                <div
+                  className="m-colle-back-btn"
+                  onClick={this.backChangeBread}
+                >
+                  <i className="iconfont icon-back"></i>返回
+                </div>
+              ) : null}
+              <div className="m-colle-all-btn" onClick={this.changeAllBread}>
+                全部文件
+              </div>
+              <div className="m-colle-bread-list-wrapper">
+                {breadColleArg.map((e, i) => (
+                  <span key={i} onClick={() => this.checkChangeBread(e, i)}>
+                    <i className="iconfont icon-arrow-right"></i>
+                    {e}
+                  </span>
+                ))}
+              </div>
+            </div>
           ) : (
             <div className="no-check-state-wrapper">
               总共5个文件 <span>5月31日前有效</span>
             </div>
-          )} */}
-
-          <div className="m-colle-bread-wrapper">
-            {breadColleArg.length ? (
-              <div className="m-colle-back-btn" onClick={this.backChangeBread}>
-                <i className="iconfont icon-back"></i>返回
-              </div>
-            ) : null}
-            <div className="m-colle-all-btn" onClick={this.changeAllBread}>
-              全部文件
-            </div>
-            <div className="m-colle-bread-list-wrapper">
-              {breadColleArg.map((e, i) => (
-                <span key={i} onClick={() => this.checkChangeBread(e, i)}>
-                  <i className="iconfont icon-arrow-right"></i>
-                  {e}
-                </span>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
 
         <div className="m-colle-list-wrapper">
