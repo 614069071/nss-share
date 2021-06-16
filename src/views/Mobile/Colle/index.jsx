@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Plyr from "plyr";
 import * as utils from "../../../utils";
 import "./index.css";
 
@@ -22,6 +23,11 @@ export default class Colle extends Component {
       ],
       isCheck: false,
       breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
+      imagePupur: false,
+      imageSrc: "",
+      videoPupur: false,
+      musicPupur: false,
+      musicSrc: "",
     };
   }
 
@@ -90,8 +96,65 @@ export default class Colle extends Component {
     this.fetchFileColles("切换路径");
   };
 
+  // 播放视频
+  playerVideo = (src = "//vjs.zencdn.net/v/oceans.webm") => {
+    this.setState({ videoPupur: true });
+
+    new Plyr("#m_share_video_wrapper");
+  };
+
+  closePlayer = () => {
+    this.setState({ videoPupur: false });
+  };
+
+  // 图片预览
+  playerImage = (
+    src = "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg"
+  ) => {
+    this.setState({
+      imageSrc: src,
+      imagePupur: true,
+    });
+
+    /* 
+    https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg
+    https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1070003001,653753576&fm=26&gp=0.jpg
+    */
+  };
+
+  closeImage = () => {
+    this.setState({ imageSrc: "", imagePupur: false });
+  };
+
+  // 音乐播放
+  playerMusic = (src = "") => {
+    this.setState({
+      musicPupur: true,
+    });
+
+    new Plyr("#m_share_audio_wrapper");
+  };
+
+  closeMusic = () => {
+    this.setState({ musicPupur: false });
+  };
+
+  playerFile = () => {
+    // this.playerImage();
+    this.playerVideo();
+    // this.playerMusic();
+  };
+
   render() {
-    const { fileColles, breadColleArg } = this.state;
+    const {
+      fileColles,
+      breadColleArg,
+      imagePupur,
+      imageSrc,
+      videoPupur,
+      musicPupur,
+      musicSrc,
+    } = this.state;
     const checkArg = fileColles.filter((e) => e.checked);
 
     return (
@@ -150,7 +213,11 @@ export default class Colle extends Component {
                 />
               </div>
               <div className="m-file-main">
-                <div className="ellipsis">文件名字</div>
+                <div>
+                  <span className="ellipsis" onClick={() => this.playerFile(v)}>
+                    文件名字
+                  </span>
+                </div>
                 <p>
                   <span>2021-05-24 11:34</span>
                   <span>1.25MB</span>
@@ -168,6 +235,47 @@ export default class Colle extends Component {
         </div>
 
         <div className="blank-wrapper"></div>
+
+        {/* 图片预览 */}
+        <div
+          className="player-image-wrapper"
+          style={{
+            display: imagePupur ? "block" : "none",
+            backgroundImage: `url(${imageSrc})`,
+          }}
+        >
+          <span className="player-image-close" onClick={this.closeImage}>
+            <i className="iconfont icon-cross"></i>
+          </span>
+        </div>
+
+        {/* 视频播放 */}
+        <div
+          className="m-player-video-wrapper"
+          style={{ display: videoPupur ? "block" : "none" }}
+        >
+          <span className="player-video-close" onClick={this.closePlayer}>
+            <i className="iconfont icon-cross"></i>
+          </span>
+
+          <div className="m-plyr-inner-wrapper">
+            <video id="m_share_video_wrapper">
+              <source src="//vjs.zencdn.net/v/oceans.mp4" />
+            </video>
+          </div>
+        </div>
+
+        {/* 音乐播放 */}
+        <div
+          className="m-player-music-wrapper"
+          style={{ display: musicPupur ? "block" : "none" }}
+        >
+          <span className="player-music-close" onClick={this.closeMusic}>
+            <i className="iconfont icon-cross"></i>
+          </span>
+
+          <audio id="m_share_audio_wrapper" src={musicSrc} preload="auto" />
+        </div>
       </div>
     );
   }

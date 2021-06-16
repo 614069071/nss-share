@@ -138,3 +138,27 @@
 .m-colle-bread-list-wrapper span:last-child i {
   color: #c8c9cc;
 }
+
+.m-player-video-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.m-plyr-inner-wrapper {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.m-player-video-wrapper .player-video-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #fff;
+}

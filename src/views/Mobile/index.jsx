@@ -15,7 +15,6 @@ export default class Mobile extends Component {
 
   render() {
     const { isOver, hasHold, isNoHold } = this.props;
-    console.log("hasHold", hasHold);
 
     return (
       <div className="mobile-wrapper">

@@ -66,6 +66,11 @@ input[type="password"]:focus {
   background-color: var(--primary-seri);
 }
 
+.button:disabled,
+.m-button:disabled {
+  background-color: #c6dafd;
+}
+
 .button.plain {
   background-color: transparent;
   border: 1px solid var(--primary-weak);
