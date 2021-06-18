@@ -16,15 +16,13 @@ body {
   font-size: 14px;
 }
 
-@media (max-width: 768px) {
-  html {
-    font-size: 13.3333333vw;
-  }
+.m-html {
+  font-size: 13.3333333vw;
+}
 
-  body {
-    font-size: 0.28rem;
-    background-color: #fff;
-  }
+.m-body {
+  font-size: 0.28rem;
+  background-color: #fff;
 }
 
 input {
