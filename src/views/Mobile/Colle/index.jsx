@@ -26,9 +26,10 @@ export default class Colle extends Component {
       breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
       imagePupur: false,
       imageSrc: "",
-      videoPupur: false,
+      haveVideo: false, //是否有视频
       musicPupur: false,
-      musicSrc: "",
+      musicSrc: require("./music.mp3").default,
+      vdoRef: null,
     };
   }
 
@@ -99,13 +100,13 @@ export default class Colle extends Component {
 
   // 播放视频
   playerVideo = (src = "//vjs.zencdn.net/v/oceans.webm") => {
-    this.setState({ videoPupur: true });
-
-    new Plyr("#m_share_video_wrapper");
+    this.setState({ haveVideo: true }, () => {
+      new Plyr("#m_share_video_wrapper").play();
+    });
   };
 
   closePlayer = () => {
-    this.setState({ videoPupur: false });
+    this.setState({ haveVideo: false });
   };
 
   // 图片预览
@@ -133,7 +134,7 @@ export default class Colle extends Component {
       musicPupur: true,
     });
 
-    new Plyr("#m_share_audio_wrapper");
+    new Plyr("#m_share_audio_wrapper").play();
   };
 
   closeMusic = () => {
@@ -141,8 +142,8 @@ export default class Colle extends Component {
   };
 
   playerFile = () => {
-    this.playerImage();
-    // this.playerVideo();
+    // this.playerImage();
+    this.playerVideo();
     // this.playerMusic();
   };
 
@@ -157,7 +158,7 @@ export default class Colle extends Component {
       breadColleArg,
       imagePupur,
       imageSrc,
-      videoPupur,
+      haveVideo,
       musicPupur,
       musicSrc,
     } = this.state;
@@ -176,7 +177,7 @@ export default class Colle extends Component {
                 </span>
 
                 <span className="check-state-info">
-                  已选中 <i>1</i> 个文件/文件夹
+                  已选中 <i>{checkArg.length}</i> 个文件/文件夹
                 </span>
 
                 <span className="check-state-all" onClick={this.selectAll}>
@@ -262,20 +263,26 @@ export default class Colle extends Component {
           </div>
 
           {/* 视频播放 */}
-          <div
+          {haveVideo ? (
+            <video id="m_share_video_wrapper">
+              <source src="//vjs.zencdn.net/v/oceans.mp4" />
+            </video>
+          ) : null}
+
+          {/* <div
             className="m-player-video-wrapper"
-            style={{ display: videoPupur ? "block" : "none" }}
+            style={{ display: haveVideo ? "block" : "none" }}
           >
             <span className="player-video-close" onClick={this.closePlayer}>
               <i className="iconfont icon-cross"></i>
             </span>
 
             <div className="m-plyr-inner-wrapper">
-              <video id="m_share_video_wrapper">
+              <video id="m_share_video_wrapper" x5-video-player-type="h5">
                 <source src="//vjs.zencdn.net/v/oceans.mp4" />
               </video>
             </div>
-          </div>
+          </div> */}
 
           {/* 音乐播放 */}
           <div

@@ -168,6 +168,13 @@
   color: #fff;
 }
 
+.m-player-music-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
 .download-files-wrapper {
   padding: 0.06rem 0.32rem;
   width: 100%;
