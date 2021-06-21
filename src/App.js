@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import * as utils from './utils';
 import Mobile from './views/Mobile';
 import PC from './views/PC';
-
-// 测试一下git tag
+import "plyr/dist/plyr.css";
 
 export default class App extends Component {
   constructor(props) {

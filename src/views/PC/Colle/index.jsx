@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Plyr from "plyr";
 import * as utils from "../../../utils";
 import "./index.css";
-import "plyr/dist/plyr.css";
 
 // 文件列表
 export default class Colle extends Component {
