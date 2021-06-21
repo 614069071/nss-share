@@ -58,6 +58,10 @@
   color: var(--danger);
 }
 
+.colle-control-right .button i {
+  margin-right: 4px;
+}
+
 /* 文件面包屑导航 */
 .colle-list-wrapper {
   flex: 1;
