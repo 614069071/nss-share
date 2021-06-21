@@ -26,7 +26,7 @@ export default class App extends Component {
   isMobile = () => {
     const scrren = window.innerWidth || document.documentElement.offsetWidth;
     const reg = /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i;
-    const isMobile = !!navigator.userAgent.match(reg) || ('ontouchend' in document.body) || (scrren < 768);
+    const isMobile = reg.test(navigator.userAgent) || ('ontouchend' in document.body) || (scrren < 768);
 
     if (isMobile) {
       document.body.classList.add('m-body');
