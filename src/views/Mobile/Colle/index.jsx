@@ -23,7 +23,7 @@ export default class Colle extends Component {
         { name: "文件.xsa", checked: false },
       ],
       isCheck: false,
-      breadColleArg: ["文件夹1", "文件夹2", "文件夹3", "文件夹4"], //文件路径集合
+      breadColleArg: ["文件夹1", "文件夹2", "文件夹3", "文件夹4", "文件夹5"], //文件路径集合
       imagePupur: false,
       imageSrc: "",
       haveVideo: false, //是否有视频

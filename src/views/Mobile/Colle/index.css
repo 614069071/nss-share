@@ -101,12 +101,14 @@
 
 /* 文件路径 */
 .m-colle-bread-wrapper {
+  height: 100%;
   display: flex;
   align-items: center;
   font-size: 0.24rem;
   color: #c8c9cc;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .m-colle-bread-wrapper .iconfont {
