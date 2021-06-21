@@ -5,6 +5,9 @@ import Plyr from "plyr";
 import * as utils from "../../../utils";
 import "./index.css";
 
+let videoInstance = null;
+let musicInstance = null;
+
 export default class Colle extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +32,6 @@ export default class Colle extends Component {
       haveVideo: false, //是否有视频
       musicPupur: false,
       musicSrc: require("./music.mp3").default,
-      vdoRef: null,
     };
   }
 
@@ -101,12 +103,15 @@ export default class Colle extends Component {
   // 播放视频
   playerVideo = (src = "//vjs.zencdn.net/v/oceans.webm") => {
     this.setState({ haveVideo: true }, () => {
-      new Plyr("#m_share_video_wrapper").play();
+      videoInstance = new Plyr("#m_share_video_wrapper");
+      videoInstance.play();
     });
   };
 
   closePlayer = () => {
-    this.setState({ haveVideo: false });
+    this.setState({ haveVideo: false }, () => {
+      videoInstance.pause();
+    });
   };
 
   // 图片预览
@@ -130,21 +135,22 @@ export default class Colle extends Component {
 
   // 音乐播放
   playerMusic = (src = "") => {
-    this.setState({
-      musicPupur: true,
+    this.setState({ musicPupur: true }, () => {
+      musicInstance = new Plyr("#m_share_audio_wrapper");
+      musicInstance.play();
     });
-
-    new Plyr("#m_share_audio_wrapper").play();
   };
 
   closeMusic = () => {
-    this.setState({ musicPupur: false });
+    this.setState({ musicPupur: false }, () => {
+      musicInstance.pause();
+    });
   };
 
   playerFile = () => {
     // this.playerImage();
-    this.playerVideo();
-    // this.playerMusic();
+    // this.playerVideo();
+    this.playerMusic();
   };
 
   // 批量下载
