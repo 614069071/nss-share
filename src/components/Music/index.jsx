@@ -116,11 +116,11 @@ export default class Music extends Component {
 
   render() {
     const { musicImageRotate, isPlay, duration, currentTime } = this.state;
-    const { visible, change } = this.props;
+    const { visible, change, isPc } = this.props;
 
     return (
       <div
-        className="music-fixed-wrapper"
+        className={`${isPc ? "pc-" : ""}music-fixed-wrapper`}
         style={{ display: visible ? "flex" : "none" }}
       >
         <span className="music-fixed-close" onClick={() => change(false)}>
@@ -167,10 +167,12 @@ Music.defaultProps = {
   data: {},
   visible: false,
   change: () => {},
+  isPc: false,
 };
 
 Music.propTypes = {
   visible: PropTypes.bool,
   change: PropTypes.func,
   data: PropTypes.object,
+  isPc: PropTypes.bool,
 };
