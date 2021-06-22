@@ -68,6 +68,9 @@ export default class Music extends Component {
       // 停止
       musicInstance.on("ended", () => {
         console.log("ended");
+
+        this.setState({ isPlay: false });
+        clearInterval(musicInstanceTimer);
       });
     }
   };
