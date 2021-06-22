@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Plyr from "plyr";
+import Music from "../../../components/Music";
 import * as utils from "../../../utils";
 import "./index.css";
 
@@ -13,8 +14,9 @@ export default class Colle extends Component {
       videoPupur: false,
       imagePupur: false,
       imageSrc: "",
-      musicPupur: false,
-      musicSrc: require("./music.mp3").default,
+      musicVisible: false,
+      // musicSrc: "",
+      musicData: {},
       fileColles: [
         { name: "我是文件夹", checked: false, isFloder: 1 },
         { name: "文件.txt", checked: false },
@@ -121,20 +123,26 @@ export default class Colle extends Component {
   // 音乐播放
   playerMusic = (src = "") => {
     this.setState({
-      musicPupur: true,
+      musicVisible: true,
     });
 
     new Plyr("#share_audio_wrapper");
   };
 
   closeMusic = () => {
-    this.setState({ musicPupur: false });
+    this.setState({ musicVisible: false });
   };
 
-  playerFile = () => {
-    this.playerImage();
-    // this.playerVideo();
-    // this.playerMusic();
+  playerFile = (v) => {
+    // this.playerImage(v);
+    // this.playerVideo(v);
+    // this.playerMusic(v);
+
+    this.setState({ musicVisible: true, musicData: v }); //音乐
+  };
+
+  changeMusic = (v) => {
+    this.setState({ musicVisible: v });
   };
 
   render() {
@@ -144,8 +152,8 @@ export default class Colle extends Component {
       videoPupur,
       imagePupur,
       imageSrc,
-      musicPupur,
-      musicSrc,
+      musicVisible,
+      musicData,
     } = this.state;
 
     const checkedCollenArg = fileColles.filter((e) => e.checked);
@@ -237,7 +245,7 @@ export default class Colle extends Component {
                       />
                     </div>
                     <div className="file-name ellipsis">
-                      <span title={v.name} onClick={() => this.playerFile()}>
+                      <span title={v.name} onClick={() => this.playerFile(v)}>
                         {v.name}
                       </span>
                     </div>
@@ -291,15 +299,24 @@ export default class Colle extends Component {
         </div>
 
         {/* 音乐播放 */}
-        <div
+        {/* <div
           className="player-music-wrapper"
-          style={{ display: musicPupur ? "block" : "none" }}
+          style={{ display: musicVisible ? "block" : "none" }}
         >
           <span className="player-music-close" onClick={this.closeMusic}>
             <i className="iconfont icon-cross"></i>
           </span>
 
           <audio id="share_audio_wrapper" src={musicSrc} preload="auto" />
+        </div> */}
+
+        <div className="p-music-fixed-wrapper">
+          <Music
+            visible={musicVisible}
+            change={this.changeMusic}
+            data={musicData}
+            isPc
+          ></Music>
         </div>
       </div>
     );

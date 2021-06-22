@@ -122,11 +122,10 @@ export default class Colle extends Component {
   };
 
   // 图片预览
-  playerImage = (
-    src = "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg"
-  ) => {
+  playerImage = (src) => {
     this.setState({
-      imageSrc: src,
+      imageSrc:
+        "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
       imagePupur: true,
     });
 
@@ -167,8 +166,8 @@ export default class Colle extends Component {
       imagePupur,
       imageSrc,
       haveVideo,
-      musicPupur,
-      musicSrc,
+      // musicPupur,
+      // musicSrc,
       musicVisible,
       musicData,
     } = this.state;
@@ -295,7 +294,7 @@ export default class Colle extends Component {
           </div> */}
 
           {/* 音乐播放 */}
-          <div
+          {/* <div
             className="m-player-music-wrapper"
             style={{ display: musicPupur ? "block" : "none" }}
           >
@@ -304,7 +303,7 @@ export default class Colle extends Component {
             </span>
 
             <audio id="m_share_audio_wrapper" src={musicSrc} preload="auto" />
-          </div>
+          </div> */}
 
           <Music
             visible={musicVisible}

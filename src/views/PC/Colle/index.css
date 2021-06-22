@@ -284,3 +284,11 @@
   color: #a6a6a6;
   font-size: 18px;
 }
+
+.p-music-fixed-wrapper {
+  width: 320px;
+  height: 600px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

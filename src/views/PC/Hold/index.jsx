@@ -41,7 +41,7 @@ export default class Hold extends Component {
             <p>请输入文件提取码</p>
             <div className="hold-password-wrapper">
               <input
-                type="password"
+                type="text"
                 maxLength="4"
                 value={code}
                 onChange={(e) => this.setState({ code: e.target.value })}
