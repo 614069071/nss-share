@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Header from "../Header";
 import Plyr from "plyr";
+import Music from "../../../components/Music";
 import * as utils from "../../../utils";
 import "./index.css";
 
 let videoInstance = null;
-let musicInstance = null;
 
 export default class Colle extends Component {
   constructor(props) {
@@ -32,6 +32,10 @@ export default class Colle extends Component {
       haveVideo: false, //是否有视频
       musicPupur: false,
       musicSrc: require("./music.mp3").default,
+      isPlay: false,
+      musicImageRotate: 0,
+      musicVisible: false,
+      musicData: {},
     };
   }
 
@@ -103,7 +107,10 @@ export default class Colle extends Component {
   // 播放视频
   playerVideo = (src = "//vjs.zencdn.net/v/oceans.webm") => {
     this.setState({ haveVideo: true }, () => {
-      videoInstance = new Plyr("#m_share_video_wrapper");
+      if (!videoInstance) {
+        videoInstance = new Plyr("#m_share_video_wrapper");
+      }
+
       videoInstance.play();
     });
   };
@@ -134,28 +141,23 @@ export default class Colle extends Component {
   };
 
   // 音乐播放
-  playerMusic = (src = "") => {
-    this.setState({ musicPupur: true }, () => {
-      musicInstance = new Plyr("#m_share_audio_wrapper");
-      musicInstance.play();
-    });
+  playerMusic = (data) => {
+    this.setState({ musicVisible: true, musicData: data });
   };
 
-  closeMusic = () => {
-    this.setState({ musicPupur: false }, () => {
-      musicInstance.pause();
-    });
-  };
-
-  playerFile = () => {
-    // this.playerImage();
-    // this.playerVideo();
-    this.playerMusic();
+  playerFile = (v) => {
+    // this.playerImage(v);
+    // this.playerVideo(v);
+    this.playerMusic(v);
   };
 
   // 批量下载
   batchDownloads = () => {
     console.log(this.state.fileColles.filter((e) => e.checked));
+  };
+
+  changeMusic = (v) => {
+    this.setState({ musicVisible: v });
   };
 
   render() {
@@ -167,6 +169,8 @@ export default class Colle extends Component {
       haveVideo,
       musicPupur,
       musicSrc,
+      musicVisible,
+      musicData,
     } = this.state;
     const checkArg = fileColles.filter((e) => e.checked);
 
@@ -301,6 +305,12 @@ export default class Colle extends Component {
 
             <audio id="m_share_audio_wrapper" src={musicSrc} preload="auto" />
           </div>
+
+          <Music
+            visible={musicVisible}
+            change={this.changeMusic}
+            data={musicData}
+          ></Music>
         </div>
         {/* 下载 */}
         <div className="download-files-wrapper">

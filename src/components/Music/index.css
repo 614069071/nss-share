@@ -1,0 +1,81 @@
+/* 自定义播放器 start*/
+.music-fixed-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.music-fixed-wrapper .music-fixed-image {
+  width: 3.6rem;
+  height: 3.6rem;
+  text-align: center;
+  line-height: 3.6rem;
+  background-color: pink;
+  border-radius: 50%;
+  margin-top: 2.2rem;
+  font-size: 0.5rem;
+  transition: all 0.1s linear;
+}
+
+.music-fixed-wrapper .music-fixed-title {
+  width: 100%;
+  height: 0.3rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.music-fixed-wrapper .music-fixed-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.music-fixed-wrapper .music-fixed-close i {
+  font-size: 0.24rem;
+}
+
+.music-fixed-wrapper .music-fixed-time {
+  height: 0.3rem;
+  margin-top: 2.6rem;
+  padding: 0 30px;
+}
+
+.music-fixed-time-process-wrapper,
+.music-fixed-time-process-inner {
+  height: 6px;
+  width: 7rem;
+  border-radius: 3px;
+}
+
+.music-fixed-time-process-wrapper {
+  background-color: #718dbe;
+  overflow: hidden;
+}
+
+.music-fixed-time-process-inner {
+  width: 0%;
+  background-color: #fff;
+}
+
+.music-fixed-time-process-item {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.music-fixed-wrapper .music-fixed-control {
+  margin-top: 1rem;
+}
+
+.music-fixed-wrapper .music-fixed-control i {
+  font-size: 0.6rem;
+}
+
+/* 自定义播放器 end */
