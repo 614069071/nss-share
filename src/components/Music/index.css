@@ -55,14 +55,40 @@
 
 .music-fixed-wrapper .music-fixed-time-process-wrapper,
 .music-fixed-wrapper .music-fixed-time-process-inner {
-  height: 6px;
+  height: 0.1rem;
   width: 7rem;
-  border-radius: 3px;
+  border-radius: 0.1rem;
+  position: relative;
 }
 
 .music-fixed-wrapper .music-fixed-time-process-wrapper {
   background-color: #718dbe;
-  overflow: hidden;
+}
+
+.music-process-control-wrapper {
+  width: 100%;
+  padding-right: 0.3rem; /* 圆点宽度 */
+  background-color: blue;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+}
+
+.music-process-control-wrapper .music-process-control-inner {
+  position: relative;
+  width: 100%;
+}
+
+.music-process-control-inner .music-fixed-time-process-control {
+  position: absolute;
+  width: 0.3rem; /* 圆点宽度 */
+  height: 0.3rem;
+  background-color: red;
+  left: 0px;
+  top: -50%;
+  margin-top: -0.09rem;
+  border-radius: 50%;
 }
 
 .music-fixed-wrapper .music-fixed-time-process-inner {

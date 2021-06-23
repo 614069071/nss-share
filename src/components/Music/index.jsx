@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Plyr from "plyr";
 import * as utils from "../../utils";
 import "./index.css";
-const musicSrc = require("./music.mp3").default;
+const musicSrc = require("./listen.m4r").default;
 
 let musicInstance = null;
 let musicInstanceTimer = null;
@@ -146,6 +146,18 @@ export default class Music extends Component {
               className="music-fixed-time-process-inner"
               style={{ width: `${(currentTime / duration) * 100}%` }}
             ></div>
+
+            {/* 进度条控制小圆点 */}
+            {/* 
+            <div className="music-process-control-wrapper">
+              <div className="music-process-control-inner">
+                <span
+                  className="music-fixed-time-process-control"
+                  style={{ left: `${(currentTime / duration) * 100}%` }}
+                ></span>
+              </div>
+            </div> 
+            */}
           </div>
           <div className="music-fixed-time-process-item">
             <span>{utils.formatTime(currentTime * 1000)}</span>
