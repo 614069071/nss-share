@@ -10,6 +10,12 @@
   --danger-weak: #fde2e2;
 }
 
+html,
+body {
+  font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+}
+
 body {
   background-color: #f7f7f7;
   color: #262626;
