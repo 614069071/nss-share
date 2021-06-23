@@ -10,16 +10,12 @@
   --danger-weak: #fde2e2;
 }
 
-html,
-body {
-  font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica",
-    "Arial", sans-serif;
-}
-
 body {
   background-color: #f7f7f7;
   color: #262626;
   font-size: 14px;
+  font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
 }
 
 .m-html {
@@ -72,7 +68,7 @@ input[type="password"]:focus {
 
 .button:disabled,
 .m-button:disabled {
-  background-color: #c6dafd;
+  opacity: 0.7;
 }
 
 .button.plain {
