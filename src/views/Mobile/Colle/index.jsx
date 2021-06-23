@@ -256,7 +256,7 @@ export default class Colle extends Component {
             ))}
           </div>
 
-          <div className="blank-wrapper"></div>
+          {/* <div className="blank-wrapper"></div> */}
 
           {/* 图片预览 */}
           <div

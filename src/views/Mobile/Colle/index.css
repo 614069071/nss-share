@@ -48,7 +48,7 @@
 }
 
 .m-colle-list-wrapper {
-  padding: 0 0.24rem 0 0.24rem;
+  padding: 0 0.24rem 0.8rem 0.24rem;
   flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
@@ -178,7 +178,7 @@
 }
 
 .download-files-wrapper {
-  padding: 0.06rem 0.32rem;
+  padding: 0.1rem 0.32rem;
   width: 100%;
   box-sizing: border-box;
   background-color: #fff;
