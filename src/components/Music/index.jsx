@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import Plyr from "plyr";
 import * as utils from "../../utils";
 import "./index.css";
-const musicSrc = require("./listen.m4r").default;
+
+var music =
+  "http://m701.music.126.net/20210623175250/1cd81f303ec643c3691ed6c484986447/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/9447234602/aec9/b024/e27a/d6452613672ac9e853b000d409734e59.m4a";
 
 let musicInstance = null;
 let musicInstanceTimer = null;
@@ -171,7 +173,10 @@ export default class Music extends Component {
           </div>
         </div>
 
-        <audio id="m_share_audio_wrapper" src={musicSrc} preload="auto" />
+        {/* <audio id="m_share_audio_wrapper" src={musicSrc} preload="auto" /> */}
+        <audio id="m_share_audio_wrapper" preload="auto" src={music} />
+
+        {/* https://d.pcs.baidu.com/file/b16d1f099685eef9d1755d0e8247d8da?fid=41536675-250528-255046424959303&dstime=1624439104&rt=sh&sign=FDtAERVJouKy-DCb740ccc5511e5e8fedcff06b081203-0nstVpQEdzVUBVyX48jmdcZGZy8%3D&expires=8h&chkv=1&chkbd=0&chkpc=&dp-logid=570103787635108329&dp-callid=0&shareid=1964501874&r=762347489&clienttype=0&resvsflag=1-0-0-1-1-1&vuk=41536675&file_type=0 */}
       </div>
     );
   }
