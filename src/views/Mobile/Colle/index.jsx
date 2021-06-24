@@ -152,7 +152,16 @@ export default class Colle extends Component {
 
   // 批量下载
   batchDownloads = () => {
-    console.log(this.state.fileColles.filter((e) => e.checked));
+    // console.log(this.state.fileColles.filter((e) => e.checked));
+
+    const arr = [
+      "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/d1c8bc44c0f34f2f80778ad7a5222cfc.jpeg",
+      "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/e9c12f0c8ae54ea8aa1e5de29a454b30.pdf",
+      // "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/0f7c01f52635460e9bb1de1a31fbda44.pdf",
+      // "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/851063dd3bf54219b6e6a03046f824ed.pdf",
+    ];
+
+    utils.downloads(arr);
   };
 
   changeMusic = (v) => {

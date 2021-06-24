@@ -18,7 +18,7 @@ export default class Colle extends Component {
       // musicSrc: "",
       musicData: {},
       fileColles: [
-        { name: "我是文件夹", checked: false, isFloder: 1 },
+        { name: "文件夹", checked: false, isFloder: 1 },
         { name: "文件.txt", checked: false },
         { name: "文件.pdf", checked: false },
         { name: "文件.doc", checked: false },
@@ -87,7 +87,16 @@ export default class Colle extends Component {
 
   // 批量下载
   batchDownloads = () => {
-    console.log(this.state.fileColles.filter((e) => e.checked));
+    // const checks = this.state.fileColles.filter((e) => e.checked);//选中的文件
+
+    const arr = [
+      "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/d1c8bc44c0f34f2f80778ad7a5222cfc.jpeg",
+      "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/e9c12f0c8ae54ea8aa1e5de29a454b30.pdf",
+      // "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/0f7c01f52635460e9bb1de1a31fbda44.pdf",
+      // "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/851063dd3bf54219b6e6a03046f824ed.pdf",
+    ];
+
+    utils.downloads(arr);
   };
 
   // 播放视频
@@ -135,10 +144,10 @@ export default class Colle extends Component {
 
   playerFile = (v) => {
     // this.playerImage(v);
-    // this.playerVideo(v);
+    this.playerVideo(v);
     // this.playerMusic(v);
 
-    this.setState({ musicVisible: true, musicData: v }); //音乐
+    // this.setState({ musicVisible: true, musicData: v }); //音乐
   };
 
   changeMusic = (v) => {
@@ -310,7 +319,10 @@ export default class Colle extends Component {
           <audio id="share_audio_wrapper" src={musicSrc} preload="auto" />
         </div> */}
 
-        <div className="p-music-fixed-wrapper">
+        <div
+          className="p-music-fixed-wrapper"
+          style={{ display: musicVisible ? "block" : "none" }}
+        >
           <Music
             visible={musicVisible}
             change={this.changeMusic}

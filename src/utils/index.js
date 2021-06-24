@@ -108,3 +108,20 @@ export function formatTime(time) {
 
   return ms
 }
+
+function createAnchor(src) {
+  const anchor = document.createElement("a");
+  anchor.href = src;
+  anchor.setAttribute("download", true);
+  anchor.click();
+  anchor.remove();
+};
+
+// 批量下载 pc 尚可 mobile 体验差
+export function downloads(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    setTimeout(() => {
+      createAnchor(arr[i]);
+    }, (i + 1) * 500);
+  }
+};
