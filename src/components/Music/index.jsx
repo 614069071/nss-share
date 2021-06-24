@@ -123,7 +123,7 @@ export default class Music extends Component {
   };
 
   render() {
-    const { musicImageRotate, isPlay, duration, currentTime } = this.state;
+    const { /* musicImageRotate,*/ isPlay, duration, currentTime } = this.state;
     const { visible, isPc } = this.props;
 
     return (
