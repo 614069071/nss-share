@@ -91,7 +91,7 @@ export default class Music extends Component {
     this.setState({ musicPupur: false }, () => {
       musicInstance.play();
 
-      this.musicImageMove();
+      // this.musicImageMove();
     });
   };
 
@@ -135,8 +135,9 @@ export default class Music extends Component {
           <i className="iconfont icon-cross"></i>
         </span>
         <div
-          className="music-fixed-image"
-          style={{ transform: `rotate(${musicImageRotate}deg)` }}
+          className={`music-fixed-image${isPlay ? " rotate" : ""}`}
+          // className="music-fixed-image"
+          // style={{ transform: `rotate(${musicImageRotate}deg)` }}
         ></div>
         <div className="music-fixed-title">阿西吧-阿西吧.mp3</div>
         <div className="music-fixed-time">
