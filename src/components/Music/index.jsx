@@ -4,8 +4,7 @@ import Plyr from "plyr";
 import * as utils from "../../utils";
 import "./index.css";
 
-var music =
-  "http://m701.music.126.net/20210623175250/1cd81f303ec643c3691ed6c484986447/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/9447234602/aec9/b024/e27a/d6452613672ac9e853b000d409734e59.m4a";
+var music = require("./music.m4r").default;
 
 let musicInstance = null;
 let musicInstanceTimer = null;
@@ -138,28 +137,28 @@ export default class Music extends Component {
         <div
           className="music-fixed-image"
           style={{ transform: `rotate(${musicImageRotate}deg)` }}
-        >
-          music
-        </div>
+        ></div>
         <div className="music-fixed-title">阿西吧-阿西吧.mp3</div>
         <div className="music-fixed-time">
           <div className="music-fixed-time-process-wrapper">
+            {/* 进度条 */}
             <div
               className="music-fixed-time-process-inner"
               style={{ width: `${(currentTime / duration) * 100}%` }}
             ></div>
 
             {/* 进度条控制小圆点 */}
-            {/* 
+
             <div className="music-process-control-wrapper">
               <div className="music-process-control-inner">
                 <span
                   className="music-fixed-time-process-control"
                   style={{ left: `${(currentTime / duration) * 100}%` }}
-                ></span>
+                >
+                  <span></span>
+                </span>
               </div>
-            </div> 
-            */}
+            </div>
           </div>
           <div className="music-fixed-time-process-item">
             <span>{utils.formatTime(currentTime * 1000)}</span>
@@ -168,8 +167,16 @@ export default class Music extends Component {
         </div>
 
         <div className="music-fixed-control">
-          <div onClick={this.playMusicChange}>
-            <i className={`iconfont icon-${isPlay ? "tingzhi" : "bofang"}`}></i>
+          <div className="prev-btn">
+            <i className="iconfont icon-shangyishou-copy-copy"></i>
+          </div>
+          <div className="play-btn" onClick={this.playMusicChange}>
+            <i
+              className={`iconfont icon-${isPlay ? "zanting_1" : "bofang_11"}`}
+            ></i>
+          </div>
+          <div className="next-btn">
+            <i className="iconfont icon-shangyishou-copy"></i>
           </div>
         </div>
 
