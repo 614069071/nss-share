@@ -150,7 +150,7 @@ export default class Colle extends Component {
     this.playerMusic(v);
   };
 
-  // 批量下载
+  // 批量下载 //百度网盘限制50M
   batchDownloads = () => {
     // console.log(this.state.fileColles.filter((e) => e.checked));
 

@@ -144,10 +144,10 @@ export default class Colle extends Component {
 
   playerFile = (v) => {
     // this.playerImage(v);
-    this.playerVideo(v);
+    // this.playerVideo(v);
     // this.playerMusic(v);
 
-    // this.setState({ musicVisible: true, musicData: v }); //音乐
+    this.setState({ musicVisible: true, musicData: v }); //音乐
   };
 
   changeMusic = (v) => {
