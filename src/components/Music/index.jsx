@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Plyr from "plyr";
-import * as utils from "../../utils";
+import * as utils from "@/utils";
 import "./index.css";
 
 var music = require("./music.m4r").default;
