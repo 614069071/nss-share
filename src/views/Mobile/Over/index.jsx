@@ -1,5 +1,5 @@
 import Header from "../Header";
-import over from "../../../images/over.png";
+import over from "@/images/over.png";
 import "./index.css";
 
 function Over(props) {

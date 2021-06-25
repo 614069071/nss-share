@@ -1,4 +1,4 @@
-import overImage from "../../../images/over.png";
+import overImage from "@/images/over.png";
 import "./index.css";
 
 const Over = (props) => {

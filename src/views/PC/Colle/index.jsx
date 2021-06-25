@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Plyr from "plyr";
-import Music from "../../../components/Music";
-import * as utils from "../../../utils";
+// import ReactFileView from "react-file-viewer";
+import Music from "@/components/Music";
+import * as utils from "@/utils";
 import "./index.css";
+
+// const fileViewSupperArg = ["pdf", "csv", "xslx", "docx", "mp4", "webm", "mp3"];//react-file-viewer支持的格式
 
 // 文件列表
 export default class Colle extends Component {
@@ -330,6 +333,11 @@ export default class Colle extends Component {
             isPc
           ></Music>
         </div>
+
+        {/* <ReactFileView
+          fileType="doc"
+          filePath={require("./test.doc").default}
+        /> */}
       </div>
     );
   }

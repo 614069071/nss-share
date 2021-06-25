@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Header from "../Header";
 import Plyr from "plyr";
-import Music from "../../../components/Music";
-import * as utils from "../../../utils";
+import Music from "@/components/Music";
+import * as utils from "@/utils";
 import "./index.css";
 
 let videoInstance = null;
