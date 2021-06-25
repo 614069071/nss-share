@@ -14,7 +14,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* color: #fff; */
   z-index: 100;
 }
 
@@ -22,8 +21,7 @@
   width: 5.6rem;
   height: 5.6rem;
   text-align: center;
-  background-image: url(../../images/music-img.png);
-  background-size: contain;
+  background: url(../../images/music-img.png) no-repeat center/contain;
   border-radius: 50%;
   margin-top: 0.88rem;
   transition: all 0.1s linear;
@@ -156,8 +154,7 @@
   width: 196px;
   height: 196px;
   text-align: center;
-  background-image: url(../../images/music-img.png);
-  background-size: contain;
+  background: url(../../images/music-img.png) no-repeat center/contain;
   border-radius: 50%;
   margin-top: 58px;
   transition: all 0.1s linear;
