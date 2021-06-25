@@ -232,7 +232,7 @@ export default class Colle extends Component {
                 )}
               </div>
               <div className="file-size">文件大小</div>
-              <div className="file-share-time">分享时间</div>
+              <div className="file-share-time">修改时间</div>
             </div>
 
             {/* 文件列表 */}
