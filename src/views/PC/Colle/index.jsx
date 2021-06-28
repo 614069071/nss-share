@@ -133,12 +133,8 @@ export default class Colle extends Component {
   };
 
   // 音乐播放
-  playerMusic = (src = "") => {
-    this.setState({
-      musicVisible: true,
-    });
-
-    new Plyr("#share_audio_wrapper");
+  playerMusic = (v) => {
+    this.setState({ musicVisible: true, musicData: v });
   };
 
   closeMusic = () => {
@@ -147,10 +143,8 @@ export default class Colle extends Component {
 
   playerFile = (v) => {
     // this.playerImage(v);
-    // this.playerVideo(v);
+    this.playerVideo(v);
     // this.playerMusic(v);
-
-    this.setState({ musicVisible: true, musicData: v }); //音乐
   };
 
   changeMusic = (v) => {
@@ -286,15 +280,17 @@ export default class Colle extends Component {
         {/* 视频播放 */}
         <div
           className="player-video-wrapper"
-          style={{ display: videoPupur ? "block" : "none" }}
+          style={{ display: videoPupur ? "flex" : "none" }}
         >
-          <span className="player-video-close" onClick={this.closePlayer}>
-            <i className="iconfont icon-cross"></i>
-          </span>
+          <div className="player-video-inner">
+            <span className="player-video-close" onClick={this.closePlayer}>
+              <i className="iconfont icon-cross"></i>
+            </span>
 
-          <video id="share_video_wrapper" className="video-js">
-            <source src="//vjs.zencdn.net/v/oceans.webm" />
-          </video>
+            <video id="share_video_wrapper" className="video-js">
+              <source src="//vjs.zencdn.net/v/oceans.webm" />
+            </video>
+          </div>
         </div>
 
         {/* 图片预览 */}
