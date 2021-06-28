@@ -11,7 +11,7 @@ i18n
   // learn more: https://github.com/i18next/i18next-xhr-backend
   // .use(Backend)
   // detect user language
-  // learn more: https://github.com/i18next/i18next-browser-languageDetector
+  // learn more: https://github.com/i18next/i18next-browser-languageDetector //识别浏览器语言
   // .use(LanguageDetector)
   // pass the i18n instance to react-i18next.
   .use(initReactI18next)
@@ -26,7 +26,7 @@ i18n
         translations: require("./index.json").zh,
       },
     },
-    // fallbackLng: 'zh-CN', // 使用LanguageDetector 取消注释
+    // fallbackLng: 'zh-CN',
     // fallbackLng: localStorage.getItem("lang") === "en" ? "en" : "zh",//设置默认语言
     fallbackLng: "zh",
     debug: true,
