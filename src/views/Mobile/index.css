@@ -12,11 +12,11 @@
 .m-file-check input[type="checkbox"] {
   width: 0.32rem;
   height: 0.32rem;
-  background-image: url("../../images/m-check-off.png");
+  background-image: url("@/images/m-check-off.png");
 }
 
 .m-file-check input[type="checkbox"]:checked {
-  background-image: url("../../images/m-check-on.png");
+  background-image: url("@/images/m-check-on.png");
 }
 
 /* 头部 */
