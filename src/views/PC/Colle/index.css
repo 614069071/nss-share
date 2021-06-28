@@ -158,7 +158,7 @@
 
 .all-download-btn {
   height: 32px !important;
-  width: 52px;
+  min-width: 52px;
 }
 
 .file-list-wrapper {

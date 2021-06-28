@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Plyr from "plyr";
+import { withTranslation } from "react-i18next";
 // import ReactFileView from "react-file-viewer";
 import Music from "@/components/Music";
 import * as utils from "@/utils";
@@ -9,9 +10,10 @@ import "./index.css";
 // const fileViewSupperArg = ["pdf", "csv", "xslx", "docx", "mp4", "webm", "mp3"];//react-file-viewer支持的格式
 
 // 文件列表
-export default class Colle extends Component {
+class Colle extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isCheckedHidden: true,
       videoPupur: false,
@@ -162,6 +164,7 @@ export default class Colle extends Component {
       musicData,
     } = this.state;
 
+    const { t } = this.props;
     const checkedCollenArg = fileColles.filter((e) => e.checked);
     const isCheckAll = checkedCollenArg.length === fileColles.length;
 
@@ -179,7 +182,7 @@ export default class Colle extends Component {
           <div className="colle-control-right">
             <button className="button" onClick={this.batchDownloads}>
               <i className="iconfont icon-xiazai"></i>
-              下载
+              {t("DOWNLOAD")}
             </button>
           </div>
         </div>
@@ -221,7 +224,7 @@ export default class Colle extends Component {
                       className="all-download-btn button plain"
                       onClick={this.batchDownloads}
                     >
-                      下载
+                      {t("DOWNLOAD")}
                     </button>
                   </Fragment>
                 ) : (
@@ -344,3 +347,5 @@ Colle.defaultProps = {};
 Colle.propTypes = {
   data: PropTypes.string,
 };
+
+export default withTranslation("translations")(Colle);
