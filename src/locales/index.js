@@ -26,12 +26,9 @@ i18n
         translations: require("./index.json").zh,
       },
     },
-    // fallbackLng: 'zh-CN',
-    // fallbackLng: localStorage.getItem("lang") === "en" ? "en" : "zh",//设置默认语言
-    fallbackLng: "zh",
+    fallbackLng: "zh",//默认语言或不存在该语言包加载的语言
     debug: true,
-    // have a common namespace used around the full app
-    ns: ["translations"],
+    ns: ["translations"],//默认加载的namespace语言包
     defaultNS: "translations",
     keySeparator: false, // we use content as keys
     interpolation: {
