@@ -88,18 +88,13 @@ export default class Music extends Component {
 
   // 音乐播放
   playerMusic = () => {
-    this.setState({ musicPupur: false }, () => {
-      musicInstance.play();
-
-      // this.musicImageMove();
-    });
+    musicInstance.play();
+    // this.musicImageMove();
   };
 
   stopMusic = () => {
-    this.setState({ musicPupur: false }, () => {
-      musicInstance.pause();
-      clearInterval(musicInstanceTimer);
-    });
+    musicInstance.pause();
+    clearInterval(musicInstanceTimer);
   };
 
   playMusicChange = () => {
