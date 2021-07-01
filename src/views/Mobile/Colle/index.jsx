@@ -37,7 +37,13 @@ export default class Colle extends Component {
         { name: "文件.xsa", checked: false },
       ],
       isCheck: false,
-      breadColleArg: ["文件夹1", "文件夹2", "文件夹3", "文件夹4", "文件夹5"], //文件路径集合
+      breadColleArg: [
+        "文件夹文件夹1",
+        "文件夹文件夹2",
+        "文件夹文件夹3",
+        "文件夹文件夹4",
+        "文件夹文件夹5",
+      ], //文件路径集合
       imagePupur: false,
       imageSrc: "",
       haveVideo: false, //是否有视频
@@ -245,7 +251,13 @@ export default class Colle extends Component {
                   {breadColleArg.map((e, i) => (
                     <span key={i} onClick={() => this.checkChangeBread(e, i)}>
                       <i className="iconfont icon-arrow-right"></i>
-                      {e}
+                      <span
+                        className={
+                          i === breadColleArg.length - 1 ? "" : "ellipsis"
+                        }
+                      >
+                        {e}
+                      </span>
                     </span>
                   ))}
                 </div>
