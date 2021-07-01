@@ -188,11 +188,9 @@ export default class Colle extends Component {
     const gap = clientX - startMoveClient;
     const { currentImageIndex } = this.state;
     if (gap > 0) {
-      //右滑
       if (currentImageIndex === 0) return;
       this.setState({ currentImageIndex: currentImageIndex - 1 });
     } else if (gap < 0) {
-      //左滑
       if (currentImageIndex >= previewImagesColle.length - 1) return;
       this.setState({ currentImageIndex: currentImageIndex + 1 });
     }
