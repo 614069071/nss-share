@@ -9,6 +9,16 @@ import "./index.css";
 
 // const fileViewSupperArg = ["pdf", "csv", "xslx", "docx", "mp4", "webm", "mp3"];//react-file-viewer支持的格式
 
+const previewImagesColle = [
+  "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+  "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
+  "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
+  "https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg",
+  "https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg",
+  "https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg",
+  "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
+];
+
 // 文件列表
 class Colle extends Component {
   constructor(props) {
@@ -36,6 +46,7 @@ class Colle extends Component {
         { name: "文件.xsa", checked: false },
       ],
       breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
+      previewImageIndex: 0,
     };
   }
 
@@ -116,11 +127,8 @@ class Colle extends Component {
   };
 
   // 图片预览
-  playerImage = (
-    src = "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg"
-  ) => {
+  playerImage = () => {
     this.setState({
-      imageSrc: src,
       imagePupur: true,
     });
 
@@ -144,13 +152,25 @@ class Colle extends Component {
   };
 
   playerFile = (v) => {
-    // this.playerImage(v);
-    this.playerVideo(v);
+    this.playerImage(v);
+    // this.playerVideo(v);
     // this.playerMusic(v);
   };
 
   changeMusic = (v) => {
     this.setState({ musicVisible: v });
+  };
+
+  previewImageSwitchLeft = () => {
+    const { previewImageIndex } = this.state;
+    if (previewImageIndex === 0) return;
+    this.setState({ previewImageIndex: previewImageIndex - 1 });
+  };
+
+  previewImageSwitchRight = () => {
+    const { previewImageIndex } = this.state;
+    if (previewImageIndex >= previewImagesColle.length - 1) return;
+    this.setState({ previewImageIndex: previewImageIndex + 1 });
   };
 
   render() {
@@ -159,9 +179,9 @@ class Colle extends Component {
       breadColleArg,
       videoPupur,
       imagePupur,
-      imageSrc,
       musicVisible,
       musicData,
+      previewImageIndex,
     } = this.state;
 
     const { t } = this.props;
@@ -301,11 +321,27 @@ class Colle extends Component {
           className="player-image-wrapper"
           style={{
             display: imagePupur ? "block" : "none",
-            backgroundImage: `url(${imageSrc})`,
+            backgroundImage: `url(${previewImagesColle[previewImageIndex]})`,
           }}
         >
           <span className="player-image-close" onClick={this.closeImage}>
             <i className="iconfont icon-cross"></i>
+          </span>
+          <span
+            className={`player-image-preview-btn left ${
+              previewImageIndex === 0 ? "off" : ""
+            }`}
+            onClick={this.previewImageSwitchLeft}
+          >
+            <i className="iconfont icon-qiehuanshang"></i>
+          </span>
+          <span
+            className={`player-image-preview-btn right ${
+              previewImageIndex === previewImagesColle.length - 1 ? "off" : ""
+            }`}
+            onClick={this.previewImageSwitchRight}
+          >
+            <i className="iconfont icon-qiehuanxia"></i>
           </span>
         </div>
 

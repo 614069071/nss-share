@@ -263,6 +263,29 @@
   cursor: pointer;
 }
 
+.player-image-wrapper .player-image-preview-btn {
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+}
+
+.player-image-wrapper .player-image-preview-btn.off i {
+  color: #4084fb;
+}
+
+.player-image-wrapper .player-image-preview-btn i {
+  font-size: 38px;
+  color: #737373;
+}
+
+.player-image-preview-btn.left {
+  left: 125px;
+}
+
+.player-image-preview-btn.right {
+  right: 125px;
+}
+
 .player-music-wrapper {
   position: fixed;
   right: 48px;
