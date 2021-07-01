@@ -252,6 +252,7 @@
   left: 0;
   top: 0;
   background: #000 no-repeat center/contain;
+  z-index: 100;
 }
 
 .player-image-wrapper .player-image-close {
@@ -260,14 +261,6 @@
   top: 20px;
   user-select: none;
   cursor: pointer;
-}
-
-.player-preview-wrapper img {
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 50%;
-  min-height: 50%;
-  object-fit: none;
 }
 
 .player-music-wrapper {

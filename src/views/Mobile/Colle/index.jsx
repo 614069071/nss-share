@@ -7,6 +7,17 @@ import * as utils from "@/utils";
 import "./index.css";
 
 let videoInstance = null;
+let startMoveClient = 0;
+
+const previewImagesColle = [
+  "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+  "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
+  "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
+  "https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg",
+  "https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg",
+  "https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg",
+  "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
+];
 
 export default class Colle extends Component {
   constructor(props) {
@@ -32,6 +43,7 @@ export default class Colle extends Component {
       haveVideo: false, //是否有视频
       musicPupur: false,
       musicSrc: require("./music.mp3").default,
+      currentImageIndex: 0,
       isPlay: false,
       musicImageRotate: 0,
       musicVisible: false,
@@ -124,8 +136,6 @@ export default class Colle extends Component {
   // 图片预览
   playerImage = (src) => {
     this.setState({
-      imageSrc:
-        "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
       imagePupur: true,
     });
 
@@ -145,9 +155,9 @@ export default class Colle extends Component {
   };
 
   playerFile = (v) => {
-    // this.playerImage(v);
+    this.playerImage(v);
     // this.playerVideo(v);
-    this.playerMusic(v);
+    // this.playerMusic(v);
   };
 
   // 批量下载 //百度网盘限制50M
@@ -168,17 +178,35 @@ export default class Colle extends Component {
     this.setState({ musicVisible: v });
   };
 
+  previewImagesChangeStart = (e) => {
+    const { clientX } = e.changedTouches[0];
+    startMoveClient = clientX;
+  };
+
+  previewImagesChangeEnd = (e) => {
+    const { clientX } = e.changedTouches[0];
+    const gap = clientX - startMoveClient;
+    const { currentImageIndex } = this.state;
+    if (gap > 0) {
+      //右滑
+      if (currentImageIndex === 0) return;
+      this.setState({ currentImageIndex: currentImageIndex - 1 });
+    } else if (gap < 0) {
+      //左滑
+      if (currentImageIndex >= previewImagesColle.length - 1) return;
+      this.setState({ currentImageIndex: currentImageIndex + 1 });
+    }
+  };
+
   render() {
     const {
       fileColles,
       breadColleArg,
       imagePupur,
-      imageSrc,
       haveVideo,
-      // musicPupur,
-      // musicSrc,
       musicVisible,
       musicData,
+      currentImageIndex,
     } = this.state;
     const checkArg = fileColles.filter((e) => e.checked);
 
@@ -269,15 +297,22 @@ export default class Colle extends Component {
 
           {/* 图片预览 */}
           <div
-            className="player-image-wrapper"
+            className="m-player-image-wrapper"
             style={{
               display: imagePupur ? "block" : "none",
-              backgroundImage: `url(${imageSrc})`,
+              backgroundImage: `url(${previewImagesColle[currentImageIndex]})`,
             }}
+            onTouchStart={this.previewImagesChangeStart}
+            onTouchEnd={this.previewImagesChangeEnd}
           >
-            <span className="player-image-close" onClick={this.closeImage}>
-              <i className="iconfont icon-cross"></i>
-            </span>
+            <div className="m-player-image-close-wrapper">
+              <span className="m-player-image-close" onClick={this.closeImage}>
+                <i className="iconfont icon-cross"></i>
+              </span>
+              <span className="m-player-image-paper">
+                {currentImageIndex + 1}/{previewImagesColle.length}
+              </span>
+            </div>
           </div>
 
           {/* 视频播放 */}

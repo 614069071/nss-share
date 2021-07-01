@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-// import Vconsole from "vconsole";
+import Vconsole from "vconsole";
 import Colle from "./Colle";
 import Hold from "./Hold";
 import Over from "./Over";
@@ -8,7 +8,7 @@ import "./index.css";
 
 export default class Mobile extends Component {
   componentDidMount() {
-    // new Vconsole();
+    new Vconsole();
   }
 
   render() {
