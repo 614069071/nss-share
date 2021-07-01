@@ -10,6 +10,7 @@ import "./index.css";
 // const fileViewSupperArg = ["pdf", "csv", "xslx", "docx", "mp4", "webm", "mp3"];//react-file-viewer支持的格式
 
 const previewImagesColle = [
+  require("./1.jpg").default,
   "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
   "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
   "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
@@ -319,11 +320,14 @@ class Colle extends Component {
         {/* 图片预览 */}
         <div
           className="player-image-wrapper"
-          style={{
-            display: imagePupur ? "block" : "none",
-            backgroundImage: `url(${previewImagesColle[previewImageIndex]})`,
-          }}
+          style={{ display: imagePupur ? "block" : "none" }}
         >
+          <div
+            className="player-image-inner"
+            style={{
+              backgroundImage: `url(${previewImagesColle[previewImageIndex]})`,
+            }}
+          ></div>
           <span className="player-image-close" onClick={this.closeImage}>
             <i className="iconfont icon-cross"></i>
           </span>

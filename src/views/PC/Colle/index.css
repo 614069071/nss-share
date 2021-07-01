@@ -251,8 +251,15 @@
   height: 100%;
   left: 0;
   top: 0;
-  background: #000 no-repeat center/contain;
   z-index: 100;
+  background-color: #000;
+}
+
+.player-image-inner {
+  width: 960px;
+  height: 100%;
+  margin: 0 auto;
+  background: no-repeat center/contain;
 }
 
 .player-image-wrapper .player-image-close {
