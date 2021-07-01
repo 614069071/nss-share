@@ -333,7 +333,7 @@ class Colle extends Component {
             }`}
             onClick={this.previewImageSwitchLeft}
           >
-            <i className="iconfont icon-qiehuanshang"></i>
+            <i className="iconfont icon-arrow-right-copy"></i>
           </span>
           <span
             className={`player-image-preview-btn right ${
@@ -341,7 +341,7 @@ class Colle extends Component {
             }`}
             onClick={this.previewImageSwitchRight}
           >
-            <i className="iconfont icon-qiehuanxia"></i>
+            <i className="iconfont icon-arrow-right"></i>
           </span>
         </div>
 
