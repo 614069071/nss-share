@@ -194,6 +194,7 @@ class Colle extends Component {
         <div className="colle-control-wrapper">
           <div className="colle-control-left">
             <span className="share-failure-sum">总共11个文件</span>
+            <span className="share-create-time">2021-05-03</span>
             <span className="share-failure-title">
               <i className="iconfont icon-reloadtime"></i>失效时间：
             </span>

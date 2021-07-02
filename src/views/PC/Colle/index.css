@@ -40,14 +40,15 @@
   align-items: center;
 }
 
-.colle-control-wrapper .colle-control-left .share-failure-sum {
-  margin-right: 14px;
-}
-
+.colle-control-left .share-create-time,
 .colle-control-left .share-failure-title {
   color: var(--info-weak);
   display: inline-flex;
   align-items: center;
+}
+
+.colle-control-left .share-create-time {
+  margin: 0 14px;
 }
 
 .colle-control-left .share-failure-title i {
