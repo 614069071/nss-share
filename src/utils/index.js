@@ -115,7 +115,7 @@ function createAnchor(src) {
   anchor.setAttribute("download", true);
   anchor.click();
   anchor.remove();
-};
+}
 
 // 批量下载 pc 尚可 mobile 体验差
 export function downloads(arr) {
@@ -124,4 +124,16 @@ export function downloads(arr) {
       createAnchor(arr[i]);
     }, (i + 1) * 500);
   }
-};
+}
+
+// 节流
+export function throttle(fn) {
+  let timer = null;
+  return function () {
+    timer && clearTimeout(timer);
+    let context = this;
+    timer = setTimeout(function () {
+      fn.apply(context, arguments);
+    }, 200)
+  }
+}

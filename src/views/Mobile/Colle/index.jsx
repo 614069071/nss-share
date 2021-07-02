@@ -54,6 +54,7 @@ export default class Colle extends Component {
       musicImageRotate: 0,
       musicVisible: false,
       musicData: {},
+      isLoading: false, //是否在加载请求数据中
     };
   }
 
@@ -202,6 +203,16 @@ export default class Colle extends Component {
     }
   };
 
+  // 下拉触底
+  lazyLoad = utils.throttle(() => {
+    const { isLoading } = this.state;
+    const { scrollTop, scrollHeight, clientHeight } = this.refScroll;
+    const isBottom = scrollHeight - scrollTop - 50 <= clientHeight;
+
+    if (!isLoading && isBottom) {
+      this.fetchFileColles();
+    }
+  });
   render() {
     const {
       fileColles,
@@ -216,7 +227,11 @@ export default class Colle extends Component {
 
     return (
       <div className="m-colle-wrapper">
-        <div className="m-inner-wrapper">
+        <div
+          className="m-inner-wrapper"
+          ref={(e) => (this.refScroll = e)}
+          onScroll={this.lazyLoad}
+        >
           <Header></Header>
 
           <div className="m-control-wrapper">
