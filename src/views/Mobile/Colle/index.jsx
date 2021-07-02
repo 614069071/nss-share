@@ -327,7 +327,7 @@ export default class Colle extends Component {
                     checked={v.checked}
                     onChange={(e) => this.checkFile(e, v, i)}
                   /> */}
-                  <button className="m-download-btn">下载</button>
+                  <button className="m-button m-download-btn">下载</button>
                 </div>
               </div>
             ))}
