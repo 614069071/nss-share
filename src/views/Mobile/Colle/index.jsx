@@ -65,6 +65,7 @@ export default class Colle extends Component {
   // 请求列表
   fetchFileColles = (data) => {
     this.setState({ isLoading: true });
+
     setTimeout(() => {
       console.log("请求列表", data);
       this.setState({ isLoading: false });
@@ -217,6 +218,7 @@ export default class Colle extends Component {
       this.fetchFileColles();
     }
   });
+
   render() {
     const {
       fileColles,

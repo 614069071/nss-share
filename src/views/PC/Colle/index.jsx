@@ -48,6 +48,7 @@ class Colle extends Component {
       ],
       breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
       previewImageIndex: 0,
+      isLoading: false,
     };
   }
 
@@ -55,7 +56,12 @@ class Colle extends Component {
 
   // 请求列表
   fetchFileColles = (data) => {
-    console.log("请求列表", data);
+    this.setState({ isLoading: true });
+
+    setTimeout(() => {
+      console.log("请求列表", data);
+      this.setState({ isLoading: false });
+    }, 3000);
   };
 
   // 全选
@@ -174,6 +180,17 @@ class Colle extends Component {
     this.setState({ previewImageIndex: previewImageIndex + 1 });
   };
 
+  // 下拉触底
+  lazyLoad = utils.throttle(() => {
+    const { isLoading } = this.state;
+    const { scrollTop, scrollHeight, clientHeight } = this.refScroll;
+    const isBottom = scrollHeight - scrollTop - 50 <= clientHeight;
+
+    if (!isLoading && isBottom) {
+      this.fetchFileColles();
+    }
+  });
+
   render() {
     const {
       fileColles,
@@ -258,7 +275,11 @@ class Colle extends Component {
             </div>
 
             {/* 文件列表 */}
-            <div className="file-list-wrapper scrollbar">
+            <div
+              className="file-list-wrapper scrollbar"
+              ref={(e) => (this.refScroll = e)}
+              onScroll={this.lazyLoad}
+            >
               {fileColles.map((v, i) => (
                 <div className="file-item-wrapper" key={i}>
                   <div className="file-info">
