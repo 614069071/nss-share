@@ -72,9 +72,17 @@
 }
 
 .m-file-item-wrapper .m-file-check {
-  width: 0.66rem;
-  height: 0.32rem;
+  width: 1.52rem;
   text-align: right;
+}
+
+.m-file-check .m-download-btn {
+  background-color: var(--primary);
+  width: 1.22rem;
+  height: 0.64rem;
+  line-height: 0.64rem;
+  color: #fff;
+  border-radius: 0.64rem;
 }
 
 .m-file-item-wrapper .m-file-main {
