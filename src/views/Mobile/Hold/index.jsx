@@ -1,41 +1,28 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { useEffect } from "react";
 import Header from "../Header";
 import "./index.css";
 
-export default class Hold extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
+function Hold(props) {
+  useEffect(() => {
     console.log("componentDidMount");
-  }
+  });
 
-  render() {
-    const { change } = this.props;
+  const { change } = props;
 
-    return (
-      <div className="m-hold-view-wrapper">
-        <Header></Header>
+  return (
+    <div className="m-hold-view-wrapper">
+      <Header></Header>
 
-        <div className="m-hold-wrapper">
-          <div>
-            <input type="text" placeholder="请输入文件提取码" maxLength="4" />
-          </div>
-          <p>密码错误，请重新输入</p>
-          <button className="m-button" onClick={change}>
-            提取文件
-          </button>
+      <div className="m-hold-wrapper">
+        <div>
+          <input type="text" placeholder="请输入文件提取码" maxLength="4" />
         </div>
+        <p>密码错误，请重新输入</p>
+        <button className="m-button" onClick={change}>
+          提取文件
+        </button>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-Hold.defaultProps = {};
-
-Hold.propTypes = {
-  data: PropTypes.string,
-};
+export default Hold;
