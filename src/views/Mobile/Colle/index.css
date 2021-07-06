@@ -205,10 +205,6 @@
   box-shadow: 0px 6px 20px 0px rgba(125, 126, 128, 0.12);
 }
 
-.m-player-video {
-  display: none;
-}
-
 .m-player-image-wrapper {
   position: fixed;
   width: 100%;
@@ -249,4 +245,10 @@
 .m-player-image-close-wrapper .m-player-image-paper {
   color: #fff;
   font-size: 0.28rem;
+}
+
+.m-player-video {
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }

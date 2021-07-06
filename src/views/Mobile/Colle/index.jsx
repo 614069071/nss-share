@@ -167,8 +167,8 @@ export default class Colle extends Component {
   };
 
   playerFile = (v) => {
-    this.playerImage(v);
-    // this.playerVideo(v);
+    // this.playerImage(v);
+    this.playerVideo(v);
     // this.playerMusic(v);
   };
 
