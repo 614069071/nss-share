@@ -7,7 +7,11 @@ import Music from "@/components/Music";
 import * as utils from "@/utils";
 import "./index.css";
 
-// const fileViewSupperArg = ["pdf", "csv", "xslx", "docx", "mp4", "webm", "mp3"];//react-file-viewer支持的格式
+/* 
+  react-file-viewer 支持的格式
+
+  const fileViewSupperArg = ["pdf", "csv", "xslx", "docx", "mp4", "webm", "mp3"]
+*/
 
 const previewImagesColle = [
   require("./1.jpg").default,
