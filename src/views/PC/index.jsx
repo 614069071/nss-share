@@ -12,12 +12,8 @@ export default class PC extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log("componentDidMount");
-  }
-
   render() {
-    const { hasHold, isOver, isNoHold, change } = this.props;
+    const { hasHold, isOver, isNoHold, change, link } = this.props;
 
     return (
       <Fragment>
@@ -27,9 +23,9 @@ export default class PC extends Component {
           {isOver ? (
             <Over />
           ) : isNoHold ? (
-            <Colle />
+            <Colle link={link} />
           ) : hasHold ? (
-            <Colle />
+            <Colle link={link} />
           ) : (
             <Hold change={change} />
           )}
@@ -45,6 +41,7 @@ PC.defaultProps = {
   hasHold: false,
   isOver: false,
   isNoHold: false,
+  link: "",
   change: () => {},
 };
 
@@ -52,5 +49,6 @@ PC.propTypes = {
   hasHold: PropTypes.bool,
   isOver: PropTypes.bool,
   isNoHold: PropTypes.bool,
+  link: PropTypes.string,
   change: PropTypes.func,
 };

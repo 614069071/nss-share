@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import Plyr from "plyr";
 import { withTranslation } from "react-i18next";
 // import ReactFileView from "react-file-viewer";
 import Music from "@/components/Music";
+import Popup from "@/components/Popup";
 import * as utils from "@/utils";
 import "./index.css";
 
@@ -37,35 +39,47 @@ class Colle extends Component {
       musicVisible: false,
       // musicSrc: "",
       musicData: {},
-      fileColles: [
-        { name: "文件夹", checked: false, isFloder: 1 },
-        { name: "文件.txt", checked: false },
-        { name: "文件.pdf", checked: false },
-        { name: "文件.doc", checked: false },
-        { name: "文件.ppt", checked: false },
-        { name: "文件.xls", checked: false },
-        { name: "文件.zip", checked: false },
-        { name: "文件.mp3", checked: false },
-        { name: "文件.mp4", checked: false },
-        { name: "文件.png", checked: false },
-        { name: "文件.xsa", checked: false },
-      ],
+      fileColles: [],
       breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
       previewImageIndex: 0,
       isLoading: false,
+      offset: 0,
+      limit: 100,
+      lazyStop: false,
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.fetchFileColles();
+  }
+
+  componentDidUpdate() {}
 
   // 请求列表
   fetchFileColles = (data) => {
     this.setState({ isLoading: true });
 
-    setTimeout(() => {
-      console.log("请求列表", data);
-      this.setState({ isLoading: false });
-    }, 3000);
+    const { link } = this.props;
+    const { offset, limit, fileColles } = this.state;
+    const query = `&offset=${offset}&limit=${limit}`;
+
+    link &&
+      axios
+        .get(link + query)
+        .then(({ data = {} }) => {
+          const { contents, count } = data;
+          const list = [...fileColles, ...contents];
+
+          this.setState({
+            isLoading: false,
+            fileColles: list,
+            lazyStop: list.length === count,
+          });
+          console.log("contents,count", contents, count);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   };
 
   // 全选
@@ -163,9 +177,13 @@ class Colle extends Component {
   };
 
   playerFile = (v) => {
-    this.playerImage(v);
-    // this.playerVideo(v);
-    // this.playerMusic(v);
+    if (v.is_dir) {
+      //请求新的列表
+    } else {
+      this.playerImage(v);
+      // this.playerVideo(v);
+      // this.playerMusic(v);
+    }
   };
 
   changeMusic = (v) => {
@@ -186,11 +204,11 @@ class Colle extends Component {
 
   // 下拉触底
   lazyLoad = utils.throttle(() => {
-    const { isLoading } = this.state;
+    const { isLoading, lazyStop } = this.state;
     const { scrollTop, scrollHeight, clientHeight } = this.refScroll;
     const isBottom = scrollHeight - scrollTop - 50 <= clientHeight;
 
-    if (!isLoading && isBottom) {
+    if (!lazyStop && !isLoading && isBottom) {
       this.fetchFileColles();
     }
   });
@@ -296,30 +314,32 @@ class Colle extends Component {
                     />
                     <div className="file-icon">
                       <img
-                        src={utils.mimeType(v.isFloder ? "floder" : v.name)}
+                        src={utils.mimeType(v.is_dir ? "floder" : v.path)}
                         alt=""
                       />
                     </div>
                     <div className="file-name ellipsis">
-                      <span title={v.name} onClick={() => this.playerFile(v)}>
-                        {v.name}
+                      <span title={v.path} onClick={() => this.playerFile(v)}>
+                        {v.path.slice(1)}
                       </span>
                     </div>
                   </div>
 
                   <div className="file-size">
-                    <span>{v.isFloder ? null : "1.25M"}</span>
-                    <a
-                      href="javascript"
-                      download="download"
-                      className="file-download-btn"
-                      title="下载"
-                    >
-                      <i className="iconfont icon-xiazai"></i>
-                    </a>
+                    <span>{v.is_dir ? null : "1.25M"}</span>
+                    {v.is_dir ? null : (
+                      <a
+                        href="javascript"
+                        download="download"
+                        className="file-download-btn"
+                        title="下载"
+                      >
+                        <i className="iconfont icon-xiazai"></i>
+                      </a>
+                    )}
                   </div>
                   <div className="file-share-time ellipsis">
-                    2021-01-12 11:07
+                    {utils.formatTime(v.update_time)}
                   </div>
                 </div>
               ))}
@@ -403,15 +423,19 @@ class Colle extends Component {
           fileType="doc"
           filePath={require("./test.doc").default}
         /> */}
+
+        <Popup visible={true}></Popup>
       </div>
     );
   }
 }
 
-Colle.defaultProps = {};
+Colle.defaultProps = {
+  link: "",
+};
 
 Colle.propTypes = {
-  data: PropTypes.string,
+  link: PropTypes.string,
 };
 
 export default withTranslation("translations")(Colle);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 import * as utils from './utils';
 import Mobile from './views/Mobile';
 import PC from './views/PC';
@@ -12,14 +13,35 @@ export default class App extends Component {
       hasHold: false,//设置了提取码，是否校验通过
       isNoHold: false, //没有设置提取码
       isMobile: this.isMobile(),
-      isOver: false //过期
+      isOver: false, //过期
+      link: ''
     };
   }
 
   componentDidMount() {
-    const hasHold = utils.storages.get('hasHold') || false;
+    axios
+      .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=yiEJja")
+      .then(({ data = {} }) => {
+        const { resp_code, datas = {} } = data;
+        const { isEnterPassword, url } = datas;
 
-    this.setState({ hasHold });
+
+        if (resp_code === 1001) {
+          this.setState({ isOver: true })
+          return;
+        }
+
+        if (isEnterPassword) {
+          this.setState({ isNoHold: !!isEnterPassword, link: url });
+        } else {
+          this.setState({ isNoHold: !!isEnterPassword, hasHold: true, link: url });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // const hasHold = utils.storages.get('hasHold') || false;
+
   }
 
   isMobile = () => {
@@ -42,8 +64,8 @@ export default class App extends Component {
   }
 
   render() {
-    const { isMobile, isNoHold, hasHold, isOver } = this.state;
-    const props = { isNoHold, hasHold, isOver, change: this.changeHold };
+    const { isMobile, isNoHold, hasHold, isOver, link } = this.state;
+    const props = { isNoHold, hasHold, isOver, change: this.changeHold, link };
 
     return (
       (<div className="app-wrapper">

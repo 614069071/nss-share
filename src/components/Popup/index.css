@@ -1,0 +1,37 @@
+.popup-wrapper {
+  width: 358px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  position: fixed;
+  top: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.popup-wrapper > span {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  margin: 0 8px;
+}
+
+.popup-wrapper .popup-title {
+  flex: 1;
+}
+
+.popup-wrapper.success {
+  border-color: #fde2e2;
+  background-color: #fef0f0;
+  color: #f56c6c;
+}
+
+.popup-wrapper.error {
+  border-color: #fde2e2;
+  background-color: #fef0f0;
+  color: #f56c6c;
+}
