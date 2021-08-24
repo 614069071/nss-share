@@ -13,19 +13,20 @@ export default class PC extends Component {
   }
 
   render() {
-    const { hasHold, isOver, isNoHold, change, link, overCode } = this.props;
+    const { hasHold, isOver, isNoHold, change, link, overCode, user } =
+      this.props;
 
     return (
       <Fragment>
-        <Header isHold={hasHold}></Header>
+        <Header isHold={hasHold} data={user}></Header>
 
         <div className="app-inner-wrapper">
           {isOver ? (
             <Over code={overCode} />
           ) : isNoHold ? (
-            <Colle link={link} />
+            <Colle link={link} user={user} />
           ) : hasHold ? (
-            <Colle link={link} />
+            <Colle link={link} user={user} />
           ) : (
             <Hold change={change} />
           )}

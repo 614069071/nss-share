@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Plyr from "plyr";
-import * as utils from "@/utils";
 import "./index.css";
 
 var music = require("./music.m4r").default;
@@ -43,36 +42,49 @@ export default class Music extends Component {
   //   return null;
   // }
 
+  formatNumber = (n) => {
+    n = n.toString();
+    return n[1] ? n : "0" + n;
+  };
+
+  formatTime = (time) => {
+    const date = new Date(time);
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+
+    return [minute, second].map(this.formatNumber).join(":");
+  };
+
   initMusic = () => {
     if (!musicInstance) {
       console.log("create music");
 
       musicInstance = new Plyr("#m_share_audio_wrapper");
-      // 获取当前时间
-      musicInstance.on("timeupdate", () => {
-        this.setState({ currentTime: musicInstance.currentTime });
-      });
-
-      // 播放
-      musicInstance.on("play", () => {
-        console.log("play");
-      });
 
       musicInstance.on("ready", () => {
+        console.log("ready", musicInstance.duration);
         this.setState({ duration: musicInstance.duration });
-      });
 
-      // 暂停
-      musicInstance.on("pause", () => {
-        console.log("pause");
-      });
+        // 获取当前时间
+        musicInstance.on("timeupdate", () => {
+          this.setState({ currentTime: musicInstance.currentTime });
+        });
+        // 暂停
+        musicInstance.on("pause", () => {
+          console.log("pause");
+        });
 
-      // 停止
-      musicInstance.on("ended", () => {
-        console.log("ended");
+        // 播放
+        musicInstance.on("play", () => {
+          console.log("play");
+        });
+        // 停止
+        musicInstance.on("ended", () => {
+          console.log("ended");
 
-        this.setState({ isPlay: false });
-        clearInterval(musicInstanceTimer);
+          this.setState({ isPlay: false });
+          clearInterval(musicInstanceTimer);
+        });
       });
     }
   };
@@ -158,8 +170,8 @@ export default class Music extends Component {
             </div>
           </div>
           <div className="music-fixed-time-process-item">
-            <span>{utils.formatTime(currentTime * 1000)}</span>
-            <span>{utils.formatTime(duration * 1000)}</span>
+            <span>{this.formatTime(currentTime * 1000)}</span>
+            <span>{this.formatTime(duration * 1000)}</span>
           </div>
         </div>
 

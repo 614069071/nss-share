@@ -15,16 +15,17 @@ export default class App extends Component {
       isMobile: this.isMobile(),
       isOver: false, //过期
       shareCode: 0,
-      link: ''
+      link: '',
+      user: {}
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=yiEJja")
+      .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=yQzQrq")
       .then(({ data = {} }) => {
         const { resp_code, datas = {} } = data;
-        const { isEnterPassword = '', url = '' } = datas || {};
+        const { isEnterPassword = '', url = '', ...other } = datas || {};
 
 
         if (resp_code === 1001 || resp_code === 1002) {
@@ -34,9 +35,9 @@ export default class App extends Component {
         }
 
         if (isEnterPassword) {
-          this.setState({ isNoHold: !!isEnterPassword, link: url });
+          this.setState({ isNoHold: !!isEnterPassword, link: url, user: other });
         } else {
-          this.setState({ isNoHold: !!isEnterPassword, hasHold: true, link: url });
+          this.setState({ isNoHold: !!isEnterPassword, hasHold: true, link: url, user: other });
         }
       })
       .catch((err) => {
@@ -66,8 +67,8 @@ export default class App extends Component {
   }
 
   render() {
-    const { isMobile, isNoHold, hasHold, isOver, link, shareCode } = this.state;
-    const props = { isNoHold, hasHold, isOver, change: this.changeHold, link, overCode: shareCode };
+    const { isMobile, isNoHold, hasHold, isOver, link, shareCode, user } = this.state;
+    const props = { isNoHold, hasHold, isOver, change: this.changeHold, link, overCode: shareCode, user };
 
     return (
       (<div className="app-wrapper">

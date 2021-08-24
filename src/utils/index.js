@@ -95,6 +95,15 @@ export const formatNumber = n => {
 }
 
 // 序列化时间
+export function formatTimeYYMS(time) {
+  const date = new Date(time);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${year}-${month}-${day}`
+}
+
 export function formatTime(time) {
   const date = new Date(time);
   const year = date.getFullYear();

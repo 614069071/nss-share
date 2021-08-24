@@ -40,7 +40,7 @@ class Colle extends Component {
       // musicSrc: "",
       musicData: {},
       fileColles: [],
-      breadColleArg: ["文件夹1", "文件夹2"], //文件路劲集合
+      breadColleArg: [], //文件路径集合
       previewImageIndex: 0,
       isLoading: false,
       offset: 0,
@@ -180,9 +180,21 @@ class Colle extends Component {
     if (v.is_dir) {
       //请求新的列表
     } else {
-      this.playerImage(v);
-      // this.playerVideo(v);
-      // this.playerMusic(v);
+      const ext = v.path.split(".").pop();
+      console.log(ext);
+      const videoArg = ["mp4"];
+      const audioArg = ["mp3"];
+      const imageArg = ["jpg", "png", "jpeg"];
+
+      if (videoArg.includes(ext)) {
+        this.playerVideo(v);
+      } else if (audioArg.includes(ext)) {
+        this.playerMusic(v);
+      } else if (imageArg.includes(ext)) {
+        this.playerImage(v);
+      } else {
+        // 不支持的格式
+      }
     }
   };
 
@@ -224,20 +236,30 @@ class Colle extends Component {
       previewImageIndex,
     } = this.state;
 
-    const { t } = this.props;
+    const { t, user } = this.props;
+    console.log("user", user);
     const checkedCollenArg = fileColles.filter((e) => e.checked);
-    const isCheckAll = checkedCollenArg.length === fileColles.length;
+    const isCheckAll =
+      checkedCollenArg.length && checkedCollenArg.length === fileColles.length;
 
     return (
       <div className="colle-view-wrapper">
         <div className="colle-control-wrapper">
           <div className="colle-control-left">
             <span className="share-failure-sum">总共11个文件</span>
-            <span className="share-create-time">2021-05-03</span>
+            <span className="share-create-time">
+              {utils.formatTimeYYMS(user.createTime * 1000)}
+            </span>
             <span className="share-failure-title">
               <i className="iconfont icon-reloadtime"></i>失效时间：
             </span>
-            <span className="share-failure-state">已失效</span>
+            {user.expiredTime ? (
+              <span className="share-failure-state">
+                {utils.formatTimeYYMS(user.expiredTime * 1000)}
+              </span>
+            ) : (
+              <span>永久</span>
+            )}
           </div>
 
           <div className="colle-control-right">
