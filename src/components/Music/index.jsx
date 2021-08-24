@@ -24,6 +24,7 @@ export default class Music extends Component {
 
   componentDidMount() {
     console.log("did", this.props.data);
+    this.initMusic();
   }
 
   componentWillUnmount() {
