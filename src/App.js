@@ -14,6 +14,7 @@ export default class App extends Component {
       isNoHold: false, //没有设置提取码
       isMobile: this.isMobile(),
       isOver: false, //过期
+      shareCode: 0,
       link: ''
     };
   }
@@ -23,11 +24,12 @@ export default class App extends Component {
       .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=yiEJja")
       .then(({ data = {} }) => {
         const { resp_code, datas = {} } = data;
-        const { isEnterPassword, url } = datas;
+        const { isEnterPassword = '', url = '' } = datas || {};
 
 
-        if (resp_code === 1001) {
-          this.setState({ isOver: true })
+        if (resp_code === 1001 || resp_code === 1002) {
+          this.setState({ isOver: true, shareCode: resp_code });
+
           return;
         }
 
@@ -64,8 +66,8 @@ export default class App extends Component {
   }
 
   render() {
-    const { isMobile, isNoHold, hasHold, isOver, link } = this.state;
-    const props = { isNoHold, hasHold, isOver, change: this.changeHold, link };
+    const { isMobile, isNoHold, hasHold, isOver, link, shareCode } = this.state;
+    const props = { isNoHold, hasHold, isOver, change: this.changeHold, link, overCode: shareCode };
 
     return (
       (<div className="app-wrapper">

@@ -2,7 +2,7 @@ import overImage from "@/images/over.png";
 import "./index.css";
 
 const Over = (props) => {
-  const { isOver } = props;
+  const { code } = props;
 
   return (
     <div className="file-over-wrapper">
@@ -10,7 +10,7 @@ const Over = (props) => {
         <div className="file-over-image-wrapper">
           <img src={overImage} alt="" />
         </div>
-        <p>{isOver ? "您访问的链接已过期" : "文件已被删除"}</p>
+        <p>{code === 1001 ? "外链已过期" : "外链不存在"}</p>
       </div>
     </div>
   );

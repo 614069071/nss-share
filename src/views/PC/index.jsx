@@ -13,7 +13,7 @@ export default class PC extends Component {
   }
 
   render() {
-    const { hasHold, isOver, isNoHold, change, link } = this.props;
+    const { hasHold, isOver, isNoHold, change, link, overCode } = this.props;
 
     return (
       <Fragment>
@@ -21,7 +21,7 @@ export default class PC extends Component {
 
         <div className="app-inner-wrapper">
           {isOver ? (
-            <Over />
+            <Over code={overCode} />
           ) : isNoHold ? (
             <Colle link={link} />
           ) : hasHold ? (
