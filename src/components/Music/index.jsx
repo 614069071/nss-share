@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import Plyr from "plyr";
 import "./index.css";
 
-var music = require("./music.m4r").default;
-
-let musicInstance = null;
+// let musicInstance = null;
 let musicInstanceTimer = null;
 
 // 音乐播放器
@@ -18,21 +16,22 @@ export default class Music extends Component {
       isPlay: false,
       duration: 0,
       currentTime: 0,
+      musicPlaySrc: "",
+      musicInstance: null,
     };
   }
 
   componentDidMount() {
-    console.log("did", this.props.data);
     this.initMusic();
   }
 
   componentWillUnmount() {
-    // console.log("music unmount");
+    console.log("music unmount");
     this.distoryMusic();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.data.name !== this.props.data.name) {
+    if (prevProps.data.src !== this.props.data.src) {
       this.initMusic();
     }
   }
@@ -56,35 +55,45 @@ export default class Music extends Component {
   };
 
   initMusic = () => {
-    if (!musicInstance) {
-      console.log("create music");
+    const { data } = this.props;
 
-      musicInstance = new Plyr("#m_share_audio_wrapper");
+    if (!this.state.musicInstance && data.src) {
+      console.log("create music", data);
 
-      musicInstance.on("ready", () => {
-        console.log("ready", musicInstance.duration);
-        this.setState({ duration: musicInstance.duration });
+      this.setState({ musicPlaySrc: data.src }, () => {
+        const player = new Plyr("#m_share_audio_wrapper");
 
-        // 获取当前时间
-        musicInstance.on("timeupdate", () => {
-          this.setState({ currentTime: musicInstance.currentTime });
+        player.on("ready", () => {
+          console.log("ready", player.duration);
+          this.setState({ duration: player.duration });
+
+          // 获取当前时间
+          player.on("timeupdate", () => {
+            this.setState({ currentTime: player.currentTime });
+
+            if (!this.state.duration && player.duration) {
+              this.setState({ duration: player.duration });
+            }
+          });
+          // 暂停
+          player.on("pause", () => {
+            console.log("pause");
+          });
+
+          // 播放
+          player.on("play", () => {
+            console.log("play");
+          });
+
+          // 停止
+          player.on("ended", () => {
+            console.log("ended");
+            this.setState({ isPlay: false });
+            clearInterval(musicInstanceTimer);
+          });
         });
-        // 暂停
-        musicInstance.on("pause", () => {
-          console.log("pause");
-        });
 
-        // 播放
-        musicInstance.on("play", () => {
-          console.log("play");
-        });
-        // 停止
-        musicInstance.on("ended", () => {
-          console.log("ended");
-
-          this.setState({ isPlay: false });
-          clearInterval(musicInstanceTimer);
-        });
+        this.setState({ musicInstance: player });
       });
     }
   };
@@ -101,12 +110,12 @@ export default class Music extends Component {
 
   // 音乐播放
   playerMusic = () => {
-    musicInstance.play();
+    this.state.musicInstance.play();
     // this.musicImageMove();
   };
 
   stopMusic = () => {
-    musicInstance.pause();
+    this.state.musicInstance.pause();
     clearInterval(musicInstanceTimer);
   };
 
@@ -120,19 +129,26 @@ export default class Music extends Component {
 
   distoryMusic = () => {
     clearInterval(musicInstanceTimer);
-    musicInstanceTimer && musicInstance.destroy();
+    musicInstanceTimer && this.state.musicInstance.destroy();
   };
 
   closeMusicView = () => {
-    musicInstance.pause();
+    this.state.musicInstance.pause();
     clearInterval(musicInstanceTimer);
     this.setState({ isPlay: false });
     this.props.change(false);
   };
 
   render() {
-    const { /* musicImageRotate,*/ isPlay, duration, currentTime } = this.state;
-    const { visible, isPc } = this.props;
+    const {
+      /* musicImageRotate,*/
+      isPlay,
+      duration,
+      currentTime,
+      musicPlaySrc,
+    } = this.state;
+
+    const { visible, isPc, data } = this.props;
 
     return (
       <div
@@ -147,7 +163,7 @@ export default class Music extends Component {
           // className="music-fixed-image"
           // style={{ transform: `rotate(${musicImageRotate}deg)` }}
         ></div>
-        <div className="music-fixed-title">阿西吧-阿西吧.mp3</div>
+        <div className="music-fixed-title">{data.title}</div>
         <div className="music-fixed-time">
           <div className="music-fixed-time-process-wrapper">
             {/* 进度条 */}
@@ -189,10 +205,9 @@ export default class Music extends Component {
           </div>
         </div>
 
-        {/* <audio id="m_share_audio_wrapper" src={musicSrc} preload="auto" /> */}
-        <audio id="m_share_audio_wrapper" preload="auto" src={music} />
-
-        {/* https://d.pcs.baidu.com/file/b16d1f099685eef9d1755d0e8247d8da?fid=41536675-250528-255046424959303&dstime=1624439104&rt=sh&sign=FDtAERVJouKy-DCb740ccc5511e5e8fedcff06b081203-0nstVpQEdzVUBVyX48jmdcZGZy8%3D&expires=8h&chkv=1&chkbd=0&chkpc=&dp-logid=570103787635108329&dp-callid=0&shareid=1964501874&r=762347489&clienttype=0&resvsflag=1-0-0-1-1-1&vuk=41536675&file_type=0 */}
+        <audio id="m_share_audio_wrapper" preload="auto">
+          <source src={musicPlaySrc} />
+        </audio>
       </div>
     );
   }
