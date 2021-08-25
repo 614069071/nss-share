@@ -1,53 +1,9 @@
-import React, { Component } from 'react';
-import axios from "axios";
-import * as utils from './utils';
 import Mobile from './views/Mobile';
 import PC from './views/PC';
 import "plyr/dist/plyr.css";
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hasHold: false,//设置了提取码，是否校验通过
-      isNoHold: false, //没有设置提取码
-      isMobile: this.isMobile(),
-      isOver: false, //过期
-      shareCode: 0,
-      link: '',
-      user: {}
-    };
-  }
-
-  componentDidMount() {
-    axios
-      .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=yQzQrq")
-      .then(({ data = {} }) => {
-        const { resp_code, datas = {} } = data;
-        const { isEnterPassword = '', url = '', ...other } = datas || {};
-
-
-        if (resp_code === 1001 || resp_code === 1002) {
-          this.setState({ isOver: true, shareCode: resp_code });
-
-          return;
-        }
-
-        if (isEnterPassword) {
-          this.setState({ isNoHold: !!isEnterPassword, link: url, user: other });
-        } else {
-          this.setState({ isNoHold: !!isEnterPassword, hasHold: true, link: url, user: other });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // const hasHold = utils.storages.get('hasHold') || false;
-
-  }
-
-  isMobile = () => {
+function App() {
+  const isMobile = () => {
     const scrren = window.innerWidth || document.documentElement.offsetWidth;
     const reg = /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i;
     const isMobile = reg.test(navigator.userAgent) || ('ontouchend' in document.body) || (scrren < 768);
@@ -59,23 +15,14 @@ export default class App extends Component {
 
     return isMobile;
   }
-
-  changeHold = () => {
-    this.setState({ hasHold: true });
-
-    utils.storages.set('hasHold', true);
-  }
-
-  render() {
-    const { isMobile, isNoHold, hasHold, isOver, link, shareCode, user } = this.state;
-    const props = { isNoHold, hasHold, isOver, change: this.changeHold, link, overCode: shareCode, user };
-
-    return (
-      (<div className="app-wrapper">
-        {
-          isMobile ? <Mobile  {...props} /> : <PC {...props} />
-        }
-      </div>)
-    );
-  }
+  return (
+    (<div className="app-wrapper">
+      {
+        isMobile() ? <Mobile /> : <PC />
+      }
+    </div>)
+  );
 }
+
+export default App;
+

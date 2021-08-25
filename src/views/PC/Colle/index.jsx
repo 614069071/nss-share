@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
+import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import axios from "axios";
 import Plyr from "plyr";
-import { withTranslation } from "react-i18next";
 // import ReactFileView from "react-file-viewer";
 import Music from "@/components/Music";
 import Popup from "@/components/Popup";
@@ -15,16 +15,16 @@ import "./index.css";
   const fileViewSupperArg = ["pdf", "csv", "xslx", "docx", "mp4", "webm", "mp3"]
 */
 
-const previewImagesColle = [
-  require("./1.jpg").default,
-  "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
-  "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
-  "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
-  "https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg",
-  "https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg",
-  "https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg",
-  "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
-];
+// const previewImagesColle = [
+//   require("./1.jpg").default,
+//   "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+//   "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
+//   "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
+//   "https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg",
+//   "https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg",
+//   "https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg",
+//   "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
+// ];
 
 // 文件列表
 class Colle extends Component {
@@ -37,8 +37,9 @@ class Colle extends Component {
       imagePupur: false,
       imageSrc: "",
       musicVisible: false,
-      // musicSrc: "",
-      musicData: {},
+      videoPlaySrc: "",
+      videoPlayer: null,
+      previewMusicData: {},
       fileColles: [],
       breadColleArg: [], //文件路径集合
       previewImageIndex: 0,
@@ -46,6 +47,7 @@ class Colle extends Component {
       offset: 0,
       limit: 100,
       lazyStop: false,
+      previewImagesColle: [],
     };
   }
 
@@ -59,9 +61,9 @@ class Colle extends Component {
   fetchFileColles = (data) => {
     this.setState({ isLoading: true });
 
-    const { link } = this.props;
+    const { link, shareKey } = this.props;
     const { offset, limit, fileColles } = this.state;
-    const query = `&offset=${offset}&limit=${limit}`;
+    const query = `getShareInformationList?key=${shareKey}&offset=${offset}&limit=${limit}`;
 
     link &&
       axios
@@ -75,7 +77,6 @@ class Colle extends Component {
             fileColles: list,
             lazyStop: list.length === count,
           });
-          console.log("contents,count", contents, count);
         })
         .catch((err) => {
           console.log(err);
@@ -141,20 +142,32 @@ class Colle extends Component {
   };
 
   // 播放视频
-  playerVideo = (src = "//vjs.zencdn.net/v/oceans.webm") => {
+  playerVideo = (id) => {
     this.setState({ videoPupur: true });
 
-    new Plyr("#share_video_wrapper");
+    const { link } = this.props;
+
+    const videoPlaySrc = `${link}viewSharedFile?file_id=${id}`;
+
+    this.setState({ videoPlaySrc }, () => {
+      if (!this.state.videoPlayer) {
+        this.setState({ videoPlayer: new Plyr("#share_video_wrapper") });
+      }
+    });
   };
 
   closePlayer = () => {
-    this.setState({ videoPupur: false });
+    this.setState({ videoPupur: false }, () => {
+      this.state.videoPlayer.pause();
+    });
   };
 
   // 图片预览
-  playerImage = () => {
+  playerImage = (id) => {
+    const { link } = this.props;
     this.setState({
       imagePupur: true,
+      previewImageSrc: `${link}viewSharedFile?file_id=${id}`,
     });
 
     /* 
@@ -169,7 +182,14 @@ class Colle extends Component {
 
   // 音乐播放
   playerMusic = (v) => {
-    this.setState({ musicVisible: true, musicData: v });
+    const { link } = this.props;
+    this.setState({
+      musicVisible: true,
+      previewMusicData: {
+        title: v.path.slice(1),
+        src: `${link}viewSharedFile?file_id=${v.file_id}`,
+      },
+    });
   };
 
   closeMusic = () => {
@@ -181,17 +201,16 @@ class Colle extends Component {
       //请求新的列表
     } else {
       const ext = v.path.split(".").pop();
-      console.log(ext);
       const videoArg = ["mp4"];
-      const audioArg = ["mp3"];
+      const audioArg = ["mp3", "ogg"];
       const imageArg = ["jpg", "png", "jpeg"];
 
       if (videoArg.includes(ext)) {
-        this.playerVideo(v);
+        this.playerVideo(v.file_id);
       } else if (audioArg.includes(ext)) {
         this.playerMusic(v);
       } else if (imageArg.includes(ext)) {
-        this.playerImage(v);
+        this.playerImage(v.file_id);
       } else {
         // 不支持的格式
       }
@@ -210,7 +229,7 @@ class Colle extends Component {
 
   previewImageSwitchRight = () => {
     const { previewImageIndex } = this.state;
-    if (previewImageIndex >= previewImagesColle.length - 1) return;
+    if (previewImageIndex >= this.previewImagesColle.length - 1) return;
     this.setState({ previewImageIndex: previewImageIndex + 1 });
   };
 
@@ -230,14 +249,16 @@ class Colle extends Component {
       fileColles,
       breadColleArg,
       videoPupur,
+      videoPlaySrc,
       imagePupur,
       musicVisible,
-      musicData,
-      previewImageIndex,
+      previewMusicData,
+      // previewImageIndex,
+      // previewImagesColle,
+      previewImageSrc,
     } = this.state;
 
-    const { t, user } = this.props;
-    console.log("user", user);
+    const { t, user, link } = this.props;
     const checkedCollenArg = fileColles.filter((e) => e.checked);
     const isCheckAll =
       checkedCollenArg.length && checkedCollenArg.length === fileColles.length;
@@ -351,7 +372,7 @@ class Colle extends Component {
                     <span>{v.is_dir ? null : "1.25M"}</span>
                     {v.is_dir ? null : (
                       <a
-                        href="javascript"
+                        href={`${link}viewSharedFile?file_id=${v.file_id}`}
                         download="download"
                         className="file-download-btn"
                         title="下载"
@@ -361,7 +382,7 @@ class Colle extends Component {
                     )}
                   </div>
                   <div className="file-share-time ellipsis">
-                    {utils.formatTime(v.update_time)}
+                    {utils.formatTime(v.update_time * 1000)}
                   </div>
                 </div>
               ))}
@@ -379,8 +400,8 @@ class Colle extends Component {
               <i className="iconfont icon-cross"></i>
             </span>
 
-            <video id="share_video_wrapper" className="video-js">
-              <source src="//vjs.zencdn.net/v/oceans.webm" />
+            <video id="share_video_wrapper" preload="auto">
+              <source src={videoPlaySrc} />
             </video>
           </div>
         </div>
@@ -392,14 +413,19 @@ class Colle extends Component {
         >
           <div
             className="player-image-inner"
+            // style={{
+            //   backgroundImage: `url(${previewImagesColle[previewImageIndex]})`,
+            // }}
+
             style={{
-              backgroundImage: `url(${previewImagesColle[previewImageIndex]})`,
+              backgroundImage: `url(${previewImageSrc})`,
             }}
           ></div>
           <span className="player-image-close" onClick={this.closeImage}>
             <i className="iconfont icon-cross"></i>
           </span>
-          <span
+
+          {/* <span
             className={`player-image-preview-btn left ${
               previewImageIndex === 0 ? "off" : ""
             }`}
@@ -414,7 +440,7 @@ class Colle extends Component {
             onClick={this.previewImageSwitchRight}
           >
             <i className="iconfont icon-qiehuanyou"></i>
-          </span>
+          </span> */}
         </div>
 
         {/* 音乐播放 */}
@@ -436,7 +462,7 @@ class Colle extends Component {
           <Music
             visible={musicVisible}
             change={this.changeMusic}
-            data={musicData}
+            data={previewMusicData}
             isPc
           ></Music>
         </div>
@@ -446,7 +472,7 @@ class Colle extends Component {
           filePath={require("./test.doc").default}
         /> */}
 
-        <Popup visible={true}></Popup>
+        <Popup visible={false}></Popup>
       </div>
     );
   }
