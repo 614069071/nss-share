@@ -14,8 +14,14 @@ function Hold(props) {
         pwd: code,
         shortKey: shortKey,
       })
-      .then((res) => {
-        console.log(res);
+      .then(({ data: { resp_code, datas } }) => {
+        console.log(resp_code);
+
+        if (resp_code === 0) {
+          change(datas);
+        } else {
+          // 弹窗提示错误
+        }
       })
       .catch((err) => {
         console.log(err);
