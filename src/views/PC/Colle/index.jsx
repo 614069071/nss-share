@@ -47,6 +47,7 @@ class Colle extends Component {
       limit: 100,
       lazyStop: false,
       previewImagesColle: [],
+      isFloderType: false,
     };
   }
 
@@ -57,29 +58,62 @@ class Colle extends Component {
   componentDidUpdate() {}
 
   // 请求列表
-  fetchFileColles = (data) => {
+  fetchFileColles = () => {
     this.setState({ isLoading: true });
 
-    const { link, shareKey } = this.props;
+    const { url, key } = this.props.infos;
     const { offset, limit, fileColles } = this.state;
-    const query = `getShareInformationList?key=${shareKey}&offset=${offset}&limit=${limit}`;
+    const query = `getShareInformationList?key=${key}&offset=${offset}&limit=${limit}`;
 
-    link &&
-      axios
-        .get(link + query)
-        .then(({ data = {} }) => {
-          const { contents, count } = data;
-          const list = [...fileColles, ...contents];
+    return new Promise((resolve) => {
+      url &&
+        axios
+          .get(url + query)
+          .then(({ data = {} }) => {
+            const { contents, count } = data;
+            const list = [...fileColles, ...contents];
 
-          this.setState({
-            isLoading: false,
-            fileColles: list,
-            lazyStop: list.length === count,
+            this.setState({
+              isLoading: false,
+              fileColles: list,
+              lazyStop: list.length === count,
+            });
+
+            resolve(true);
+          })
+          .catch((err) => {
+            resolve(false);
           });
+    });
+  };
+
+  getFloderFiles = (data) => {
+    const { url } = this.props.infos;
+    const { isFloderType, fileColles } = this.state;
+
+    return new Promise((resolve) => {
+      axios
+        .get(`${url}getShareFolderInformationList?file_id=${data.file_id}`)
+        .then((res) => {
+          console.log(res);
+
+          if (isFloderType) {
+            this.setState({
+              fileColles: [...fileColles, ...res.data.contents],
+            });
+          } else {
+            this.setState({
+              isFloderType: true,
+              fileColles: [...fileColles, ...res.data.contents],
+            });
+          }
+
+          resolve(true);
         })
         .catch((err) => {
-          console.log(err);
+          resolve(false);
         });
+    });
   };
 
   // 全选
@@ -103,27 +137,34 @@ class Colle extends Component {
   };
 
   //返回
-  backChangeBread = () => {
+  backChangeBread = async () => {
     let arr = this.state.breadColleArg;
-    let current = arr.slice(0, arr.length - 1);
+    let current = arr.slice(0, -1);
 
-    this.setState({ breadColleArg: current });
-
-    this.fetchFileColles("返回");
+    if (current.length) {
+      const isHanve = await this.getFloderFiles(current[current.length - 1]);
+      isHanve && this.setState({ breadColleArg: current });
+    } else {
+      const isHanve = await this.fetchFileColles();
+      isHanve && this.setState({ breadColleArg: current });
+    }
   };
 
   // 全部文件
   changeAllBread = () => {
-    this.setState({ breadColleArg: [] });
-    this.fetchFileColles("全部文件");
+    this.setState({ breadColleArg: [], fileColles: [] }, () => {
+      this.fetchFileColles("全部文件");
+    });
   };
 
   // 切换路径
   checkChangeBread = (item, index) => {
     let arr = this.state.breadColleArg.slice(0, index + 1);
 
-    this.setState({ breadColleArg: arr });
-    this.fetchFileColles("切换路径");
+    this.setState({ fileColles: [] }, async () => {
+      const isHave = await this.getFloderFiles(item);
+      isHave && this.setState({ breadColleArg: arr });
+    });
   };
 
   // 批量下载
@@ -144,9 +185,9 @@ class Colle extends Component {
   playerVideo = (id) => {
     this.setState({ videoPupur: true });
 
-    const { link } = this.props;
+    const { url } = this.props.infos;
 
-    const videoPlaySrc = `${link}viewSharedFile?file_id=${id}`;
+    const videoPlaySrc = `${url}viewSharedFile?file_id=${id}`;
 
     this.setState({ videoPlaySrc }, () => {
       if (!this.state.videoPlayer) {
@@ -163,10 +204,10 @@ class Colle extends Component {
 
   // 图片预览
   playerImage = (id) => {
-    const { link } = this.props;
+    const { url } = this.props.infos;
     this.setState({
       imagePupur: true,
-      previewImageSrc: `${link}viewSharedFile?file_id=${id}`,
+      previewImageSrc: `${url}viewSharedFile?file_id=${id}`,
     });
 
     /* 
@@ -181,12 +222,12 @@ class Colle extends Component {
 
   // 音乐播放
   playerMusic = (v) => {
-    const { link } = this.props;
+    const { url } = this.props.infos;
     this.setState({
       musicVisible: true,
       previewMusicData: {
         title: v.path.slice(1),
-        src: `${link}viewSharedFile?file_id=${v.file_id}`,
+        src: `${url}viewSharedFile?file_id=${v.file_id}`,
       },
     });
   };
@@ -198,6 +239,12 @@ class Colle extends Component {
   playerFile = (v) => {
     if (v.is_dir) {
       //请求新的列表
+      this.setState({ fileColles: [] }, async () => {
+        const isHave = await this.getFloderFiles(v);
+
+        isHave &&
+          this.setState({ breadColleArg: [...this.state.breadColleArg, v] });
+      });
     } else {
       const ext = v.path.split(".").pop();
       const videoArg = ["mp4"];
@@ -257,7 +304,7 @@ class Colle extends Component {
       previewImageSrc,
     } = this.state;
 
-    const { t, user, link } = this.props;
+    const { t, infos } = this.props;
     const checkedCollenArg = fileColles.filter((e) => e.checked);
     const isCheckAll =
       checkedCollenArg.length && checkedCollenArg.length === fileColles.length;
@@ -268,14 +315,14 @@ class Colle extends Component {
           <div className="colle-control-left">
             <span className="share-failure-sum">总共11个文件</span>
             <span className="share-create-time">
-              {utils.formatTimeYYMS(user.createTime * 1000)}
+              {utils.formatTimeYYMS(infos.createTime * 1000)}
             </span>
             <span className="share-failure-title">
               <i className="iconfont icon-reloadtime"></i>失效时间：
             </span>
-            {user.expiredTime ? (
+            {infos.expiredTime ? (
               <span className="share-failure-state">
-                {utils.formatTimeYYMS(user.expiredTime * 1000)}
+                {utils.formatTimeYYMS(infos.expiredTime * 1000)}
               </span>
             ) : (
               <span>永久</span>
@@ -305,7 +352,7 @@ class Colle extends Component {
                 {breadColleArg.map((e, i) => (
                   <span key={i} onClick={() => this.checkChangeBread(e, i)}>
                     <i className="iconfont icon-arrow-right"></i>
-                    {e}
+                    {e.path.slice(1)}
                   </span>
                 ))}
               </div>
@@ -371,7 +418,7 @@ class Colle extends Component {
                     <span>{v.is_dir ? null : "1.25M"}</span>
                     {v.is_dir ? null : (
                       <a
-                        href={`${link}viewSharedFile?file_id=${v.file_id}`}
+                        href={`${infos.url}viewSharedFile?file_id=${v.file_id}`}
                         download="download"
                         className="file-download-btn"
                         title="下载"
@@ -478,11 +525,11 @@ class Colle extends Component {
 }
 
 Colle.defaultProps = {
-  link: "",
+  infos: {},
 };
 
 Colle.propTypes = {
-  link: PropTypes.string,
+  infos: PropTypes.object,
 };
 
 export default withTranslation("translations")(Colle);

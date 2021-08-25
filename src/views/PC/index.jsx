@@ -17,23 +17,16 @@ export default class PC extends Component {
       isNoHold: false, //没有设置提取码
       isOver: false, //过期
       shareCode: 0,
-      link: "",
-      user: {},
-      shareKey: "",
+      infos: {},
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=i6zyYb")
+      .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=u2ERfe")
       .then(({ data = {} }) => {
         const { resp_code, datas = {} } = data;
-        const {
-          isEnterPassword = "",
-          url = "",
-          key = "",
-          ...other
-        } = datas || {};
+        const { isEnterPassword = "" } = datas || {};
 
         if (resp_code === 1001 || resp_code === 1002) {
           this.setState({ isOver: true, shareCode: resp_code });
@@ -44,17 +37,13 @@ export default class PC extends Component {
         if (isEnterPassword) {
           this.setState({
             isNoHold: !!isEnterPassword,
-            link: url,
-            shareKey: key,
-            user: other,
+            infos: datas,
           });
         } else {
           this.setState({
             isNoHold: !!isEnterPassword,
             hasHold: true,
-            link: url,
-            shareKey: key,
-            user: other,
+            infos: datas,
           });
         }
       })
@@ -74,20 +63,19 @@ export default class PC extends Component {
     // const { hasHold, isOver, isNoHold, change, link, overCode, user } =
     //   this.props;
 
-    const { isNoHold, hasHold, isOver, link, shareCode, user, shareKey } =
-      this.state;
+    const { isNoHold, hasHold, isOver, shareCode, infos } = this.state;
 
     return (
       <Fragment>
-        <Header isHold={hasHold} data={user}></Header>
+        <Header isHold={hasHold} data={infos}></Header>
 
         <div className="app-inner-wrapper">
           {isOver ? (
             <Over code={shareCode} />
           ) : isNoHold ? (
-            <Colle link={link} user={user} shareKey={shareKey} />
+            <Colle infos={infos} />
           ) : hasHold ? (
-            <Colle link={link} user={user} shareKey={shareKey} />
+            <Colle infos={infos} />
           ) : (
             <Hold change={this.changeHold} />
           )}

@@ -14,9 +14,9 @@ function Header(props) {
         <div className="header-item-right">
           <div>分享者：</div>
           <div className="header-avator-wrapper">
-            <img src={data.url} alt="" />
+            <img src={data.figureurl} alt="" />
           </div>
-          <div>{data.name}</div>
+          <div>{data.nickname}</div>
         </div>
       ) : null}
     </header>
