@@ -1,12 +1,26 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./index.css";
 
 function Hold(props) {
+  const shortKey = window.location.href.split("/").pop();
   const [code, setCode] = useState("");
 
   const validCode = () => {
     const { change } = props;
-    change();
+
+    axios
+      .post("http://192.168.8.160:8080/checkLink", {
+        pwd: code,
+        shortKey: shortKey,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     console.log("code", code);
   };
 

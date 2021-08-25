@@ -13,8 +13,7 @@ export default class PC extends Component {
     super(props);
 
     this.state = {
-      hasHold: false, //设置了提取码，是否校验通过
-      isNoHold: false, //没有设置提取码
+      hasHold: false, //是否校验通过
       isOver: false, //过期
       shareCode: 0,
       infos: {},
@@ -22,8 +21,10 @@ export default class PC extends Component {
   }
 
   componentDidMount() {
+    const shortKey = window.location.href.split("/").pop();
+
     axios
-      .get("http://192.168.8.160:8080/getLinkInfoByShort?shortKey=u2ERfe")
+      .get(`http://192.168.8.160:8080/getLinkInfoByShort?shortKey=${shortKey}`)
       .then(({ data = {} }) => {
         const { resp_code, datas = {} } = data;
         const { isEnterPassword = "" } = datas || {};
@@ -36,13 +37,12 @@ export default class PC extends Component {
 
         if (isEnterPassword) {
           this.setState({
-            isNoHold: !!isEnterPassword,
+            hasHold: !!isEnterPassword,
             infos: datas,
           });
         } else {
           this.setState({
-            isNoHold: !!isEnterPassword,
-            hasHold: true,
+            hasHold: !!isEnterPassword,
             infos: datas,
           });
         }
@@ -63,7 +63,7 @@ export default class PC extends Component {
     // const { hasHold, isOver, isNoHold, change, link, overCode, user } =
     //   this.props;
 
-    const { isNoHold, hasHold, isOver, shareCode, infos } = this.state;
+    const { hasHold, isOver, shareCode, infos } = this.state;
 
     return (
       <Fragment>
@@ -72,12 +72,10 @@ export default class PC extends Component {
         <div className="app-inner-wrapper">
           {isOver ? (
             <Over code={shareCode} />
-          ) : isNoHold ? (
-            <Colle infos={infos} />
           ) : hasHold ? (
-            <Colle infos={infos} />
+            <Hold infos={infos} change={this.changeHold} />
           ) : (
-            <Hold change={this.changeHold} />
+            <Colle infos={infos} />
           )}
         </div>
 
@@ -86,19 +84,3 @@ export default class PC extends Component {
     );
   }
 }
-
-PC.defaultProps = {
-  hasHold: false,
-  isOver: false,
-  isNoHold: false,
-  link: "",
-  change: () => {},
-};
-
-PC.propTypes = {
-  hasHold: PropTypes.bool,
-  isOver: PropTypes.bool,
-  isNoHold: PropTypes.bool,
-  link: PropTypes.string,
-  change: PropTypes.func,
-};
