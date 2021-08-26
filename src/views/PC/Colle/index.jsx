@@ -76,7 +76,8 @@ class Colle extends Component {
             this.setState({
               isLoading: false,
               fileColles: list,
-              lazyStop: list.length === count,
+              offset: list.length,
+              lazyStop: list.length === count || contents.length < 100,
             });
 
             resolve(true);
@@ -97,14 +98,22 @@ class Colle extends Component {
         .then((res) => {
           console.log(res);
 
+          const { contents = [], count = 0 } = res.data;
+
+          const list = [...fileColles, ...contents];
+
           if (isFloderType) {
             this.setState({
-              fileColles: [...fileColles, ...res.data.contents],
+              offset: list.length,
+              lazyStop: list.length === count || contents.length < 100,
+              fileColles: list,
             });
           } else {
             this.setState({
+              offset: list.length,
+              lazyStop: list.length === count || contents.length < 100,
               isFloderType: true,
-              fileColles: [...fileColles, ...res.data.contents],
+              fileColles: list,
             });
           }
 
@@ -137,17 +146,19 @@ class Colle extends Component {
   };
 
   //返回
-  backChangeBread = async () => {
+  backChangeBread = () => {
     let arr = this.state.breadColleArg;
     let current = arr.slice(0, -1);
 
-    if (current.length) {
-      const isHanve = await this.getFloderFiles(current[current.length - 1]);
-      isHanve && this.setState({ breadColleArg: current });
-    } else {
-      const isHanve = await this.fetchFileColles();
-      isHanve && this.setState({ breadColleArg: current });
-    }
+    this.setState({ fileColles: [] }, async () => {
+      if (current.length) {
+        const isHanve = await this.getFloderFiles(current[current.length - 1]);
+        isHanve && this.setState({ breadColleArg: current });
+      } else {
+        const isHanve = await this.fetchFileColles();
+        isHanve && this.setState({ breadColleArg: current });
+      }
+    });
   };
 
   // 全部文件
