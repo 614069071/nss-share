@@ -14,15 +14,22 @@ function Hold(props) {
         pwd: code,
         shortKey: shortKey,
       })
-      .then(({ data: { resp_code, datas } }) => {
-        console.log(resp_code);
+      .then(
+        ({
+          data: {
+            resp_code,
+            datas: { key, url },
+          },
+        }) => {
+          console.log(resp_code);
 
-        if (resp_code === 0) {
-          change(datas);
-        } else {
-          // 弹窗提示错误
+          if (resp_code === 0) {
+            change({ key, url });
+          } else {
+            // 弹窗提示错误
+          }
         }
-      })
+      )
       .catch((err) => {
         console.log(err);
       });

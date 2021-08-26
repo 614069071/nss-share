@@ -268,7 +268,7 @@ class Colle extends Component {
       });
     } else {
       const ext = v.path.split(".").pop();
-      const videoArg = ["mp4"];
+      const videoArg = ["mp4", "webm"];
       const audioArg = ["mp3", "ogg"];
       const imageArg = ["jpg", "png", "jpeg"];
 

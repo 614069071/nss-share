@@ -22,8 +22,13 @@ export default class PC extends Component {
   }
 
   componentDidMount() {
-    const hasHoldInfos = utils.storages.get("hasHold");
+    let hasHoldInfos = utils.storages.get("hasHold");
     const shortKey = window.location.href.split("/").pop();
+
+    if (hasHoldInfos.shortKey !== shortKey) {
+      hasHoldInfos = "";
+      utils.storages.set("hasHold", "");
+    }
 
     axios
       .get(`http://192.168.8.160:8080/getLinkInfoByShort?shortKey=${shortKey}`)
@@ -58,9 +63,10 @@ export default class PC extends Component {
   }
 
   changeHold = (data) => {
+    const shortKey = window.location.href.split("/").pop();
     const infos = Object.assign({}, this.state.infos, data);
     this.setState({ hasHold: true, infos });
-    utils.storages.set("hasHold", data);
+    utils.storages.set("hasHold", Object.assign({ shortKey }, data));
   };
 
   render() {
