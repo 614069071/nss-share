@@ -144,3 +144,16 @@ export function throttle(fn) {
     }, 200)
   }
 }
+
+export function toBety(size) {
+  let c = 0;
+  let num = size;
+  let bety = ['KB', 'MB', 'GB', 'TB'];
+
+  while (num > 1024) {
+    num /= 1024;
+    c++;
+  }
+
+  return num.toFixed(2) + bety[c];
+}

@@ -436,7 +436,9 @@ class Colle extends Component {
                   </div>
 
                   <div className="file-size">
-                    <span>{v.is_dir ? null : "1.25M"}</span>
+                    <span>
+                      {v.is_dir ? null : utils.toBety(v.bytes / 1024)}
+                    </span>
                     {v.is_dir ? null : (
                       <a
                         href={`${infos.url}${
