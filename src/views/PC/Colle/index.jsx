@@ -277,7 +277,7 @@ class Colle extends Component {
       const ext = v.path.split(".").pop();
       const videoArg = ["mp4", "webm"];
       const audioArg = ["mp3", "ogg"];
-      const imageArg = ["jpg", "png", "jpeg"];
+      const imageArg = ["jpg", "png", "jpeg", "gif", "bmp"];
 
       if (videoArg.includes(ext)) {
         this.playerVideo(v.file_id);
