@@ -89,12 +89,17 @@ class Colle extends Component {
   };
 
   getFloderFiles = (data) => {
-    const { url } = this.props.infos;
+    const { url, linkType } = this.props.infos;
     const { isFloderType, fileColles } = this.state;
+    const link = `${url}${
+      linkType
+        ? "getPublicShareFolderInformationList"
+        : "getShareFolderInformationList"
+    }?file_id=${data.file_id}`;
 
     return new Promise((resolve) => {
       axios
-        .get(`${url}getShareFolderInformationList?file_id=${data.file_id}`)
+        .get(link)
         .then((res) => {
           console.log(res);
 
@@ -196,9 +201,11 @@ class Colle extends Component {
   playerVideo = (id) => {
     this.setState({ videoPupur: true });
 
-    const { url } = this.props.infos;
+    const { url, linkType } = this.props.infos;
 
-    const videoPlaySrc = `${url}viewSharedFile?file_id=${id}`;
+    const videoPlaySrc = `${url}${
+      linkType ? "viewPublicSharedFile" : "viewSharedFile"
+    }?file_id=${id}`;
 
     this.setState({ videoPlaySrc }, () => {
       if (!this.state.videoPlayer) {
@@ -215,10 +222,12 @@ class Colle extends Component {
 
   // 图片预览
   playerImage = (id) => {
-    const { url } = this.props.infos;
+    const { url, linkType } = this.props.infos;
     this.setState({
       imagePupur: true,
-      previewImageSrc: `${url}viewSharedFile?file_id=${id}`,
+      previewImageSrc: `${url}${
+        linkType ? "viewPublicSharedFile" : "viewSharedFile"
+      }?file_id=${id}`,
     });
 
     /* 
@@ -233,12 +242,14 @@ class Colle extends Component {
 
   // 音乐播放
   playerMusic = (v) => {
-    const { url } = this.props.infos;
+    const { url, linkType } = this.props.infos;
     this.setState({
       musicVisible: true,
       previewMusicData: {
         title: v.path.slice(1),
-        src: `${url}viewSharedFile?file_id=${v.file_id}`,
+        src: `${url}${
+          linkType ? "viewPublicSharedFile" : "viewSharedFile"
+        }?file_id=${v.file_id}`,
       },
     });
   };
@@ -363,7 +374,7 @@ class Colle extends Component {
                 {breadColleArg.map((e, i) => (
                   <span key={i} onClick={() => this.checkChangeBread(e, i)}>
                     <i className="iconfont icon-arrow-right"></i>
-                    {e.path.slice(1)}
+                    {e.path.split("/").pop()}
                   </span>
                 ))}
               </div>
@@ -420,7 +431,7 @@ class Colle extends Component {
                     </div>
                     <div className="file-name ellipsis">
                       <span title={v.path} onClick={() => this.playerFile(v)}>
-                        {v.path.slice(1)}
+                        {v.path.split("/").pop()}
                       </span>
                     </div>
                   </div>
@@ -429,7 +440,11 @@ class Colle extends Component {
                     <span>{v.is_dir ? null : "1.25M"}</span>
                     {v.is_dir ? null : (
                       <a
-                        href={`${infos.url}viewSharedFile?file_id=${v.file_id}`}
+                        href={`${infos.url}${
+                          infos.linkType
+                            ? "viewPublicSharedFile"
+                            : "viewSharedFile"
+                        }?file_id=${v.file_id}&path=${v.path}`}
                         download="download"
                         className="file-download-btn"
                         title="下载"
