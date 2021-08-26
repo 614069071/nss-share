@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
 import axios from "axios";
 import * as utils from "../../utils";
 import Over from "./Over";
@@ -14,6 +13,7 @@ export default class PC extends Component {
 
     this.state = {
       hasHold: false, //是否校验通过
+      isNoHold: false, //是否设置了密码
       isOver: false, //过期
       shareCode: 0,
       infos: {},
@@ -21,6 +21,7 @@ export default class PC extends Component {
   }
 
   componentDidMount() {
+    const hasHoldInfos = utils.storages.get("hasHold");
     const shortKey = window.location.href.split("/").pop();
 
     axios
@@ -35,17 +36,11 @@ export default class PC extends Component {
           return;
         }
 
-        if (isEnterPassword) {
-          this.setState({
-            hasHold: !!isEnterPassword,
-            infos: datas,
-          });
-        } else {
-          this.setState({
-            hasHold: !!isEnterPassword,
-            infos: datas,
-          });
-        }
+        this.setState({
+          hasHold: !!hasHoldInfos,
+          isNoHold: !isEnterPassword,
+          infos: Object.assign({}, datas, hasHoldInfos),
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -53,17 +48,14 @@ export default class PC extends Component {
     // const hasHold = utils.storages.get('hasHold') || false;
   }
 
-  changeHold = () => {
-    this.setState({ hasHold: true });
-
-    utils.storages.set("hasHold", true);
+  changeHold = (data) => {
+    const infos = Object.assign({}, this.state.infos, data);
+    this.setState({ hasHold: true, infos });
+    utils.storages.set("hasHold", data);
   };
 
   render() {
-    // const { hasHold, isOver, isNoHold, change, link, overCode, user } =
-    //   this.props;
-
-    const { hasHold, isOver, shareCode, infos } = this.state;
+    const { isNoHold, hasHold, isOver, shareCode, infos } = this.state;
 
     return (
       <Fragment>
@@ -72,10 +64,10 @@ export default class PC extends Component {
         <div className="app-inner-wrapper">
           {isOver ? (
             <Over code={shareCode} />
-          ) : hasHold ? (
-            <Hold infos={infos} change={this.changeHold} />
-          ) : (
+          ) : hasHold || isNoHold ? (
             <Colle infos={infos} />
+          ) : (
+            <Hold infos={infos} change={this.changeHold} />
           )}
         </div>
 
