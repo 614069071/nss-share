@@ -17,6 +17,7 @@ export default class PC extends Component {
       isOver: false, //过期
       shareCode: 0,
       infos: {},
+      isLoading: true,
     };
   }
 
@@ -29,6 +30,14 @@ export default class PC extends Component {
       .then(({ data = {} }) => {
         const { resp_code, datas = {} } = data;
         const { isEnterPassword = "" } = datas || {};
+        const { key, url } = hasHoldInfos;
+        const new_infos = Object.assign(
+          {},
+          datas,
+          isEnterPassword ? { key, url } : {}
+        );
+
+        this.setState({ isLoading: false });
 
         if (resp_code === 1001 || resp_code === 1002) {
           this.setState({ isOver: true, shareCode: resp_code });
@@ -39,7 +48,7 @@ export default class PC extends Component {
         this.setState({
           hasHold: !!hasHoldInfos,
           isNoHold: !isEnterPassword,
-          infos: Object.assign({}, datas, hasHoldInfos),
+          infos: new_infos,
         });
       })
       .catch((err) => {
@@ -55,23 +64,27 @@ export default class PC extends Component {
   };
 
   render() {
-    const { isNoHold, hasHold, isOver, shareCode, infos } = this.state;
+    const { isLoading, isNoHold, hasHold, isOver, shareCode, infos } =
+      this.state;
 
     return (
       <Fragment>
         <Header isHold={hasHold} data={infos}></Header>
 
-        <div className="app-inner-wrapper">
-          {isOver ? (
-            <Over code={shareCode} />
-          ) : hasHold || isNoHold ? (
-            <Colle infos={infos} />
-          ) : (
-            <Hold infos={infos} change={this.changeHold} />
-          )}
-        </div>
-
-        <Footer></Footer>
+        {isLoading ? null : (
+          <>
+            <div className="app-inner-wrapper">
+              {isOver ? (
+                <Over code={shareCode} />
+              ) : hasHold || isNoHold ? (
+                <Colle infos={infos} />
+              ) : (
+                <Hold infos={infos} change={this.changeHold} />
+              )}
+            </div>
+            <Footer></Footer>
+          </>
+        )}
       </Fragment>
     );
   }
