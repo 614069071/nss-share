@@ -48,6 +48,7 @@ class Colle extends Component {
       lazyStop: false,
       previewImagesColle: [],
       isFloderType: false,
+      currentFloderCount: 0,
     };
   }
 
@@ -81,6 +82,7 @@ class Colle extends Component {
               fileColles: list,
               offset: list.length,
               lazyStop: list.length === count || contents.length < 100,
+              currentFloderCount: count,
             });
 
             resolve(true);
@@ -118,6 +120,7 @@ class Colle extends Component {
               offset: list.length,
               lazyStop: list.length === count || contents.length < 100,
               fileColles: list,
+              currentFloderCount: count,
             });
           } else {
             this.setState({
@@ -125,6 +128,7 @@ class Colle extends Component {
               lazyStop: list.length === count || contents.length < 100,
               isFloderType: true,
               fileColles: list,
+              currentFloderCount: count,
             });
           }
 
@@ -323,6 +327,7 @@ class Colle extends Component {
       // previewImageIndex,
       // previewImagesColle,
       previewImageSrc,
+      currentFloderCount,
     } = this.state;
 
     const { t, infos } = this.props;
@@ -334,7 +339,9 @@ class Colle extends Component {
       <div className="colle-view-wrapper">
         <div className="colle-control-wrapper">
           <div className="colle-control-left">
-            <span className="share-failure-sum">总共11个文件</span>
+            <span className="share-failure-sum">
+              总共{currentFloderCount}个文件
+            </span>
             <span className="share-create-time">
               {utils.formatTimeYYMS(infos.createTime * 1000)}
             </span>
