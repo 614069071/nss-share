@@ -71,7 +71,10 @@ class Colle extends Component {
           .get(url + query)
           .then(({ data = {} }) => {
             const { contents, count } = data;
-            const list = [...fileColles, ...contents];
+            const list = [
+              ...fileColles,
+              ...contents.map((e) => ({ ...e, checked: false })),
+            ];
 
             this.setState({
               isLoading: false,
@@ -105,7 +108,10 @@ class Colle extends Component {
 
           const { contents = [], count = 0 } = res.data;
 
-          const list = [...fileColles, ...contents];
+          const list = [
+            ...fileColles,
+            ...contents.map((e) => ({ ...e, checked: false })),
+          ];
 
           if (isFloderType) {
             this.setState({
@@ -185,16 +191,9 @@ class Colle extends Component {
 
   // 批量下载
   batchDownloads = () => {
-    // const checks = this.state.fileColles.filter((e) => e.checked);//选中的文件
-
-    const arr = [
-      "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/d1c8bc44c0f34f2f80778ad7a5222cfc.jpeg",
-      "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/e9c12f0c8ae54ea8aa1e5de29a454b30.pdf",
-      // "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/0f7c01f52635460e9bb1de1a31fbda44.pdf",
-      // "https://test-cloud-hospital-front.rubikstack.com/ms-hoc-material/v3/file/download/851063dd3bf54219b6e6a03046f824ed.pdf",
-    ];
-
-    utils.downloads(arr);
+    const checkFiles = this.state.fileColles.filter((e) => e.checked); //选中的文件
+    console.log(checkFiles);
+    // utils.downloads(arr);
   };
 
   // 播放视频
