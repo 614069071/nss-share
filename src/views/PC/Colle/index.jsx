@@ -25,6 +25,8 @@ import "./index.css";
 //   "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
 // ];
 
+let popupTimer = null;
+
 // 文件列表
 class Colle extends Component {
   constructor(props) {
@@ -287,7 +289,7 @@ class Colle extends Component {
         // 不支持的格式
         !this.state.popupVisible &&
           this.setState({ popupVisible: true }, () => {
-            setTimeout(() => {
+            popupTimer = setTimeout(() => {
               this.setState({ popupVisible: false });
             }, 3000);
           });
@@ -563,7 +565,10 @@ class Colle extends Component {
         <Popup
           visible={popupVisible}
           title="该文件格式暂不支持预览"
-          close={() => this.setState({ popupVisible: false })}
+          close={() => {
+            clearTimeout(popupTimer);
+            this.setState({ popupVisible: false });
+          }}
         ></Popup>
       </div>
     );
