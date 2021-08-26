@@ -49,6 +49,7 @@ class Colle extends Component {
       previewImagesColle: [],
       isFloderType: false,
       currentFloderCount: 0,
+      popupVisible: false,
     };
   }
 
@@ -284,6 +285,12 @@ class Colle extends Component {
         this.playerImage(v.file_id);
       } else {
         // 不支持的格式
+        !this.state.popupVisible &&
+          this.setState({ popupVisible: true }, () => {
+            setTimeout(() => {
+              this.setState({ popupVisible: false });
+            }, 3000);
+          });
       }
     }
   };
@@ -328,6 +335,7 @@ class Colle extends Component {
       // previewImagesColle,
       previewImageSrc,
       currentFloderCount,
+      popupVisible,
     } = this.state;
 
     const { t, infos } = this.props;
@@ -552,7 +560,11 @@ class Colle extends Component {
           filePath={require("./test.doc").default}
         /> */}
 
-        <Popup visible={false}></Popup>
+        <Popup
+          visible={popupVisible}
+          title="该文件格式暂不支持预览"
+          close={() => this.setState({ popupVisible: false })}
+        ></Popup>
       </div>
     );
   }

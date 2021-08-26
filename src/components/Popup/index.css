@@ -16,8 +16,13 @@
 .popup-wrapper > span {
   width: 20px;
   height: 20px;
-  background-color: #fff;
+  line-height: 20px;
+  text-align: center;
   margin: 0 8px;
+}
+
+.popup-wrapper .popup-close {
+  cursor: pointer;
 }
 
 .popup-wrapper .popup-title {

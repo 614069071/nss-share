@@ -17,8 +17,8 @@ function Popup(props) {
         <i className={`iconfont icon-${type}`}></i>
       </span>
       <div className="popup-title">{title}</div>
-      <span onClick={close}>
-        <i className="iconfont icon-close"></i>
+      <span className="popup-close" onClick={close}>
+        <i className="iconfont icon-cross"></i>
       </span>
     </div>
   );
