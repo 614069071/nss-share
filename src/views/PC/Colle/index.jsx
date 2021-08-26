@@ -99,11 +99,9 @@ class Colle extends Component {
   getFloderFiles = (data) => {
     const { url, linkType } = this.props.infos;
     const { isFloderType, fileColles } = this.state;
-    const link = `${url}${
-      linkType
-        ? "getPublicShareFolderInformationList"
-        : "getShareFolderInformationList"
-    }?file_id=${data.file_id}`;
+    const link = `${url}get${
+      linkType ? "Public" : ""
+    }ShareFolderInformationList?file_id=${data.file_id}`;
 
     return new Promise((resolve) => {
       axios
@@ -208,12 +206,9 @@ class Colle extends Component {
     this.setState({ videoPupur: true });
 
     const { url, linkType } = this.props.infos;
+    const src = `${url}view${linkType ? "Public" : ""}SharedFile?file_id=${id}`;
 
-    const videoPlaySrc = `${url}${
-      linkType ? "viewPublicSharedFile" : "viewSharedFile"
-    }?file_id=${id}`;
-
-    this.setState({ videoPlaySrc }, () => {
+    this.setState({ videoPlaySrc: src }, () => {
       if (!this.state.videoPlayer) {
         this.setState({ videoPlayer: new Plyr("#share_video_wrapper") });
       }
@@ -229,12 +224,8 @@ class Colle extends Component {
   // 图片预览
   playerImage = (id) => {
     const { url, linkType } = this.props.infos;
-    this.setState({
-      imagePupur: true,
-      previewImageSrc: `${url}${
-        linkType ? "viewPublicSharedFile" : "viewSharedFile"
-      }?file_id=${id}`,
-    });
+    const src = `${url}view${linkType ? "Public" : ""}SharedFile?file_id=${id}`;
+    this.setState({ imagePupur: true, previewImageSrc: src });
 
     /* 
     https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg
@@ -253,9 +244,9 @@ class Colle extends Component {
       musicVisible: true,
       previewMusicData: {
         title: v.path.slice(1),
-        src: `${url}${
-          linkType ? "viewPublicSharedFile" : "viewSharedFile"
-        }?file_id=${v.file_id}`,
+        src: `${url}view${linkType ? "Public" : ""}SharedFile?file_id=${
+          v.file_id
+        }`,
       },
     });
   };
@@ -458,11 +449,9 @@ class Colle extends Component {
                     </span>
                     {v.is_dir ? null : (
                       <a
-                        href={`${infos.url}${
-                          infos.linkType
-                            ? "viewPublicSharedFile"
-                            : "viewSharedFile"
-                        }?file_id=${v.file_id}&path=${v.path}`}
+                        href={`${infos.url}download${
+                          infos.linkType ? "Public" : ""
+                        }SharedFile?file_id=${v.file_id}`}
                         download="download"
                         className="file-download-btn"
                         title="下载"
