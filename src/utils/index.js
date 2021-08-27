@@ -96,16 +96,16 @@ export const formatNumber = n => {
 
 // 序列化时间
 export function formatTimeYYMS(time) {
-  const date = new Date(time);
+  const date = new Date(time || 0);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  return `${year}-${month}-${day}`
+  return [year, month, day].map(formatNumber).join("-")
 }
 
 export function formatTime(time) {
-  const date = new Date(time);
+  const date = new Date(time || 0);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -113,7 +113,7 @@ export function formatTime(time) {
   const minute = date.getMinutes();
   // const second = date.getSeconds();
 
-  return `${year}-${month}-${day} ${hour}:${minute}`
+  return [year, month, day].map(formatNumber).join("-") + " " + [hour, minute].map(formatNumber).join(":")
 }
 
 function createAnchor(src) {
