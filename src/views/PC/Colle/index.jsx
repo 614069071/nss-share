@@ -65,9 +65,11 @@ class Colle extends Component {
   fetchFileColles = () => {
     this.setState({ isLoading: true });
 
-    const { url, key } = this.props.infos;
+    const { url, key, linkType } = this.props.infos;
     const { offset, limit, fileColles } = this.state;
-    const query = `getShareInformationList?key=${key}&offset=${offset}&limit=${limit}`;
+    const query = `get${
+      linkType ? "Public" : ""
+    }ShareInformationList?key=${key}&offset=${offset}&limit=${limit}`;
 
     return new Promise((resolve) => {
       url &&
@@ -196,9 +198,17 @@ class Colle extends Component {
 
   // 批量下载
   batchDownloads = () => {
-    const checkFiles = this.state.fileColles.filter((e) => e.checked); //选中的文件
+    const { url, linkType } = this.props.infos;
+    const checkFiles = this.state.fileColles
+      .filter((e) => e.checked)
+      .map(
+        (e) =>
+          `${url}download${linkType ? "Public" : ""}SharedFile?file_id=${
+            e.file_id
+          }`
+      ); //选中的文件
     console.log(checkFiles);
-    // utils.downloads(arr);
+    utils.downloads(checkFiles);
   };
 
   // 播放视频
