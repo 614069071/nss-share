@@ -1,5 +1,5 @@
 // 根据后缀获取对应icon
-export function mimeType(mime) {
+export function mimeType(mime = "") {
 
   const ext = mime.split('.').pop();
 
@@ -147,7 +147,7 @@ export function throttle(fn) {
 
 export function toBety(size) {
   let c = 0;
-  let num = size;
+  let num = size || 0;
   let bety = ['KB', 'MB', 'GB', 'TB'];
 
   while (num > 1024) {

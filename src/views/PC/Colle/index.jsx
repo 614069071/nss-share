@@ -448,7 +448,7 @@ class Colle extends Component {
                     </div>
                     <div className="file-name ellipsis">
                       <span title={v.path} onClick={() => this.playerFile(v)}>
-                        {v.path.split("/").pop()}
+                        {(v.path || "").split("/").pop()}
                       </span>
                     </div>
                   </div>
